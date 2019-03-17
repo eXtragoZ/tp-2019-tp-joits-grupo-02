@@ -2,6 +2,8 @@ package ar.edu.unsam.arena.runnable
 import org.uqbar.arena.Application
 import ar.edu.unsam.arena.view.LoginView
 import ar.edu.unsam.arena.model.LoginModel
+import ar.edu.unsam.arena.view.CompraDeTicketsView
+import ar.edu.unsam.arena.model.CompraDeTicketsModel
 
 class JoitsApplication extends Application {
 	new(JoitsBootstrap bootstrap) {
@@ -16,4 +18,9 @@ class JoitsApplication extends Application {
 		new LoginView(this, new LoginModel)
 	}
 	
+	def void logear(LoginView view) {
+		val usuario = view.modelObject.usuario
+		view.close
+		new CompraDeTicketsView(this, new CompraDeTicketsModel(usuario)).open
+	}
 }
