@@ -3,20 +3,24 @@ package ar.edu.unsam.rodaje
 import java.util.List
 import ar.edu.unsam.funcion.Funcion
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.Entity
 
 @Accessors
-abstract class Rodaje {
+abstract class Rodaje extends Entity {
 
 	String titulo
-	int puntaje
+	float puntaje
 	String genero
-	List<Funcion> funciones
+	List<Funcion> funciones = newArrayList
 	
-	new(String titulo, int puntaje, String genero, List<Funcion> funciones){
+	new() {
+		super()
+	}
+	
+	new(String titulo, float puntaje, String genero){
 		this.titulo = titulo
 		this.puntaje = puntaje
 		this.genero = genero
-		this.funciones = funciones
 	}
 	
 }

@@ -109,6 +109,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			new Button(it) => [
 				caption = "Buscar"
 				onClick[this.modelObject.buscar]
+				setAsDefault
 			]
 		]
 	}
@@ -119,8 +120,8 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			new Table<Pelicula>(it, typeof(Pelicula)) => [
 				items <=> lista
 				value <=> "peliculaSeleccionada"
-				numberVisibleRows = 5
-
+				numberVisibleRows = 6
+				
 				new Column<Pelicula>(it) => [
 					title = "Nombre"
 					bindContentsToProperty("titulo")
@@ -129,12 +130,12 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				new Column<Pelicula>(it) => [
 					title = "Fecha"
 					bindContentsToProperty("anioRodaje")
-					fixedSize = 50
+					fixedSize = 40
 				]
 				new Column<Pelicula>(it) => [
 					title = "Rating"
 					bindContentsToProperty("puntaje")
-					fixedSize = 50
+					fixedSize = 30
 				]
 				new Column<Pelicula>(it) => [
 					title = "Género"
@@ -155,12 +156,12 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				numberVisibleRows = 9
 				new Column<Funcion>(it) => [
 					title = "Fecha"
-					bindContentsToProperty("fechaFuncion")
+					bindContentsToProperty("fecha")
 					fixedSize = 100
 				]
 				new Column<Funcion>(it) => [
 					title = "Hora"
-					bindContentsToProperty("horaFuncion")
+					bindContentsToProperty("hora")
 					fixedSize = 50
 				]
 

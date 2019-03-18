@@ -11,7 +11,7 @@ class LoginModel {
 	String usuario
 	String password
 	
-	@Dependencies("usuario", "password") 
+	@Dependencies("usuario", "password")
 	def getValidar() {
 		return StringUtils.isNotBlank(usuario)
 	}
