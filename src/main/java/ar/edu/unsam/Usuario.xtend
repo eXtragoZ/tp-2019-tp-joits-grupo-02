@@ -9,14 +9,13 @@ class Usuario {
 	String nombre
 	String apellido
 	int edad
-	List<Usuario> amigos //= []
+	List<Usuario> amigos
 	double saldo
 	
-	new(String nombre, String apellido, int edad, List<Usuario> amigos){
+	new(String nombre, String apellido, int edad){
 		this.nombre = nombre
 		this.apellido = apellido
 		this.edad = edad
-		this.amigos = amigos
 	}
 	
 }
