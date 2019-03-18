@@ -12,6 +12,7 @@ abstract class Rodaje extends Entity {
 	float puntaje
 	String genero
 	List<Funcion> funciones = newArrayList
+	double precioBase
 	
 	new() {
 		super()
@@ -22,5 +23,7 @@ abstract class Rodaje extends Entity {
 		this.puntaje = puntaje
 		this.genero = genero
 	}
+	
+	abstract def getPrecioEntrada()
 	
 }

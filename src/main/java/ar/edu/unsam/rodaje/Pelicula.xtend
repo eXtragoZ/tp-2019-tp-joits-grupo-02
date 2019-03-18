@@ -12,14 +12,20 @@ class Pelicula extends Rodaje {
 	
 	new() {
 		super()
+		this.precioBase = 30.00
 	}
 	
 	new(int anioRodaje, String titulo, float puntaje, String genero){
 		super(titulo, puntaje, genero)
 		this.anioRodaje = anioRodaje
+		this.precioBase = 30.00
 	}
 	
 	def tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
+	}
+	
+	override getPrecioEntrada() {
+		this.precioBase
 	}
 }
