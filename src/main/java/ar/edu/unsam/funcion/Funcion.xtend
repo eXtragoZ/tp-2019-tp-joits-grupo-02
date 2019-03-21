@@ -30,4 +30,17 @@ class Funcion {
 	def getHora() {
 		formatterTime.format(fechaHora)
 	}
+	
+	def getDia() {
+		this.fechaHora.dayOfWeek.value
+	}
+	
+	def double getPrecioPorDiaDeFuncion() {
+		if(dia > 5) 120.00 else this.getPrecioSiNoEsFinde()
+	}
+	
+	def double getPrecioSiNoEsFinde() {
+		if(dia == 3) 50.00 else 80.00
+	}
+	
 }

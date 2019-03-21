@@ -1,7 +1,9 @@
 package ar.edu.unsam
 
-import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unsam.entrada.Entrada
+import ar.edu.unsam.rodaje.Rodaje
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Usuario {
@@ -11,6 +13,7 @@ class Usuario {
 	int edad
 	List<Usuario> amigos = newArrayList
 	double saldo
+	List<Entrada> entradas = newArrayList
 	
 	new(String nombre, String apellido, int edad){
 		this.nombre = nombre
@@ -20,5 +23,9 @@ class Usuario {
 	
 	def esAmigo(Usuario amigo){
 		amigos.contains(amigo)
+	}
+	
+	def comprarEntrada(Rodaje rodaje) {
+		entradas.add(new Entrada(rodaje, rodaje.precioEntrada))
 	}
 }

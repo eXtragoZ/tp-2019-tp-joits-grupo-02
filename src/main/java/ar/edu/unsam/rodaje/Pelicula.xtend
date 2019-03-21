@@ -8,20 +8,18 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Pelicula extends Rodaje {
 	
-	int anioRodaje
-	
 	new() {
 		super()
 		this.precioBase = 30.00
 	}
 	
-	new(int anioRodaje, String titulo, float puntaje, String genero){
+	new(int anio, String titulo, float puntaje, String genero){
 		super(titulo, puntaje, genero)
-		this.anioRodaje = anioRodaje
+		this.anio = anio
 		this.precioBase = 30.00
 	}
 	
-	def tieneValorBuscado(String valorBusqueda) {
+	override tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
 	}
 	

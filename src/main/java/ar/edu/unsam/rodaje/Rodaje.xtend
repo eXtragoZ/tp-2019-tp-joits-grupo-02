@@ -13,6 +13,7 @@ abstract class Rodaje extends Entity {
 	String genero
 	List<Funcion> funciones = newArrayList
 	double precioBase
+	int anio
 	
 	new() {
 		super()
@@ -25,5 +26,6 @@ abstract class Rodaje extends Entity {
 	}
 	
 	abstract def double getPrecioEntrada()
+	abstract def boolean tieneValorBuscado(String valorBusqueda)
 	
 }
