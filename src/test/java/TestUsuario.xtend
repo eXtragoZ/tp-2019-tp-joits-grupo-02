@@ -15,9 +15,10 @@ class TestUsuario {
 		Assert.assertEquals(100, carlos.saldo, 0.1)
 	}
 	
-//	@Test
-//	def void sonAmigos(){
-//		carlos.setAmigos([david, rodolfo])
-//		Assert.assertEquals(true, true)
-//	}
+	@Test
+	def void sonAmigos(){
+		carlos.amigos.add(david)
+		Assert.assertEquals(true, carlos.esAmigo(david))
+	}
+	
 }

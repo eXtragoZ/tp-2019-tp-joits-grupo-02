@@ -1,5 +1,7 @@
 package ar.edu.unsam.rodaje
 
+import java.util.List
+
 class Saga extends Rodaje {
 	
 	List<Pelicula> peliculas

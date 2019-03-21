@@ -24,6 +24,6 @@ abstract class Rodaje extends Entity {
 		this.genero = genero
 	}
 	
-	abstract def getPrecioEntrada()
+	abstract def double getPrecioEntrada()
 	
 }

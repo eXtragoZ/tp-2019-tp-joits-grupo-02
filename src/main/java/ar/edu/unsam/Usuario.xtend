@@ -9,7 +9,7 @@ class Usuario {
 	String nombre
 	String apellido
 	int edad
-	List<Usuario> amigos
+	List<Usuario> amigos = newArrayList
 	double saldo
 	
 	new(String nombre, String apellido, int edad){
@@ -18,4 +18,7 @@ class Usuario {
 		this.edad = edad
 	}
 	
+	def esAmigo(Usuario amigo){
+		amigos.contains(amigo)
+	}
 }
