@@ -1,7 +1,9 @@
 package ar.edu.unsam
 
-import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unsam.entrada.Entrada
+import ar.edu.unsam.rodaje.Rodaje
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.apache.commons.lang.StringUtils
 
 @Accessors
@@ -13,7 +15,9 @@ class Usuario {
 	int edad
 	List<Usuario> amigos = newArrayList
 	double saldo
+	List<Entrada> entradas = newArrayList
 	String password
+
 	
 	new(){}
 	
@@ -32,7 +36,13 @@ class Usuario {
 		amigos.contains(amigo)
 	}
 	
+
+	def comprarEntrada(Rodaje rodaje) {
+		entradas.add(new Entrada(rodaje, rodaje.precioEntrada))
+   }
+
 	def tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(nombre, valorBusqueda) || StringUtils.containsIgnoreCase(apellido, valorBusqueda)
 	}
+  
 }

@@ -14,6 +14,7 @@ abstract class Rodaje {
 	String genero
 	List<Funcion> funciones = newArrayList
 	double precioBase
+	int anio
 
 	new() {
 		super()
@@ -26,6 +27,7 @@ abstract class Rodaje {
 	}
 
 	abstract def double getPrecioEntrada()
+	abstract def boolean tieneValorBuscado(String valorBusqueda)
 	
 	def tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)

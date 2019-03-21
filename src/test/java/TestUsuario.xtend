@@ -1,7 +1,6 @@
-
 import ar.edu.unsam.Usuario
-import org.junit.Test
 import org.junit.Assert
+import org.junit.Test
 
 class TestUsuario {
 	
@@ -14,8 +13,7 @@ class TestUsuario {
 		carlos.saldo = 100
 		Assert.assertEquals(100, carlos.saldo, 0.1)
 	}
-	
-	@Test
+
 	def void noCoincideSaldoUsuario(){
 		carlos.saldo = 100
 		Assert.assertNotEquals(200, carlos.saldo)
@@ -36,6 +34,13 @@ class TestUsuario {
 	@Test
 	def void encuentroUsuario(){
 		Assert.assertTrue(carlos.tieneValorBuscado("gAR"))
+	}
+
+	@Test
+	def void carlosCompraEntrada() {
+		Assert.assertEquals(0, carlos.entradas.size)
+		carlos.comprarEntrada(TestRodaje.elPadrino)
+		Assert.assertEquals(1, carlos.entradas.size)
 	}
 	
 	@Test

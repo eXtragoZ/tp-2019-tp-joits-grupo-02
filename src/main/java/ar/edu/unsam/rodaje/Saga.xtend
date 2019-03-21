@@ -1,6 +1,7 @@
 package ar.edu.unsam.rodaje
 
 import java.util.List
+import ar.edu.unsam.funcion.Funcion
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
@@ -22,26 +23,27 @@ class Saga extends Rodaje {
 		this.precioBase = 10.00
 	}
 	
-	new(List<Pelicula> peliculas, String titulo, float puntaje, String genero){
+	new(List<Pelicula> peliculas, String titulo, float puntaje, String genero, int nivelDeClasico){
 		super(titulo, puntaje, genero)
 		this.peliculas = peliculas
+		this.nivelDeClasico = nivelDeClasico
 		this.precioBase = 10.00
 	}
 	
-	def getPlus() {
-		this.nivelDeClasico * PLUS  
-	}
-	
 	def getPrecioBasePorPeliculas() {
-		this.precioBase * this.peliculas.size
+		this.precioBase * this.peliculas.size * this.nivelDeClasico
 	}
 	
-	def valorPorFuncion() {
-		0//a completar
+	def precioPorFuncion() {
+		this.funciones.fold(0.00, [total, funcion | total + funcion.getPrecioPorDiaDeFuncion])
 	}
 	
 	override getPrecioEntrada() {
-		this.getPrecioBasePorPeliculas() + this.plus + this.valorPorFuncion
+		this.getPrecioBasePorPeliculas() + this.precioPorFuncion
+	}
+	
+	override tieneValorBuscado(String valorBusqueda) {
+		this.peliculas.exists[pelicula | pelicula.tieneValorBuscado(valorBusqueda)]
 	}
 	
 }
