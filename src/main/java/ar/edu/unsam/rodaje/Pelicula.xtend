@@ -1,6 +1,5 @@
 package ar.edu.unsam.rodaje
 
-import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 

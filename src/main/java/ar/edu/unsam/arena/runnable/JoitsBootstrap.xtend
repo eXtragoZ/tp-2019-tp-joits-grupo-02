@@ -1,20 +1,22 @@
 package ar.edu.unsam.arena.runnable
 
-import ar.edu.unsam.repos.RepoPeliculas
+import ar.edu.unsam.funcion.Funcion
+import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.rodaje.Pelicula
+import ar.edu.unsam.rodaje.Rodaje
+import ar.edu.unsam.rodaje.Saga
+import java.time.LocalDateTime
+import java.util.Random
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
 import org.uqbar.commons.applicationContext.ApplicationContext
-import java.time.LocalDateTime
-import ar.edu.unsam.funcion.Funcion
-import java.util.Random
 
 class JoitsBootstrap extends CollectionBasedBootstrap {
-	
+
 	override run() {
-		val salas = newArrayList("A","B","C","Premium")
-		
-		new RepoPeliculas => [
-			ApplicationContext.instance.configureRepo(Pelicula, it)
+		val salas = newArrayList("A", "B", "C", "Premium")
+
+		new RepoRodajes => [
+			ApplicationContext.instance.configureSingleton(Rodaje, it)
 			create(new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama"))
 			create(new Pelicula(1974, "The Godfather: Part II", 9.0f, "Crime, Drama"))
 			create(new Pelicula(1999, "Fight Club", 8.8f, "Drama"))
@@ -23,8 +25,11 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			create(new Pelicula(1999, "Matrix", 8.7f, "Action, Sci-Fi "))
 			create(new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi"))
 			create(new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi"))
-			
-			allInstances.forEach[
+			create(
+				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula], "The Godfather", 9.2f,
+					"Crime, Drama"))
+
+			allInstances.forEach [
 				val iFun = new Random().nextInt(12) + 3
 				for (var i = 0; i < iFun; i++) {
 					val hours = new Random().nextInt(64) + -6
@@ -34,8 +39,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 				}
 			]
 		]
-		
-		
+
 	}
-	
+
 }
