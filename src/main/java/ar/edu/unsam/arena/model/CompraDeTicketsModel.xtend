@@ -1,19 +1,20 @@
 package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.funcion.Funcion
+import ar.edu.unsam.repos.Repo
 import ar.edu.unsam.rodaje.Pelicula
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.applicationContext.ApplicationContext
-import org.uqbar.commons.model.Repo
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.utils.ObservableUtils
+import ar.edu.unsam.rodaje.Rodaje
 
 @Accessors
 @Observable
-class CompraDeTicketsModel {	
+class CompraDeTicketsModel {
 	val String usuario
 	String busquedaIngresada
 	String busquedaActual
@@ -33,9 +34,9 @@ class CompraDeTicketsModel {
 
 	def getPeliculas() {
 		if (StringUtils.isBlank(busquedaActual)) {
-			repoPeliculas.allInstances
+			repoRodaje.allInstances
 		} else {
-			repoPeliculas.allInstances.filter[tieneValorBuscado(busquedaActual)].toList
+			repoRodaje.allInstances.filter[tieneValorBuscado(busquedaActual)].toList
 		}
 	}
 
@@ -43,17 +44,17 @@ class CompraDeTicketsModel {
 		val List<Pelicula> peliculas = newArrayList
 		return peliculas
 	}
-	
+
 	def agregarAlCarrito() {
 		carrito.add(funcionSeleccionada)
 	}
-	
+
 	@Dependencies("peliculaSeleccionada", "funcionSeleccionada")
 	def getValidarFuncion() {
 		peliculaSeleccionada !== null && funcionSeleccionada !== null
 	}
-	
-	def repoPeliculas() {
-		ApplicationContext.instance.getRepo(Pelicula) as Repo<Pelicula>
+
+	def repoRodaje() {
+		ApplicationContext.instance.getSingleton(Rodaje) as Repo<Rodaje>
 	}
 }

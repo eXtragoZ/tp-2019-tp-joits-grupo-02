@@ -1,6 +1,5 @@
 package ar.edu.unsam.rodaje
 
-import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
@@ -19,10 +18,6 @@ class Pelicula extends Rodaje {
 		super(titulo, puntaje, genero)
 		this.anioRodaje = anioRodaje
 		this.precioBase = 30.00
-	}
-	
-	def tieneValorBuscado(String valorBusqueda) {
-		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
 	}
 	
 	override getPrecioEntrada() {
