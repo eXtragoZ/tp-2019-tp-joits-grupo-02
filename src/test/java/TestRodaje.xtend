@@ -18,7 +18,7 @@ class TestRodaje {
 	var matrix = new Pelicula(1999, "Matrix", 8.7f, "Action, Sci-Fi ")
 	var interestelar = new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi")
 	var capitanaMarvel = new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi")
-	var sagaElPadrino = new Saga(#[elPadrino, elPadrino2], "The Godfather Saga", 9.4f, "Crime, Drama", 6)
+	var sagaElPadrino = new Saga(#[elPadrino, elPadrino2], "The Godfather Saga",2000, 9.4f, "Crime, Drama", 6)
 	
 	def static getElPadrino() {
 		new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama")

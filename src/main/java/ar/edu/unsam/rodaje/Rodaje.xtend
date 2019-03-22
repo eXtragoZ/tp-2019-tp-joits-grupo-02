@@ -20,15 +20,15 @@ abstract class Rodaje {
 		super()
 	}
 
-	new(String titulo, float puntaje, String genero) {
+	new(String titulo, int anio, float puntaje, String genero) {
 		this.titulo = titulo
+		this.anio = anio
 		this.puntaje = puntaje
 		this.genero = genero
 	}
 
 	abstract def double getPrecioEntrada()
-	abstract def boolean tieneValorBuscado(String valorBusqueda)
-	
+
 	def tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
 	}

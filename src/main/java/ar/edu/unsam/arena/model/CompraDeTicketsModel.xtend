@@ -18,7 +18,7 @@ class CompraDeTicketsModel {
 	val String usuario
 	String busquedaIngresada
 	String busquedaActual
-	Pelicula peliculaSeleccionada
+	Rodaje rodajeSeleccionado
 	Funcion funcionSeleccionada
 	List<Funcion> carrito
 
@@ -49,9 +49,9 @@ class CompraDeTicketsModel {
 		carrito.add(funcionSeleccionada)
 	}
 
-	@Dependencies("peliculaSeleccionada", "funcionSeleccionada")
+	@Dependencies("rodajeSeleccionado", "funcionSeleccionada")
 	def getValidarFuncion() {
-		peliculaSeleccionada !== null && funcionSeleccionada !== null
+		rodajeSeleccionado !== null && funcionSeleccionada !== null
 	}
 
 	def repoRodaje() {

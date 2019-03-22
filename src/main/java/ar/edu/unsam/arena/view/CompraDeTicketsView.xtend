@@ -119,7 +119,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			layout = new VerticalLayout
 			new Table<Pelicula>(it, typeof(Pelicula)) => [
 				items <=> lista
-				value <=> "peliculaSeleccionada"
+				value <=> "rodajeSeleccionado"
 				numberVisibleRows = 6
 				
 				new Column<Pelicula>(it) => [
@@ -129,7 +129,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				]
 				new Column<Pelicula>(it) => [
 					title = "Fecha"
-					bindContentsToProperty("anioRodaje")
+					bindContentsToProperty("anio")
 					fixedSize = 40
 				]
 				new Column<Pelicula>(it) => [
@@ -151,7 +151,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 		new Panel(panel) => [
 			layout = new VerticalLayout
 			new Table<Funcion>(it, typeof(Funcion)) => [
-				items <=> "peliculaSeleccionada.funciones"
+				items <=> "rodajeSeleccionado.funciones"
 				value <=> "funcionSeleccionada"
 				numberVisibleRows = 9
 				new Column<Funcion>(it) => [

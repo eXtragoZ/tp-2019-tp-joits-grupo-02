@@ -1,5 +1,6 @@
 package ar.edu.unsam.rodaje
 
+import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
@@ -13,8 +14,7 @@ class Pelicula extends Rodaje {
 	}
 	
 	new(int anio, String titulo, float puntaje, String genero){
-		super(titulo, puntaje, genero)
-		this.anio = anio
+		super(titulo, anio, puntaje, genero)
 		this.precioBase = 30.00
 	}
 	

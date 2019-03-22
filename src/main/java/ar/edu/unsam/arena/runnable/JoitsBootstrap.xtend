@@ -26,8 +26,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			create(new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi"))
 			create(new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi"))
 			create(
-				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula], "The Godfather", 9.2f,
-					"Crime, Drama"))
+				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula], "The Godfather", 2000,
+					9.2f, "Crime, Drama", 9))
 
 			allInstances.forEach [
 				val iFun = new Random().nextInt(12) + 3
