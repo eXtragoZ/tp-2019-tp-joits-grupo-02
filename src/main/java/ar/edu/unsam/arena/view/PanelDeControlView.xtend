@@ -80,7 +80,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 			layout = new VerticalLayout
 
-			labelDoble(it, "Usuario", "usuario.userName")
+			labelDoble(it, "Usuario", "usuario.nombreUsuario")
 			labelAndButton(it, "Edad", "usuario.edad", false)
 
 			new Panel(it) => [

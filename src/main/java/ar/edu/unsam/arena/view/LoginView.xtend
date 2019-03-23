@@ -7,12 +7,13 @@ import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.PasswordField
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.widgets.PasswordField
+import org.uqbar.commons.model.exceptions.UserException
 
 class LoginView extends Window<LoginModel> {
 
@@ -24,9 +25,11 @@ class LoginView extends Window<LoginModel> {
 	override createContents(Panel mainPanel) {
 		mainPanel => [
 			layout = new VerticalLayout
-//			agregarValorEditable("Usuario", "nombreUsuario", "Password", "password")
+			new Label(mainPanel) => [
+				value <=> "mensaje"
+			]
 			agregarValorEditable("Usuario", "nombreUsuario")
-			agregarValorEditable("Password", "password")
+			agregarValorEditablePassword("Password", "password")
 			agregarAcciones
 		]
 	}
@@ -52,7 +55,6 @@ class LoginView extends Window<LoginModel> {
 
 	}
 
-//	def void agregarValorEditable(Panel panel, String descripcion, String valor, String descripcion2, String valor2) {
 	def void agregarValorEditable(Panel panel, String descripcion, String valor) {
 		new Panel(panel) => [
 			layout = new HorizontalLayout
@@ -66,23 +68,31 @@ class LoginView extends Window<LoginModel> {
 				width = 100
 				alignLeft
 			]
-//		]
-//		new Panel(panel) => [
-//			layout = new HorizontalLayout
-//			new Label(it) => [
-//				text = descripcion2
-//				width = 70
-//				alignLeft
-//			]
-//			new PasswordField(it) => [
-//				value <=> valor2
-//				width = 100
-//				alignLeft
-//			]
+		]
+	}
+
+	def void agregarValorEditablePassword(Panel panel, String descripcion, String valor) {
+		new Panel(panel) => [
+			layout = new HorizontalLayout
+			new Label(it) => [
+				text = descripcion
+				width = 70
+				alignLeft
+			]
+			new PasswordField(it) => [
+				value <=> valor
+				width = 100
+			]
 		]
 	}
 
 	def aceptar() {
-		(owner as JoitsApplication).logear(this)
+		try {
+			val usuario = this.modelObject.obtenerUsuario()
+			(owner as JoitsApplication).logear(this, usuario)
+		} catch (UserException exception) {
+			this.modelObject.mensaje = exception.message;
+		}
+
 	}
 }

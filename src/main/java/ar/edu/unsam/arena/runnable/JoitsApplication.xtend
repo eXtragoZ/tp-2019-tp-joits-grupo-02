@@ -6,8 +6,8 @@ import ar.edu.unsam.arena.model.PanelDeControlModel
 import ar.edu.unsam.arena.view.CompraDeTicketsView
 import ar.edu.unsam.arena.view.LoginView
 import ar.edu.unsam.arena.view.PanelDeControlView
-import org.uqbar.arena.Application
 import ar.edu.unsam.usuario.Usuario
+import org.uqbar.arena.Application
 
 class JoitsApplication extends Application {
 	new(JoitsBootstrap bootstrap) {
@@ -22,8 +22,7 @@ class JoitsApplication extends Application {
 		new LoginView(this, new LoginModel)
 	}
 
-	def void logear(LoginView view) {
-		val usuario = view.modelObject.usuario
+	def void logear(LoginView view, Usuario usuario) {
 		view.close
 		new CompraDeTicketsView(this, new CompraDeTicketsModel(usuario)).open
 	}

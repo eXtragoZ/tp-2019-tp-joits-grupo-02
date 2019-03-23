@@ -1,6 +1,5 @@
 package ar.edu.unsam.arena.runnable
 
-import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.repos.RepoUsuarios
@@ -15,15 +14,9 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 
 class JoitsBootstrap extends CollectionBasedBootstrap {
 
-	Usuario usuario
-	Usuario cgarcia
-
 	override run() {
 		val salas = newArrayList("A", "B", "C", "Premium")
-		usuario = new Usuario("a","Nombre","Apeliido",30,"") 
-		cgarcia = new Usuario("cgarcia", "Carlos", "García", 25, "1234")
-
-		val repoRodaje = new RepoRodajes => [
+		val repoRodajes = new RepoRodajes => [
 			ApplicationContext.instance.configureSingleton(Rodaje, it)
 			create(new Pelicula(1, 1972, "The Godfather", 9.2f, "Crime, Drama"))
 			create(new Pelicula(1974, "The Godfather: Part II", 9.0f, "Crime, Drama"))
@@ -37,28 +30,27 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula], "The Godfather", 2000,
 					9.2f, "Crime, Drama", 9))
 
-			allInstances.forEach [
-				val iFun = new Random().nextInt(12) + 3
-				for (var i = 0; i < iFun; i++) {
-					val hours = new Random().nextInt(64) + -6
-					funciones.add(
-						new Funcion(LocalDateTime.now.plusHours(hours),
-							"Sala " + salas.get(new Random().nextInt(salas.size))))
-				}
-			]
 		]
-		
-		cgarcia.saldo = 1000
-		cgarcia.amigos.add(usuario)
-		cgarcia.entradas = #[new Entrada(repoRodaje.searchById(1))]
-		
-		new RepoUsuarios => [
-			ApplicationContext.instance.configureSingleton(Usuario, it)
-			create(cgarcia)
-			create(usuario)
+		repoRodajes.allInstances.forEach [
+			val iFun = new Random().nextInt(12) + 3
+			for (var i = 0; i < iFun; i++) {
+				val hours = new Random().nextInt(64) + -6
+				funciones.add(
+					new Funcion(LocalDateTime.now.plusHours(hours),
+						"Sala " + salas.get(new Random().nextInt(salas.size))))
+			}
 		]
-		
 
+		val repoUsuarios = new RepoUsuarios => [
+			ApplicationContext.instance.configureSingleton(Usuario, it)
+			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
+			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
+				saldo = 1000
+			])
+
+		]
+		repoUsuarios.allInstances.get(1).amigos.add(repoUsuarios.allInstances.get(0))
+		repoUsuarios.allInstances.get(1).comprarEntrada(repoRodajes.searchById(1))
 	}
 
 }

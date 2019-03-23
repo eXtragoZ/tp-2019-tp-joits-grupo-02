@@ -8,7 +8,7 @@ interface Repo<T> {
 
 	def T searchById(long id)
 	
-	def T searchByString(String unValor, String otroValor)
+	def T searchByString(String valor)
 
 	def List<T> searchByExample(T example)
 

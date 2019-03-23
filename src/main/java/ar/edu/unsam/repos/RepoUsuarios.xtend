@@ -40,11 +40,8 @@ class RepoUsuarios implements Repo<Usuario> {
 		create(object)
 	}
 	
-	override searchByString(String unValor, String otroValor) {
-		usuarios.findFirst[ _usuario | 
-			_usuario.userName.equals(unValor) && 
-			_usuario.password.equals(otroValor)
-		]
+	override searchByString(String valor) {
+		usuarios.findFirst[nombreUsuario.equals(valor)]
 	}
 	
 }

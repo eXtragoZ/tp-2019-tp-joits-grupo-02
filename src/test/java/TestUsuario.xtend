@@ -1,12 +1,12 @@
-import ar.edu.unsam.Usuario
 import org.junit.Assert
 import org.junit.Test
+import ar.edu.unsam.usuario.Usuario
 
 class TestUsuario {
 	
-	var carlos = new Usuario("Carlos", "García", 25, "1234")
-	var david = new Usuario("David", "Lebón", 25, "1234")
-	var rodolfo = new Usuario("Rodolfo", "Páez", 20, "1234")
+	var carlos = new Usuario("a","Carlos", "García", 25, "1234")
+	var david = new Usuario("b","David", "Lebón", 25, "1234")
+	var rodolfo = new Usuario("c","Rodolfo", "Páez", 20, "1234")
 	
 	@Test
 	def void coincideSaldoUsuario(){
