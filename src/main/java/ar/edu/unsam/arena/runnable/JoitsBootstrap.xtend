@@ -17,11 +17,13 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 	Usuario usuario
 	Usuario cgarcia
+	Usuario pperez
 
 	override run() {
 		val salas = newArrayList("A", "B", "C", "Premium")
 		usuario = new Usuario("a","Nombre","Apeliido",30,"") 
 		cgarcia = new Usuario("cgarcia", "Carlos", "García", 25, "1234")
+		pperez = new Usuario("peperez", "Pablo", "Perez", 30, "1234")
 
 		val repoRodaje = new RepoRodajes => [
 			ApplicationContext.instance.configureSingleton(Rodaje, it)
@@ -56,6 +58,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			ApplicationContext.instance.configureSingleton(Usuario, it)
 			create(cgarcia)
 			create(usuario)
+			create(pperez)
 		]
 		
 

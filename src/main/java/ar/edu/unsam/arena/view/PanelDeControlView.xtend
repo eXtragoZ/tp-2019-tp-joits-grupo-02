@@ -45,6 +45,12 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 			labelAndButton(it, "Cargar Saldo", "saldoNuevo", true)
 
+			new Label(it) => [
+				text = "Pelis vistas"
+				width = 100
+				alignLeft
+			]
+
 			new Table<Entrada>(it, typeof(Entrada)) => [
 				items <=> "usuario.entradas"
 				numberVisibleRows = 6
@@ -64,11 +70,11 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				]
 				new Button(it) => [
 					caption = "Aceptar"
-					onClick[| this.volver]
+					onClick[|this.volver]
 				]
 				new Button(it) => [
 					caption = "Cancelar"
-					onClick[| this.cancelar]
+					onClick[|this.cancelar]
 				]
 			]
 
@@ -86,6 +92,13 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 			new Panel(it) => [
 
 				layout = new VerticalLayout
+
+				new Label(it) => [
+					text = "Amigos"
+					width = 100
+					alignLeft
+				]
+
 				new Table<Usuario>(it, typeof(Usuario)) => [
 					items <=> "usuario.amigos"
 					numberVisibleRows = 6
@@ -106,6 +119,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 			new Button(it) => [
 				caption = "Buscar Amigos"
+				onClick[| this.buscarAmigos]
 			]
 		]
 	}
@@ -126,7 +140,8 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 			if (isButton) {
 				new Button(it) => [
 					caption = "Cargar Saldo"
-					onClick[| modelObject.cargarSaldo]
+					enabled <=> "validar"
+					onClick[|modelObject.cargarSaldo]
 				]
 			}
 
@@ -148,16 +163,18 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 			]
 		]
 	}
-	
+
 	def volver() {
-		(owner as JoitsApplication).compraDeTickets(this.modelObject.usuario)
-		this.close
+		(owner as JoitsApplication).compraDeTickets(this)
 	}
-	
+
 	def cancelar() {
 		this.modelObject.cancelarCambios()
-		(owner as JoitsApplication).compraDeTickets(this.modelObject.usuario)
-		this.close
+		(owner as JoitsApplication).compraDeTickets(this)
+	}
+	
+	def buscarAmigos() {
+		(owner as JoitsApplication).buscarAmigo(this)
 	}
 
 }

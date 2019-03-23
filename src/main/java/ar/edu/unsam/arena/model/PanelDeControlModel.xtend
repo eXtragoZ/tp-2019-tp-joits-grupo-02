@@ -5,6 +5,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Observable
 @Accessors
@@ -33,6 +34,11 @@ class PanelDeControlModel {
 	
 	def cargarSaldo() {
 		this.usuario.saldo = this.usuario.saldo + saldoNuevo
+	}
+	
+	@Dependencies("saldoNuevo")
+	def getValidar() {
+		!Double.isNaN(this.saldoNuevo) && this.saldoNuevo > 0
 	}
 
 }

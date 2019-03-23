@@ -83,6 +83,6 @@ class LoginView extends Window<LoginModel> {
 	}
 
 	def aceptar() {
-		(owner as JoitsApplication).logear(this)
+		(owner as JoitsApplication).loguear(this)
 	}
 }
