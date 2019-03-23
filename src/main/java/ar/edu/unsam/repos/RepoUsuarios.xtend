@@ -6,13 +6,16 @@ import java.util.List
 class RepoUsuarios implements Repo<Usuario> {
 	
 	List<Usuario> usuarios = newArrayList
+	int nextId = 1
 		
 	override allInstances() {
 		usuarios
 	}
 	
 	override create(Usuario object) {
+		object.id = this.nextId
 		usuarios.add(object)
+		this.nextId++
 	}
 	
 	override createExample() {

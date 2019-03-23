@@ -1,8 +1,10 @@
 package ar.edu.unsam.arena.runnable
 
+import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.CompraDeTicketsModel
 import ar.edu.unsam.arena.model.LoginModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
+import ar.edu.unsam.arena.view.BuscarAmigosWindow
 import ar.edu.unsam.arena.view.CompraDeTicketsView
 import ar.edu.unsam.arena.view.LoginView
 import ar.edu.unsam.arena.view.PanelDeControlView
@@ -26,15 +28,29 @@ class JoitsApplication extends Application {
 		view.close
 		new CompraDeTicketsView(this, new CompraDeTicketsModel(usuario)).open
 	}
-	
+
 	def void panelDeControl(CompraDeTicketsView view) {
 		val usuario = view.modelObject.usuario
 		view.close
 		new PanelDeControlView(this, new PanelDeControlModel(usuario)).open
 	}
-	
-	def compraDeTickets(Usuario usuario) {
+
+	def void compraDeTickets(PanelDeControlView view) {
+		val usuario = view.modelObject.usuario
+		view.close
 		new CompraDeTicketsView(this, new CompraDeTicketsModel(usuario)).open
 	}
-	
+
+	def void buscarAmigo(PanelDeControlView view) {
+		val usuario = view.modelObject.usuario
+		view.close
+		new BuscarAmigosWindow(this, new BuscarAmigosModel(usuario)).open
+	}
+
+	def volverPanelControl(BuscarAmigosWindow view) {
+		val usuario = view.modelObject.usuario
+		view.close
+		new PanelDeControlView(this, new PanelDeControlModel(usuario)).open
+	}
+
 }

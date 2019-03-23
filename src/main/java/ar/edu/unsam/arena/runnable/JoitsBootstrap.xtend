@@ -31,6 +31,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 					9.2f, "Crime, Drama", 9))
 
 		]
+
 		repoRodajes.allInstances.forEach [
 			val iFun = new Random().nextInt(12) + 3
 			for (var i = 0; i < iFun; i++) {

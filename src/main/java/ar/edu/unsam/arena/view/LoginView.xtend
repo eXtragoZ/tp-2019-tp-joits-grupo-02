@@ -93,6 +93,5 @@ class LoginView extends Window<LoginModel> {
 		} catch (UserException exception) {
 			this.modelObject.mensaje = exception.message;
 		}
-
 	}
 }
