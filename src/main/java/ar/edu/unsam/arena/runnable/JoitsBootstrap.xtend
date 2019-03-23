@@ -1,12 +1,13 @@
 package ar.edu.unsam.arena.runnable
 
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.repos.RepoUsuarios
 import ar.edu.unsam.rodaje.Pelicula
 import ar.edu.unsam.rodaje.Rodaje
 import ar.edu.unsam.rodaje.Saga
+import ar.edu.unsam.usuario.Usuario
 import java.time.LocalDateTime
 import java.util.Random
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
@@ -22,19 +23,9 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		usuario = new Usuario("a","Nombre","Apeliido",30,"") 
 		cgarcia = new Usuario("cgarcia", "Carlos", "García", 25, "1234")
 
-		cgarcia.amigos.add(usuario)
-
-		new RepoUsuarios => [
-			ApplicationContext.instance.configureSingleton(Usuario, it)
-//			create(
-//				new Usuario("a", "Nombre", "Apeliido", 30, "")
-//				)			
-			create(usuario)
-		]
-
-		new RepoRodajes => [
+		val repoRodaje = new RepoRodajes => [
 			ApplicationContext.instance.configureSingleton(Rodaje, it)
-			create(new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama"))
+			create(new Pelicula(1, 1972, "The Godfather", 9.2f, "Crime, Drama"))
 			create(new Pelicula(1974, "The Godfather: Part II", 9.0f, "Crime, Drama"))
 			create(new Pelicula(1999, "Fight Club", 8.8f, "Drama"))
 			create(new Pelicula(1994, "Forrest Gump", 8.8f, "Drama, Romance"))
@@ -56,6 +47,17 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 				}
 			]
 		]
+		
+		cgarcia.saldo = 1000
+		cgarcia.amigos.add(usuario)
+		cgarcia.entradas = #[new Entrada(repoRodaje.searchById(1))]
+		
+		new RepoUsuarios => [
+			ApplicationContext.instance.configureSingleton(Usuario, it)
+			create(cgarcia)
+			create(usuario)
+		]
+		
 
 	}
 

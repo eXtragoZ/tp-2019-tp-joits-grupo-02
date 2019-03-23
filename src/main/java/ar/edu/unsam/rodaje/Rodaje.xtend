@@ -4,7 +4,9 @@ import ar.edu.unsam.funcion.Funcion
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
 
+@Observable
 @Accessors
 abstract class Rodaje {
 

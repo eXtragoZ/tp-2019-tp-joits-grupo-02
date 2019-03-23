@@ -13,6 +13,7 @@ class Entrada {
 	Rodaje rodaje
 	
 	new(Rodaje rodaje) {
+		this.fechaHora = LocalDateTime.now
 		this.rodaje = rodaje		
 	}
 	
