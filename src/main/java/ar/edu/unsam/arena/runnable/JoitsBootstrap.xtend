@@ -1,6 +1,6 @@
 package ar.edu.unsam.arena.runnable
 
-import ar.edu.unsam.Usuario
+import ar.edu.unsam.usuario.Usuario
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.repos.RepoUsuarios
@@ -18,10 +18,14 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 	override run() {
 		val salas = newArrayList("A", "B", "C", "Premium")
-		usuario = new Usuario("cgarcia", "Carlos", "García", 25, "1234")
+		usuario = new Usuario("a","Nombre","Apeliido",30,"") 
+//		new Usuario("cgarcia", "Carlos", "García", 25, "1234")
 
 		new RepoUsuarios => [
 			ApplicationContext.instance.configureSingleton(Usuario, it)
+//			create(
+//				new Usuario("a", "Nombre", "Apeliido", 30, "")
+//				)			
 			create(usuario)
 		]
 

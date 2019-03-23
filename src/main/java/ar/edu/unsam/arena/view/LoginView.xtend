@@ -12,6 +12,7 @@ import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.arena.widgets.PasswordField
 
 class LoginView extends Window<LoginModel> {
 
@@ -23,6 +24,7 @@ class LoginView extends Window<LoginModel> {
 	override createContents(Panel mainPanel) {
 		mainPanel => [
 			layout = new VerticalLayout
+//			agregarValorEditable("Usuario", "nombreUsuario", "Password", "password")
 			agregarValorEditable("Usuario", "nombreUsuario")
 			agregarValorEditable("Password", "password")
 			agregarAcciones
@@ -50,6 +52,7 @@ class LoginView extends Window<LoginModel> {
 
 	}
 
+//	def void agregarValorEditable(Panel panel, String descripcion, String valor, String descripcion2, String valor2) {
 	def void agregarValorEditable(Panel panel, String descripcion, String valor) {
 		new Panel(panel) => [
 			layout = new HorizontalLayout
@@ -63,6 +66,19 @@ class LoginView extends Window<LoginModel> {
 				width = 100
 				alignLeft
 			]
+//		]
+//		new Panel(panel) => [
+//			layout = new HorizontalLayout
+//			new Label(it) => [
+//				text = descripcion2
+//				width = 70
+//				alignLeft
+//			]
+//			new PasswordField(it) => [
+//				value <=> valor2
+//				width = 100
+//				alignLeft
+//			]
 		]
 	}
 

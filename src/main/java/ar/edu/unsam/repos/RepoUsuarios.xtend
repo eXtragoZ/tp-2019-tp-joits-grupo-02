@@ -1,6 +1,6 @@
 package ar.edu.unsam.repos
 
-import ar.edu.unsam.Usuario
+import ar.edu.unsam.usuario.Usuario
 import java.util.List
 
 class RepoUsuarios implements Repo<Usuario> {

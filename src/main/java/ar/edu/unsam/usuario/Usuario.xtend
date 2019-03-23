@@ -1,4 +1,4 @@
-package ar.edu.unsam
+package ar.edu.unsam.usuario
 
 import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.rodaje.Rodaje

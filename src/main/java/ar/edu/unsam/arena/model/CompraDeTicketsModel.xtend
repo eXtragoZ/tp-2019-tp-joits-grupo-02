@@ -1,6 +1,6 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.Usuario
+import ar.edu.unsam.usuario.Usuario
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.Repo
 import ar.edu.unsam.rodaje.Pelicula
