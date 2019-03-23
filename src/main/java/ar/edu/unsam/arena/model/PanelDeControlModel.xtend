@@ -9,6 +9,7 @@ import org.uqbar.commons.model.annotations.Observable
 class PanelDeControlModel {
 
 	Usuario usuario
+	double saldoNuevo
 
 	new(Usuario usuario) {
 		this.usuario = usuario

@@ -3,9 +3,11 @@ package ar.edu.unsam.usuario
 import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.rodaje.Rodaje
 import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.apache.commons.lang.StringUtils
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
 
+@Observable
 @Accessors
 class Usuario {
 

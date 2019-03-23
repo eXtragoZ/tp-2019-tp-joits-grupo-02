@@ -15,11 +15,14 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 class JoitsBootstrap extends CollectionBasedBootstrap {
 
 	Usuario usuario
+	Usuario cgarcia
 
 	override run() {
 		val salas = newArrayList("A", "B", "C", "Premium")
 		usuario = new Usuario("a","Nombre","Apeliido",30,"") 
-//		new Usuario("cgarcia", "Carlos", "García", 25, "1234")
+		cgarcia = new Usuario("cgarcia", "Carlos", "García", 25, "1234")
+
+		cgarcia.amigos.add(usuario)
 
 		new RepoUsuarios => [
 			ApplicationContext.instance.configureSingleton(Usuario, it)
