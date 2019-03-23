@@ -1,8 +1,10 @@
 package ar.edu.unsam.arena.model
 
+import ar.edu.unsam.Usuario
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.Repo
 import ar.edu.unsam.rodaje.Pelicula
+import ar.edu.unsam.rodaje.Rodaje
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -10,19 +12,18 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.utils.ObservableUtils
-import ar.edu.unsam.rodaje.Rodaje
 
 @Accessors
 @Observable
 class CompraDeTicketsModel {
-	val String usuario
+	Usuario usuario
 	String busquedaIngresada
 	String busquedaActual
 	Rodaje rodajeSeleccionado
 	Funcion funcionSeleccionada
 	List<Funcion> carrito
 
-	new(String usuario) {
+	new(Usuario usuario) {
 		this.usuario = usuario
 		this.carrito = newArrayList
 	}

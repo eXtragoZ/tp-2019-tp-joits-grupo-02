@@ -23,7 +23,7 @@ class LoginView extends Window<LoginModel> {
 	override createContents(Panel mainPanel) {
 		mainPanel => [
 			layout = new VerticalLayout
-			agregarValorEditable("Usuario", "usuario")
+			agregarValorEditable("Usuario", "nombreUsuario")
 			agregarValorEditable("Password", "password")
 			agregarAcciones
 		]

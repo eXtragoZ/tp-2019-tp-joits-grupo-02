@@ -41,4 +41,7 @@ class RepoRodajes implements Repo<Rodaje> {
 		create(object)
 	}
 	
+	override searchByString(String unValor, String otroValor) {
+	}
+	
 }

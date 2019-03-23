@@ -1,6 +1,7 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.CompraDeTicketsModel
+import ar.edu.unsam.arena.runnable.JoitsApplication
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.rodaje.Pelicula
 import org.uqbar.arena.layout.HorizontalLayout
@@ -29,7 +30,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			new Panel(it) => [
 				layout = new HorizontalLayout
 				new Label(it) => [
-					text = "Usuario Logueado: ??????"
+					text = "Usuario Logueado: f??????"
 					width = 300
 					alignLeft
 				]
@@ -56,11 +57,16 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 					width = 300
 				]
 				new Button(it) => [
+					onClick [this.panelDeControl]
 					caption = "Panel de Control"
 				]
 			]
 
 		]
+	}
+	
+	def panelDeControl() {
+		(owner as JoitsApplication).panelDeControl(this)
 	}
 
 	def void agregarPanelPeliculas(Panel panel) {

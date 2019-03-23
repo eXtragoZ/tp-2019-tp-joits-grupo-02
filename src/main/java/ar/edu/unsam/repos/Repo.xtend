@@ -7,6 +7,8 @@ interface Repo<T> {
 	def Class<T> getEntityType()
 
 	def T searchById(long id)
+	
+	def T searchByString(String unValor, String otroValor)
 
 	def List<T> searchByExample(T example)
 

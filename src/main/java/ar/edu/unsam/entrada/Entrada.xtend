@@ -7,13 +7,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Entrada {
 	
-	double precioEntrada
 	LocalDateTime fechaHora
 	Rodaje rodaje
 	
-	new(Rodaje rodaje, double precioEntrada) {
+	new(Rodaje rodaje) {
 		this.rodaje = rodaje		
-		this.precioEntrada = precioEntrada
 	}
 	
 }

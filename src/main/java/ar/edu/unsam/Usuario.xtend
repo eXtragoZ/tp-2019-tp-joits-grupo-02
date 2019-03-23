@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils
 class Usuario {
 
 	long id
+	String userName
 	String nombre
 	String apellido
 	int edad
@@ -28,6 +29,14 @@ class Usuario {
 		this.password = password
 	}
 	
+	new(String userName, String nombre, String apellido, int edad, String password){
+		this.userName = userName
+		this.nombre = nombre
+		this.apellido = apellido
+		this.edad = edad
+		this.password = password
+	}
+	
 	def validar(String password){
 		this.password == password
 	}
@@ -38,7 +47,7 @@ class Usuario {
 	
 
 	def comprarEntrada(Rodaje rodaje) {
-		entradas.add(new Entrada(rodaje, rodaje.precioEntrada))
+		entradas.add(new Entrada(rodaje))
    }
 
 	def tieneValorBuscado(String valorBusqueda) {
