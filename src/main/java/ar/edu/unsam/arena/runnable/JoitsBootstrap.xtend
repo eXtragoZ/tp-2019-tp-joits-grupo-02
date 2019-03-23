@@ -37,7 +37,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			for (var i = 0; i < iFun; i++) {
 				val hours = new Random().nextInt(64) + -6
 				funciones.add(
-					new Funcion(LocalDateTime.now.plusHours(hours),
+					new Funcion(it, LocalDateTime.now.plusHours(hours),
 						"Sala " + salas.get(new Random().nextInt(salas.size))))
 			}
 		]

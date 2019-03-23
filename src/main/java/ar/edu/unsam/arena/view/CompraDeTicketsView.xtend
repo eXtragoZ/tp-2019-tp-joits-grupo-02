@@ -30,14 +30,21 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			new Panel(it) => [
 				layout = new HorizontalLayout
 				new Label(it) => [
-					text = "Usuario Logueado: f??????"
-					width = 300
+					text = "Usuario Logueado: "
 					alignLeft
 				]
 				new Label(it) => [
-					text = "Fecha 00/00/0000"
-					width = 300
+					value <=> "usuario.nombreUsuario"
+					width = 150
+					alignLeft
+				]
+				new Label(it) => [
+					text = "Fecha "
 					alignRight
+					width = 300
+				]
+				new Label(it) => [
+					value <=> "fechaActual"
 				]
 			]
 			new Panel(it) => [
@@ -48,7 +55,10 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			new Panel(it) => [
 				layout = new HorizontalLayout
 				new Label(it) => [
-					text = "Items en carrito: ??????"
+					text = "Items en carrito: "
+				]
+				new Label(it) => [
+					value <=> "cantidadItems"
 				]
 				new Button(it) => [
 					caption = "Finalizar compra"
@@ -64,7 +74,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 
 		]
 	}
-	
+
 	def panelDeControl() {
 		(owner as JoitsApplication).panelDeControl(this)
 	}
@@ -92,11 +102,16 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				alignLeft
 			]
 			agregarListaFunciones()
-			new Label(it) => [
-				text = "Importe de la entrada seleccionada: $???"
-				width = 100
-				alignLeft
+			new Panel(it) => [
+				layout = new HorizontalLayout
+				new Label(it) => [
+					text = "Importe de la entrada seleccionada: $"
+				]
+				new Label(it) => [
+					value <=> "funcionSeleccionada.precio"
+				]
 			]
+
 			new Button(it) => [
 				caption = "Agregar al carrito"
 				onClick [this.modelObject.agregarAlCarrito]
@@ -127,7 +142,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				items <=> lista
 				value <=> "rodajeSeleccionado"
 				numberVisibleRows = 6
-				
+
 				new Column<Pelicula>(it) => [
 					title = "Nombre"
 					bindContentsToProperty("titulo")

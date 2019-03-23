@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import ar.edu.unsam.rodaje.Rodaje
 
 @Accessors
 @Observable
@@ -13,12 +14,14 @@ class Funcion {
 	
 	LocalDateTime fechaHora
 	String nombreSala
+	Rodaje rodaje
 	
 	new() {
 		super()
 	}
 
-	new(LocalDateTime fechaHora, String nombreSala) {
+	new(Rodaje rodaje, LocalDateTime fechaHora, String nombreSala) {
+		this.rodaje = rodaje
 		this.fechaHora = fechaHora
 		this.nombreSala = nombreSala
 	}
@@ -41,6 +44,10 @@ class Funcion {
 	
 	def double getPrecioSiNoEsFinde() {
 		if(dia == 3) 50.00 else 80.00
+	}
+	
+	def getPrecio() {
+		rodaje.precioEntrada + this.precioPorDiaDeFuncion
 	}
 	
 }

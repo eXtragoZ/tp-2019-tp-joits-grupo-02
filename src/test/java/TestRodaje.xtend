@@ -31,7 +31,7 @@ class TestRodaje {
 	
 	@Test
 	def void probarSagaElPadrino(){
-		sagaElPadrino.funciones = #[new Funcion(LocalDateTime.now, "Hoyts El Padrino")]
+		sagaElPadrino.funciones = #[new Funcion(sagaElPadrino, LocalDateTime.now, "Hoyts El Padrino")]
 		Assert.assertEquals(200, sagaElPadrino.precioEntrada, 0.1)
 	}
 	
