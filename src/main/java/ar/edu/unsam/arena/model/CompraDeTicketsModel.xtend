@@ -1,8 +1,7 @@
 package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.repos.Repo
-import ar.edu.unsam.rodaje.Pelicula
+import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.rodaje.Rodaje
 import ar.edu.unsam.usuario.Usuario
 import java.time.LocalDate
@@ -45,9 +44,8 @@ class CompraDeTicketsModel {
 		}
 	}
 
-	def getPeliculasRecomendadas() {
-		val List<Pelicula> peliculas = newArrayList
-		return peliculas
+	def getRecomendadas() {
+		return repoRodaje.recomendados
 	}
 
 	def agregarAlCarrito() {
@@ -69,6 +67,6 @@ class CompraDeTicketsModel {
 	}
 
 	def repoRodaje() {
-		ApplicationContext.instance.getSingleton(Rodaje) as Repo<Rodaje>
+		ApplicationContext.instance.getSingleton(Rodaje) as RepoRodajes
 	}
 }

@@ -3,11 +3,14 @@ package ar.edu.unsam.repos
 import ar.edu.unsam.rodaje.Pelicula
 import ar.edu.unsam.rodaje.Rodaje
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class RepoRodajes implements Repo<Rodaje> {
 
 	List<Rodaje> rodajes = newArrayList
 	int nextId = 1
+	@Accessors
+	List<Rodaje> recomendados = newArrayList
 
 	override allInstances() {
 		rodajes
@@ -45,6 +48,7 @@ class RepoRodajes implements Repo<Rodaje> {
 	}
 
 	override searchByString(String valor) {
+		rodajes.findFirst[titulo == valor]
 	}
 
 }

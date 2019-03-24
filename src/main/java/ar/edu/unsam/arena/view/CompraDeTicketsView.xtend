@@ -89,7 +89,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				width = 100
 				alignLeft
 			]
-			agregarListaPeliculas("peliculasRecomendadas")
+			agregarListaPeliculas("recomendadas")
 		]
 	}
 
