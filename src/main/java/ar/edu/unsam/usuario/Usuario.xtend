@@ -51,5 +51,9 @@ class Usuario {
 		return StringUtils.containsIgnoreCase(nombre, valorBusqueda) ||
 			StringUtils.containsIgnoreCase(apellido, valorBusqueda)
 	}
+	
+	def reducirSaldo(Double valor) {
+		this.saldo -= valor
+	}
 
 }

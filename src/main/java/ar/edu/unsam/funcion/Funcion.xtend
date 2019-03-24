@@ -11,6 +11,7 @@ import ar.edu.unsam.rodaje.Rodaje
 class Funcion {
 	val formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 	val formatterTime = DateTimeFormatter.ofPattern("HH:mm")
+	val formatterDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
 	
 	LocalDateTime fechaHora
 	String nombreSala
@@ -32,6 +33,10 @@ class Funcion {
 	
 	def getHora() {
 		formatterTime.format(fechaHora)
+	}
+	
+	def getFechaHora() {
+		formatterDateTime.format(fechaHora)
 	}
 	
 	def getDia() {

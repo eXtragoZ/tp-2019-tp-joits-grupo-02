@@ -35,7 +35,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				]
 				new Label(it) => [
 					value <=> "usuario.nombreUsuario"
-					width = 150
+					width = 280
 					alignLeft
 				]
 				new Label(it) => [
@@ -54,29 +54,20 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			]
 			new Panel(it) => [
 				layout = new HorizontalLayout
-				new Label(it) => [
-					text = "Items en carrito: "
-				]
-				new Label(it) => [
-					value <=> "cantidadItems"
-				]
 				new Button(it) => [
 					caption = "Finalizar compra"
+					onClick [this.finalizarCompra]
 				]
 				new Label(it) => [
-					width = 300
+					width = 540
 				]
 				new Button(it) => [
-					onClick [this.panelDeControl]
 					caption = "Panel de Control"
+					onClick [this.panelDeControl]
 				]
 			]
 
 		]
-	}
-
-	def panelDeControl() {
-		(owner as JoitsApplication).panelDeControl(this)
 	}
 
 	def void agregarPanelPeliculas(Panel panel) {
@@ -117,6 +108,16 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				onClick [this.modelObject.agregarAlCarrito]
 				enabled <=> "validarFuncion"
 			]
+			new Panel(it) => [
+				layout = new HorizontalLayout
+				new Label(it) => [
+					text = "Items en carrito: "
+				]
+				new Label(it) => [
+					value <=> "cantidadItems"
+				]
+
+			]
 		]
 	}
 
@@ -146,22 +147,22 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				new Column<Pelicula>(it) => [
 					title = "Nombre"
 					bindContentsToProperty("titulo")
-					fixedSize = 150
+					fixedSize = 190
 				]
 				new Column<Pelicula>(it) => [
 					title = "Fecha"
 					bindContentsToProperty("anio")
-					fixedSize = 40
+					fixedSize = 50
 				]
 				new Column<Pelicula>(it) => [
 					title = "Rating"
 					bindContentsToProperty("puntaje")
-					fixedSize = 30
+					fixedSize = 50
 				]
 				new Column<Pelicula>(it) => [
 					title = "Género"
 					bindContentsToProperty("genero")
-					fixedSize = 100
+					fixedSize = 150
 				]
 			]
 
@@ -194,5 +195,13 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			]
 
 		]
+	}
+
+	def finalizarCompra() {
+		new FinalizarCompraView(this, this.modelObject).open
+	}
+
+	def panelDeControl() {
+		(owner as JoitsApplication).panelDeControl(this)
 	}
 }

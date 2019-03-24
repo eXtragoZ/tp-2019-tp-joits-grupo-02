@@ -25,6 +25,7 @@ class CompraDeTicketsModel {
 	Rodaje rodajeSeleccionado
 	Funcion funcionSeleccionada
 	List<Funcion> carrito
+	Funcion funcionCarritoSeleccionada
 
 	new(Usuario usuario) {
 		this.usuario = usuario
@@ -52,6 +53,25 @@ class CompraDeTicketsModel {
 		carrito.add(funcionSeleccionada)
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
+		
+	def sacarDelCarrito() {
+		carrito.remove(funcionCarritoSeleccionada)
+		ObservableUtils.firePropertyChanged(this, "carrito")
+		ObservableUtils.firePropertyChanged(this, "cantidadItems")
+		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
+	}
+	
+	def limpiarCarrito() {
+		carrito.clear
+		ObservableUtils.firePropertyChanged(this, "carrito")
+		ObservableUtils.firePropertyChanged(this, "cantidadItems")
+		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
+	}
+	
+	def comprar() {
+		usuario.reducirSaldo(totalPrecioCarrito)
+		limpiarCarrito
+	}
 
 	@Dependencies("rodajeSeleccionado", "funcionSeleccionada")
 	def getValidarFuncion() {
@@ -65,8 +85,13 @@ class CompraDeTicketsModel {
 	def getFechaActual() {
 		formatterDate.format(LocalDate.now)
 	}
+	
+	def getTotalPrecioCarrito() {
+		carrito.fold(0d, [total, funcion | total + funcion.precio])
+	}
 
 	def repoRodaje() {
 		ApplicationContext.instance.getSingleton(Rodaje) as RepoRodajes
 	}
+	
 }
