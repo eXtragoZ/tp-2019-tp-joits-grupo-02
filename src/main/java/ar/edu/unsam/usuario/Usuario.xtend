@@ -1,7 +1,6 @@
 package ar.edu.unsam.usuario
 
-import ar.edu.unsam.entrada.Entrada
-import ar.edu.unsam.rodaje.Rodaje
+import ar.edu.unsam.funcion.Funcion
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -19,7 +18,7 @@ class Usuario {
 	int edad
 	List<Usuario> amigos = newArrayList
 	double saldo
-	List<Entrada> entradas = newArrayList
+	List<Funcion> entradas = newArrayList
 	String password
 
 	new() {
@@ -43,8 +42,8 @@ class Usuario {
 		amigos.contains(amigo)
 	}
 
-	def comprarEntrada(Rodaje rodaje) {
-		entradas.add(new Entrada(rodaje))
+	def comprarEntrada(Funcion funcion) {
+		entradas.add(funcion)
 	}
 
 	def tieneValorBuscado(String valorBusqueda) {
@@ -54,6 +53,10 @@ class Usuario {
 	
 	def reducirSaldo(Double valor) {
 		this.saldo -= valor
+	}
+	
+	def getPeliculasVistas(){
+		entradas.map[rodaje].toSet
 	}
 
 }

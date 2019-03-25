@@ -54,10 +54,22 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
 			])
+			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234"))
+			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234"))
+			create(new Usuario("hug", "Hugo", "Ferrer", 30, "1234"))
+			create(new Usuario("mar", "Marcos", "Guerrero", 30, "1234"))
+			create(new Usuario("rau", "Raúl", "Romero", 30, "1234"))
+			create(new Usuario("san", "Santiago", "Vargas", 30, "1234"))
 
 		]
+		repoUsuarios.allInstances.forEach[
+			val iFun = new Random().nextInt(3) + 2
+			for (var i = 0; i < iFun; i++) {
+				val funciones = repoRodajes.allInstances.get(new Random().nextInt(repoRodajes.allInstances.size)).funciones
+				entradas.add(funciones.get(new Random().nextInt(funciones.size)))
+			}
+		]
 		repoUsuarios.allInstances.get(1).amigos.add(repoUsuarios.allInstances.get(0))
-		repoUsuarios.allInstances.get(1).comprarEntrada(repoRodajes.searchById(1))
 	}
 
 }

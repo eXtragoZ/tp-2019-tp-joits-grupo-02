@@ -2,7 +2,7 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.PanelDeControlModel
 import ar.edu.unsam.arena.runnable.JoitsApplication
-import ar.edu.unsam.entrada.Entrada
+import ar.edu.unsam.rodaje.Rodaje
 import ar.edu.unsam.usuario.Usuario
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -51,13 +51,13 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				alignLeft
 			]
 
-			new Table<Entrada>(it, typeof(Entrada)) => [
-				items <=> "usuario.entradas"
+			new Table<Rodaje>(it, typeof(Rodaje)) => [
+				items <=> "usuario.peliculasVistas"
 				numberVisibleRows = 6
 
-				new Column<Entrada>(it) => [
+				new Column<Rodaje>(it) => [
 					title = "Titulo"
-					bindContentsToProperty("tituloRodaje")
+					bindContentsToProperty("titulo")
 					fixedSize = 150
 				]
 			]
@@ -70,11 +70,11 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				]
 				new Button(it) => [
 					caption = "Aceptar"
-					onClick[|this.volver]
+					onClick[this.volver]
 				]
 				new Button(it) => [
 					caption = "Cancelar"
-					onClick[|this.cancelar]
+					onClick[this.cancelar]
 				]
 			]
 
@@ -119,7 +119,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 			new Button(it) => [
 				caption = "Buscar Amigos"
-				onClick[| this.buscarAmigos]
+				onClick[this.buscarAmigos]
 			]
 		]
 	}
@@ -141,7 +141,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				new Button(it) => [
 					caption = "Cargar Saldo"
 					enabled <=> "validar"
-					onClick[|modelObject.cargarSaldo]
+					onClick[modelObject.cargarSaldo]
 				]
 			}
 
