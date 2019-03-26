@@ -52,7 +52,7 @@ class BuscarAmigosWindow extends Window<BuscarAmigosModel> {
 				]
 				new Button(it) => [
 					caption = "Volver"
-					onClick[|this.volver]
+					onClick[this.close]
 				]
 			]
 		]
@@ -93,18 +93,9 @@ class BuscarAmigosWindow extends Window<BuscarAmigosModel> {
 					fixedSize = 200
 				]
 				
-				newColumn(it, "Nombre", "nombre")
-				
-				newColumn(it, "Nombre", "nombre")
 			]
 
 		]
-	}
-	
-	def Column<Usuario> newColumn(Table<Usuario> it, String name, String columnValue) {}	
-	
-	def volver() {
-		(owner as JoitsApplication).volverPanelControl(this)
 	}
 	
 }

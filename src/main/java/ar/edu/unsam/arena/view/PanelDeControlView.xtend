@@ -70,7 +70,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				]
 				new Button(it) => [
 					caption = "Aceptar"
-					onClick[this.volver]
+					onClick[this.close]
 				]
 				new Button(it) => [
 					caption = "Cancelar"
@@ -164,13 +164,9 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 		]
 	}
 
-	def volver() {
-		(owner as JoitsApplication).compraDeTickets(this)
-	}
-
 	def cancelar() {
 		this.modelObject.cancelarCambios()
-		(owner as JoitsApplication).compraDeTickets(this)
+		this.close
 	}
 	
 	def buscarAmigos() {

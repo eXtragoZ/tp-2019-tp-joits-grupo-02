@@ -16,13 +16,11 @@ class BuscarAmigosModel {
 
 	Usuario usuario
 	Usuario seleccionado
-	List<Usuario> amigosSugeridos = new ArrayList
 	String busquedaIngresada
 	String busquedaActual
 
 	new(Usuario usuario) {
 		this.usuario = usuario
-		amigosSugeridos = #[new Usuario("ggonzales", "Gabriel", "Gonzalez", 40, "1234")]
 	}
 
 	def buscar() {
@@ -33,7 +31,7 @@ class BuscarAmigosModel {
 
 	def getListaDeBusqueda() {
 		if (StringUtils.isBlank(busquedaActual)) {
-			getListaDePersonas()
+			this.listaDePersonas
 		} else {
 			this.listaDePersonas.filter[tieneValorBuscado(busquedaActual)].toList
 		}
@@ -44,15 +42,15 @@ class BuscarAmigosModel {
 	}
 
 	def getBusquedaRecomendada() {
-		this.getNoSonAmigos(this.amigosSugeridos)
+		this.getNoSonAmigos(this.repoUsuario.amigosRecomendados(this.usuario))
 	}
 	
-	def getNoSonAmigos(List<Usuario> lista) {
-		lista.filter[ persona | !usuario.esAmigo(persona)].toList
+	def getNoSonAmigos(List<Usuario> usuarios) {
+		usuarios.filter[!usuario.esAmigo(it)].toList
 	}
 	
 	def repoUsuario() {
-		ApplicationContext.instance.getSingleton(Usuario) as Repo<Usuario>
+		ApplicationContext.instance.getSingleton(Usuario) as RepoUsuarios
 	}
 	
 	def agregarAmigo() {

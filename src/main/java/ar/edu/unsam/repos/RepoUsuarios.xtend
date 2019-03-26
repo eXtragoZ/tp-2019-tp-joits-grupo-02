@@ -47,4 +47,7 @@ class RepoUsuarios implements Repo<Usuario> {
 		usuarios.findFirst[nombreUsuario.equals(valor)]
 	}
 	
+	def amigosRecomendados(Usuario usuario) {
+		#[allInstances.get(0), allInstances.get(4), allInstances.get(5)]
+	}
 }

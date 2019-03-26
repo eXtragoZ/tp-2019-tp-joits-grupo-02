@@ -31,8 +31,7 @@ class JoitsApplication extends Application {
 
 	def void panelDeControl(CompraDeTicketsView view) {
 		val usuario = view.modelObject.usuario
-		view.close
-		new PanelDeControlView(this, new PanelDeControlModel(usuario)).open
+		new PanelDeControlView(view, new PanelDeControlModel(usuario)).open
 	}
 
 	def void compraDeTickets(PanelDeControlView view) {
@@ -43,14 +42,7 @@ class JoitsApplication extends Application {
 
 	def void buscarAmigo(PanelDeControlView view) {
 		val usuario = view.modelObject.usuario
-		view.close
-		new BuscarAmigosWindow(this, new BuscarAmigosModel(usuario)).open
-	}
-
-	def volverPanelControl(BuscarAmigosWindow view) {
-		val usuario = view.modelObject.usuario
-		view.close
-		new PanelDeControlView(this, new PanelDeControlModel(usuario)).open
+		new BuscarAmigosWindow(view, new BuscarAmigosModel(usuario)).open
 	}
 
 }
