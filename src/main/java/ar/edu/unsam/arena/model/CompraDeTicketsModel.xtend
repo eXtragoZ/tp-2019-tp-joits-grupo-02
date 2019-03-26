@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
@@ -26,6 +27,7 @@ class CompraDeTicketsModel {
 	Funcion funcionSeleccionada
 	List<Funcion> carrito
 	Funcion funcionCarritoSeleccionada
+	String mensajeError = ""
 
 	new(Usuario usuario) {
 		this.usuario = usuario
@@ -56,6 +58,7 @@ class CompraDeTicketsModel {
 		
 	def sacarDelCarrito() {
 		carrito.remove(funcionCarritoSeleccionada)
+		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
@@ -63,13 +66,15 @@ class CompraDeTicketsModel {
 	
 	def limpiarCarrito() {
 		carrito.clear
+		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
 	}
 	
 	def comprar() {
-		usuario.reducirSaldo(totalPrecioCarrito)
+		if(this.totalPrecioCarrito > usuario.saldo)	throw new UserException("ERROR no tiene saldo para realizar la compra")
+		carrito.forEach[ funcion | usuario.comprarEntrada(funcion)]
 		limpiarCarrito
 	}
 

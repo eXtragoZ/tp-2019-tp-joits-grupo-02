@@ -43,6 +43,7 @@ class Usuario {
 	}
 
 	def comprarEntrada(Funcion funcion) {
+		this.reducirSaldo(funcion.precio)
 		entradas.add(funcion)
 	}
 

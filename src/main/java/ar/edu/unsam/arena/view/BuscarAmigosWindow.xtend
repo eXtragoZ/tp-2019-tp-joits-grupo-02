@@ -78,20 +78,19 @@ class BuscarAmigosWindow extends Window<BuscarAmigosModel> {
 			layout = new VerticalLayout
 			new Table<Usuario>(it, typeof(Usuario)) => [
 				items <=> lista
-				width = 300
 				value <=> "seleccionado"
 				numberVisibleRows = 6
 				
 				new Column<Usuario>(it) => [
 					title = "Nombre"
 					bindContentsToProperty("nombre")
-					fixedSize = 150
+					fixedSize = 200
 				]
 				
 				new Column<Usuario>(it) => [
 					title = "Apellido"
 					bindContentsToProperty("apellido")
-					fixedSize = 150
+					fixedSize = 200
 				]
 				
 				newColumn(it, "Nombre", "nombre")

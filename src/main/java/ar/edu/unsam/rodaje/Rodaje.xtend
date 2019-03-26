@@ -29,7 +29,9 @@ abstract class Rodaje {
 		this.genero = genero
 	}
 
-	abstract def double getPrecioEntrada()
+	def double getPrecioEntrada() {
+		this.precioBase
+	}
 
 	def tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)

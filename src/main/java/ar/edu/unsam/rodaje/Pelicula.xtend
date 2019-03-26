@@ -28,7 +28,4 @@ class Pelicula extends Rodaje {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
 	}
 	
-	override getPrecioEntrada() {
-		this.precioBase
-	}
 }

@@ -30,16 +30,12 @@ class Saga extends Rodaje {
 		this.precioBase = 10.00
 	}
 
-	def getPrecioBasePorPeliculas() {
-		this.precioBase * this.peliculas.size * this.nivelDeClasico
-	}
-
 	def precioPorFuncion() {
 		this.funciones.fold(0.00, [total, funcion|total + funcion.getPrecioPorDiaDeFuncion])
 	}
 
 	override getPrecioEntrada() {
-		this.getPrecioBasePorPeliculas() + this.precioPorFuncion
+		this.precioBase * this.peliculas.size * this.nivelDeClasico
 	}
 
 	override tieneValorBuscado(String valorBusqueda) {

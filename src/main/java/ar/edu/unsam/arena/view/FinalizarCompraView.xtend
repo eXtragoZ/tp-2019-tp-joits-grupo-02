@@ -2,6 +2,8 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.CompraDeTicketsModel
 import ar.edu.unsam.funcion.Funcion
+import java.awt.Color
+import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -11,9 +13,9 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.model.exceptions.UserException
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.NotNullObservable
 
 class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 
@@ -62,8 +64,7 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 				new Button(it) => [
 					caption = "Comprar"
 					onClick [
-						this.modelObject.comprar
-						this.close
+						comprar()
 					]
 				]
 				new Button(it) => [
@@ -71,8 +72,22 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 					onClick [this.close]
 				]
 			]
+			
+			new Label(it) => [
+				foreground = Color.RED
+				value <=> "mensajeError"
+			]
 
 		]
+	}
+	
+	private def void comprar() {
+		try {
+			this.modelObject.comprar
+			this.close
+		} catch (UserException exception) {
+			this.modelObject.mensajeError = exception.message;
+		}
 	}
 
 	def agregarListaCarrito(Panel panel) {

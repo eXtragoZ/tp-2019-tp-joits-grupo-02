@@ -16,30 +16,39 @@ class BuscarAmigosModel {
 
 	Usuario usuario
 	Usuario seleccionado
-	List<Usuario> amigosFiltrados = new ArrayList
+	List<Usuario> amigosSugeridos = new ArrayList
 	String busquedaIngresada
 	String busquedaActual
 
 	new(Usuario usuario) {
 		this.usuario = usuario
+		amigosSugeridos = #[new Usuario("ggonzales", "Gabriel", "Gonzalez", 40, "1234")]
 	}
 
 	def buscar() {
 		busquedaActual = busquedaIngresada
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
+		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
 	}
 
 	def getListaDeBusqueda() {
 		if (StringUtils.isBlank(busquedaActual)) {
-			this.amigosFiltrados = this.usuario.amigos
+			getListaDePersonas()
 		} else {
-			this.usuario.amigos.filter[tieneValorBuscado(busquedaActual)].toList
+			this.listaDePersonas.filter[tieneValorBuscado(busquedaActual)].toList
 		}
+	}
+	
+	private def List<Usuario> getListaDePersonas() {
+		this.getNoSonAmigos(this.repoUsuario.allInstances)
 	}
 
 	def getBusquedaRecomendada() {
-		val List<Usuario> amigos = #[new Usuario("ggonzales", "Gabriel", "Gonzalez", 40, "1234")]
-		return amigos
+		this.getNoSonAmigos(this.amigosSugeridos)
+	}
+	
+	def getNoSonAmigos(List<Usuario> lista) {
+		lista.filter[ persona | !usuario.esAmigo(persona)].toList
 	}
 	
 	def repoUsuario() {
@@ -49,6 +58,7 @@ class BuscarAmigosModel {
 	def agregarAmigo() {
 		this.usuario.amigos.add(this.seleccionado)
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
+		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
 	}
 
 }
