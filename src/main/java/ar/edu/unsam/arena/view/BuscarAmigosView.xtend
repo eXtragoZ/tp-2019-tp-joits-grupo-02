@@ -15,7 +15,7 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class BuscarAmigosWindow extends Window<BuscarAmigosModel> {
+class BuscarAmigosView extends Window<BuscarAmigosModel> {
 	
 	new(WindowOwner owner, BuscarAmigosModel model) {
 		super(owner, model)
@@ -31,7 +31,7 @@ class BuscarAmigosWindow extends Window<BuscarAmigosModel> {
 				alignLeft
 			]
 			agregarBuscador()
-			agregarLista("listaDeBusqueda")
+			new TablaUsuarioView(this, this.modelObject, "listaDeBusqueda")
 			new Label(it) => [
 				text = "Amigos sugeridos"
 				width = 100

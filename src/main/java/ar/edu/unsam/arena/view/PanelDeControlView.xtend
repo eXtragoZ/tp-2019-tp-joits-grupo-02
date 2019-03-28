@@ -170,7 +170,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 	}
 	
 	def buscarAmigos() {
-		new BuscarAmigosWindow(this, new BuscarAmigosModel(this.modelObject.usuario)).open
+		new BuscarAmigosView(this, new BuscarAmigosModel(this.modelObject.usuario)).open
 	}
 
 }
