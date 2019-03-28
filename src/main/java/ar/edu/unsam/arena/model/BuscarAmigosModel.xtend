@@ -1,8 +1,7 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.repos.Repo
+import ar.edu.unsam.repos.RepoUsuarios
 import ar.edu.unsam.usuario.Usuario
-import java.util.ArrayList
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors

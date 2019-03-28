@@ -1,7 +1,6 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
-import ar.edu.unsam.arena.runnable.JoitsApplication
 import ar.edu.unsam.usuario.Usuario
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
