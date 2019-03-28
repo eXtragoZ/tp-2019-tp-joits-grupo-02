@@ -1,7 +1,7 @@
 package ar.edu.unsam.arena.view
 
+import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
-import ar.edu.unsam.arena.runnable.JoitsApplication
 import ar.edu.unsam.rodaje.Rodaje
 import ar.edu.unsam.usuario.Usuario
 import org.uqbar.arena.layout.HorizontalLayout
@@ -170,7 +170,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 	}
 	
 	def buscarAmigos() {
-		(owner as JoitsApplication).buscarAmigo(this)
+		new BuscarAmigosWindow(this, new BuscarAmigosModel(this.modelObject.usuario)).open
 	}
 
 }
