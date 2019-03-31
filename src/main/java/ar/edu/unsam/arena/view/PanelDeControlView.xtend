@@ -98,22 +98,8 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 					width = 100
 					alignLeft
 				]
-
-				new Table<Usuario>(it, typeof(Usuario)) => [
-					items <=> "usuario.amigos"
-					numberVisibleRows = 6
-
-					new Column<Usuario>(it) => [
-						title = "Nombre"
-						bindContentsToProperty("nombre")
-						fixedSize = 100
-					]
-					new Column<Usuario>(it) => [
-						title = "Fecha"
-						bindContentsToProperty("apellido")
-						fixedSize = 100
-					]
-				]
+				
+				new TablaUsuarioView("usuario.amigos").crearTabla(it)
 
 			]
 
@@ -170,7 +156,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 	}
 	
 	def buscarAmigos() {
-		new BuscarAmigosWindow(this, new BuscarAmigosModel(this.modelObject.usuario)).open
+		new BuscarAmigosView(this, new BuscarAmigosModel(this.modelObject.usuario)).open
 	}
 
 }
