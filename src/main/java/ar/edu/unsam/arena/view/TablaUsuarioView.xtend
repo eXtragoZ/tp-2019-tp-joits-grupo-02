@@ -11,16 +11,17 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class TablaUsuarioView extends Window<BuscarAmigosModel> {
+class TablaUsuarioView {
 
 	String lista
+	BuscarAmigosModel model
 
-	new(WindowOwner owner, BuscarAmigosModel model, String lista) {
-		super(owner, model)
+	new(String lista) {
+//		this.model = model
 		this.lista = lista
 	}
 
-	override createContents(Panel mainPanel) {
+	def crearTabla(Panel mainPanel) {
 		new Panel(mainPanel) => [
 			layout = new VerticalLayout
 			new Table<Usuario>(it, typeof(Usuario)) => [

@@ -16,14 +16,14 @@ import org.uqbar.arena.windows.WindowOwner
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class BuscarAmigosView extends Window<BuscarAmigosModel> {
-	
+
 	new(WindowOwner owner, BuscarAmigosModel model) {
 		super(owner, model)
 		this.title = "Buscar Amigos!"
 	}
-	
+
 	override createContents(Panel mainPanel) {
-		
+
 		mainPanel => [
 			layout = new VerticalLayout
 			new Label(it) => [
@@ -31,14 +31,14 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 				alignLeft
 			]
 			agregarBuscador()
-			new TablaUsuarioView(this, this.modelObject, "listaDeBusqueda")
+			new TablaUsuarioView("listaDeBusqueda").crearTabla(it)
 			new Label(it) => [
 				text = "Amigos sugeridos"
 				width = 100
 				alignLeft
 			]
-			agregarLista("busquedaRecomendada")
-			
+			new TablaUsuarioView("busquedaRecomendada").crearTabla(it)
+
 			new Panel(it) => [
 				layout = new HorizontalLayout
 
@@ -56,7 +56,7 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 			]
 		]
 	}
-	
+
 	def void agregarBuscador(Panel panel) {
 		new Panel(panel) => [
 			layout = new HorizontalLayout
@@ -72,29 +72,4 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 		]
 	}
 
-	def agregarLista(Panel panel, String lista) {
-		new Panel(panel) => [
-			layout = new VerticalLayout
-			new Table<Usuario>(it, typeof(Usuario)) => [
-				items <=> lista
-				value <=> "seleccionado"
-				numberVisibleRows = 6
-				
-				new Column<Usuario>(it) => [
-					title = "Nombre"
-					bindContentsToProperty("nombre")
-					fixedSize = 200
-				]
-				
-				new Column<Usuario>(it) => [
-					title = "Apellido"
-					bindContentsToProperty("apellido")
-					fixedSize = 200
-				]
-				
-			]
-
-		]
-	}
-	
 }

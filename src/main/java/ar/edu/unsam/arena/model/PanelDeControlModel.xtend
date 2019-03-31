@@ -12,10 +12,10 @@ import org.uqbar.commons.model.annotations.Dependencies
 class PanelDeControlModel {
 
 	Usuario usuario
+	Usuario seleccionado
 	
 	int edadAnterior
 	double saldoAnterior
-	List<Usuario> amigosAnteriores = new ArrayList
 	
 	double saldoNuevo
 
@@ -23,13 +23,11 @@ class PanelDeControlModel {
 		this.usuario = usuario
 		this.edadAnterior = usuario.edad
 		this.saldoAnterior = usuario.saldo
-		this.amigosAnteriores = usuario.amigos
 	}
 
 	def cancelarCambios() {
 		this.usuario.edad = this.edadAnterior
 		this.usuario.saldo = this.saldoAnterior
-		this.usuario.amigos = this.amigosAnteriores
 	}
 	
 	def cargarSaldo() {
