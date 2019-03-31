@@ -8,7 +8,7 @@ import ar.edu.unsam.arena.view.CompraDeTicketsView
 import ar.edu.unsam.arena.view.FinalizarCompraView
 import ar.edu.unsam.arena.view.LoginView
 import ar.edu.unsam.arena.view.PanelDeControlView
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.usuario.Usuario
 import org.uqbar.arena.Application
 
 class JoitsApplication extends Application {

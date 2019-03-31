@@ -1,6 +1,6 @@
-package ar.edu.unsam.repos
+package ar.edu.unsam.domain.repos
 
-import java.util.List;
+import java.util.List
 
 interface Repo<T> {
 

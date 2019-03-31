@@ -1,10 +1,10 @@
-package ar.edu.unsam.funcion
+package ar.edu.unsam.domain.funcion
 
+import ar.edu.unsam.domain.rodaje.Rodaje
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import ar.edu.unsam.rodaje.Rodaje
 
 @Accessors
 @Observable

@@ -1,9 +1,10 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.CompraDeTicketsModel
+import ar.edu.unsam.arena.model.FinalizarCompraModel
 import ar.edu.unsam.arena.runnable.JoitsApplication
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.rodaje.Pelicula
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.rodaje.Pelicula
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -16,7 +17,6 @@ import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import ar.edu.unsam.arena.model.FinalizarCompraModel
 
 class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 

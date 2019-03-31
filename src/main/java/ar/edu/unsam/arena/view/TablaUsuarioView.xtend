@@ -1,13 +1,11 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.usuario.Usuario
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
-import org.uqbar.arena.windows.Window
-import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 

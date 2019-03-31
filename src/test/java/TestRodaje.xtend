@@ -1,6 +1,6 @@
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.rodaje.Pelicula
-import ar.edu.unsam.rodaje.Saga
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.rodaje.Pelicula
+import ar.edu.unsam.domain.rodaje.Saga
 import java.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test

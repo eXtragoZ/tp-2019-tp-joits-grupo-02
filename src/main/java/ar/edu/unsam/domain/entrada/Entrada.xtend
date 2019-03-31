@@ -1,7 +1,7 @@
-package ar.edu.unsam.entrada
+package ar.edu.unsam.domain.entrada
 
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.rodaje.Rodaje
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.rodaje.Rodaje
 import java.time.LocalDateTime
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable

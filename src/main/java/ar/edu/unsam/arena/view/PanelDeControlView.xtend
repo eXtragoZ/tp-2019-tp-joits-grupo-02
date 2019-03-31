@@ -2,8 +2,7 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
-import ar.edu.unsam.rodaje.Rodaje
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.rodaje.Rodaje
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button

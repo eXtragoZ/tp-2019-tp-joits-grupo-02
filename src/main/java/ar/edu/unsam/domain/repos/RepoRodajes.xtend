@@ -1,7 +1,7 @@
-package ar.edu.unsam.repos
+package ar.edu.unsam.domain.repos
 
-import ar.edu.unsam.rodaje.Pelicula
-import ar.edu.unsam.rodaje.Rodaje
+import ar.edu.unsam.domain.rodaje.Pelicula
+import ar.edu.unsam.domain.rodaje.Rodaje
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 

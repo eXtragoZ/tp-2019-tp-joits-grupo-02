@@ -1,13 +1,13 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.entrada.Entrada
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.entrada.Entrada
+import ar.edu.unsam.domain.usuario.Usuario
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
-import org.uqbar.commons.model.annotations.Dependencies
 
 @Observable
 @Accessors

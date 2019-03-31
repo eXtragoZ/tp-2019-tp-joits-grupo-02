@@ -1,12 +1,11 @@
-package ar.edu.unsam.usuario
+package ar.edu.unsam.domain.usuario
 
-import ar.edu.unsam.funcion.Funcion
+import ar.edu.unsam.domain.entrada.Entrada
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
-import ar.edu.unsam.entrada.Entrada
 
 @Observable
 @Accessors

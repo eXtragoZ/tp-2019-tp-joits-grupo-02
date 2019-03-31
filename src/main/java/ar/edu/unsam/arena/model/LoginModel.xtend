@@ -1,7 +1,7 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.usuario.Usuario
-import ar.edu.unsam.repos.Repo
+import ar.edu.unsam.domain.repos.Repo
+import ar.edu.unsam.domain.usuario.Usuario
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.applicationContext.ApplicationContext

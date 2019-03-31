@@ -1,4 +1,4 @@
-package ar.edu.unsam.rodaje
+package ar.edu.unsam.domain.rodaje
 
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors

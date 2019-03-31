@@ -1,8 +1,9 @@
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test
+import ar.edu.unsam.domain.entrada.Entrada
 
 class TestUsuario {
 	
@@ -41,7 +42,7 @@ class TestUsuario {
 	@Test
 	def void carlosCompraEntrada() {
 		Assert.assertEquals(0, carlos.entradas.size)
-		carlos.comprarEntrada(new Funcion(TestRodaje.elPadrino, LocalDateTime.now, "Sala A"))
+		carlos.comprarEntrada(new Entrada(TestRodaje.elPadrino, new Funcion(TestRodaje.elPadrino, LocalDateTime.now, "Sala A")))
 		Assert.assertEquals(1, carlos.entradas.size)
 	}
 	

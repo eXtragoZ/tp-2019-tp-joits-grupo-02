@@ -1,7 +1,7 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.FinalizarCompraModel
-import ar.edu.unsam.funcion.Funcion
+import ar.edu.unsam.domain.funcion.Funcion
 import java.awt.Color
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout

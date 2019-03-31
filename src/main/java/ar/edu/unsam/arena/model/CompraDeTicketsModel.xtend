@@ -1,10 +1,10 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.entrada.Entrada
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.repos.RepoRodajes
-import ar.edu.unsam.rodaje.Rodaje
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.entrada.Entrada
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.repos.RepoRodajes
+import ar.edu.unsam.domain.rodaje.Rodaje
+import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.List

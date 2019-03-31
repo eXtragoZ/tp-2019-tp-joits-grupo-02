@@ -1,6 +1,6 @@
-package ar.edu.unsam.rodaje
+package ar.edu.unsam.domain.rodaje
 
-import ar.edu.unsam.funcion.Funcion
+import ar.edu.unsam.domain.funcion.Funcion
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors

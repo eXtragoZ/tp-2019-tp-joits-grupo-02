@@ -1,13 +1,13 @@
 package ar.edu.unsam.arena.runnable
 
-import ar.edu.unsam.entrada.Entrada
-import ar.edu.unsam.funcion.Funcion
-import ar.edu.unsam.repos.RepoRodajes
-import ar.edu.unsam.repos.RepoUsuarios
-import ar.edu.unsam.rodaje.Pelicula
-import ar.edu.unsam.rodaje.Rodaje
-import ar.edu.unsam.rodaje.Saga
-import ar.edu.unsam.usuario.Usuario
+import ar.edu.unsam.domain.entrada.Entrada
+import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.repos.RepoRodajes
+import ar.edu.unsam.domain.repos.RepoUsuarios
+import ar.edu.unsam.domain.rodaje.Pelicula
+import ar.edu.unsam.domain.rodaje.Rodaje
+import ar.edu.unsam.domain.rodaje.Saga
+import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDateTime
 import java.util.Random
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
