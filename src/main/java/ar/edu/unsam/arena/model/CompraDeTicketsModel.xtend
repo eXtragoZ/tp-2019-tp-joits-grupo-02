@@ -1,5 +1,6 @@
 package ar.edu.unsam.arena.model
 
+import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.rodaje.Rodaje
@@ -25,7 +26,7 @@ class CompraDeTicketsModel {
 	String busquedaActual
 	Rodaje rodajeSeleccionado
 	Funcion funcionSeleccionada
-	List<Funcion> carrito
+	List<Entrada> carrito
 	Funcion funcionCarritoSeleccionada
 	String mensajeError = ""
 
@@ -52,7 +53,7 @@ class CompraDeTicketsModel {
 	}
 
 	def agregarAlCarrito() {
-		carrito.add(funcionSeleccionada)
+		carrito.add(this.getNewEntrada)
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
 		
@@ -91,8 +92,17 @@ class CompraDeTicketsModel {
 		formatterDate.format(LocalDate.now)
 	}
 	
+	def getPrecioEntrada() {
+		return getNewEntrada().precio
+	}
+	
+	@Dependencies("funcionSeleccionada")
+	def Entrada getNewEntrada() {
+		new Entrada(rodajeSeleccionado, funcionSeleccionada)
+	}
+	
 	def getTotalPrecioCarrito() {
-		carrito.fold(0d, [total, funcion | total + funcion.precio])
+		carrito.fold(0d, [total, entrada | total + entrada.precio])
 	}
 
 	def repoRodaje() {

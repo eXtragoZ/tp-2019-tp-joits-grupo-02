@@ -1,5 +1,6 @@
 package ar.edu.unsam.arena.runnable
 
+import ar.edu.unsam.entrada.Entrada
 import ar.edu.unsam.funcion.Funcion
 import ar.edu.unsam.repos.RepoRodajes
 import ar.edu.unsam.repos.RepoUsuarios
@@ -66,7 +67,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			val iFun = new Random().nextInt(3) + 2
 			for (var i = 0; i < iFun; i++) {
 				val funciones = repoRodajes.allInstances.get(new Random().nextInt(repoRodajes.allInstances.size)).funciones
-				entradas.add(funciones.get(new Random().nextInt(funciones.size)))
+				val funcion = funciones.get(new Random().nextInt(funciones.size))
+				entradas.add(new Entrada(funcion.rodaje, funciones.get(new Random().nextInt(funciones.size))))
 			}
 		]
 		repoUsuarios.allInstances.get(1).amigos.add(repoUsuarios.allInstances.get(0))

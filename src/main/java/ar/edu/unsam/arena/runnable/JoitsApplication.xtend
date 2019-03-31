@@ -1,9 +1,11 @@
 package ar.edu.unsam.arena.runnable
 
 import ar.edu.unsam.arena.model.CompraDeTicketsModel
+import ar.edu.unsam.arena.model.FinalizarCompraModel
 import ar.edu.unsam.arena.model.LoginModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
 import ar.edu.unsam.arena.view.CompraDeTicketsView
+import ar.edu.unsam.arena.view.FinalizarCompraView
 import ar.edu.unsam.arena.view.LoginView
 import ar.edu.unsam.arena.view.PanelDeControlView
 import ar.edu.unsam.usuario.Usuario
@@ -36,6 +38,12 @@ class JoitsApplication extends Application {
 		val usuario = view.modelObject.usuario
 		view.close
 		new CompraDeTicketsView(this, new CompraDeTicketsModel(usuario)).open
+	}
+	
+	def void finalizarCompra(CompraDeTicketsView view) {
+		val usuario = view.modelObject.usuario
+		val carrito = view.modelObject.carrito
+		new FinalizarCompraView(this, new FinalizarCompraModel(usuario, carrito)).open
 	}
 
 }

@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
+import ar.edu.unsam.entrada.Entrada
 
 @Observable
 @Accessors
@@ -18,7 +19,7 @@ class Usuario {
 	int edad
 	List<Usuario> amigos = newArrayList
 	double saldo
-	List<Funcion> entradas = newArrayList
+	List<Entrada> entradas = newArrayList
 	String password
 
 	new() {
@@ -42,9 +43,9 @@ class Usuario {
 		amigos.contains(amigo)
 	}
 
-	def comprarEntrada(Funcion funcion) {
-		this.reducirSaldo(funcion.precio)
-		entradas.add(funcion)
+	def comprarEntrada(Entrada entrada) {
+		this.reducirSaldo(entrada.precio)
+		entradas.add(entrada)
 	}
 
 	def tieneValorBuscado(String valorBusqueda) {

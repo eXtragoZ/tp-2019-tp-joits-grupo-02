@@ -1,6 +1,6 @@
 package ar.edu.unsam.arena.view
 
-import ar.edu.unsam.arena.model.CompraDeTicketsModel
+import ar.edu.unsam.arena.model.FinalizarCompraModel
 import ar.edu.unsam.funcion.Funcion
 import java.awt.Color
 import org.uqbar.arena.bindings.NotNullObservable
@@ -17,9 +17,9 @@ import org.uqbar.commons.model.exceptions.UserException
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class FinalizarCompraView extends Window<CompraDeTicketsModel> {
+class FinalizarCompraView extends Window<FinalizarCompraModel> {
 
-	new(WindowOwner owner, CompraDeTicketsModel model) {
+	new(WindowOwner owner, FinalizarCompraModel model) {
 		super(owner, model)
 		this.title = "Joits - Finalizar Compra"
 	}
@@ -37,8 +37,8 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 				layout = new HorizontalLayout
 				new Button(it) => [
 					caption = "Eliminar Item"
-					onClick [this.modelObject.sacarDelCarrito]
-					bindEnabled(new NotNullObservable("funcionCarritoSeleccionada"))
+					onClick [sacarDelCarrito()]
+					bindEnabled(new NotNullObservable("seleccionado"))
 				]
 				new Label(it) => [
 					width = 390
@@ -56,16 +56,15 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 				layout = new HorizontalLayout
 				new Button(it) => [
 					caption = "Limpiar carrito"
-					onClick [this.modelObject.limpiarCarrito]
+					onClick [limpiarCarrito()]
 				]
 				new Label(it) => [
 					width = 320
 				]
 				new Button(it) => [
 					caption = "Comprar"
-					onClick [
-						comprar()
-					]
+					onClick [comprar()]
+					enabled <=> "validarComprar"
 				]
 				new Button(it) => [
 					caption = "Volver atrás"
@@ -81,9 +80,20 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 		]
 	}
 	
+	private def void sacarDelCarrito() {
+		this.modelObject.sacarDelCarrito()
+		(this.owner as CompraDeTicketsView).sacarDelCarrito
+	}
+	
+	private def void limpiarCarrito() {
+		this.modelObject.limpiarCarrito()
+		(this.owner as CompraDeTicketsView).limpiarCarrito
+	}
+	
 	private def void comprar() {
 		try {
-			this.modelObject.comprar
+			this.modelObject.comprar()
+			(this.owner as CompraDeTicketsView).limpiarCarrito
 			this.close
 		} catch (UserException exception) {
 			this.modelObject.mensajeError = exception.message;
@@ -95,7 +105,7 @@ class FinalizarCompraView extends Window<CompraDeTicketsModel> {
 			layout = new VerticalLayout
 			new Table<Funcion>(it, typeof(Funcion)) => [
 				items <=> "carrito"
-				value <=> "funcionCarritoSeleccionada"
+				value <=> "seleccionado"
 				numberVisibleRows = 6
 
 				new Column<Funcion>(it) => [

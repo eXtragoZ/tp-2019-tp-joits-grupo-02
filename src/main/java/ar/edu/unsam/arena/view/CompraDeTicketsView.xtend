@@ -16,6 +16,7 @@ import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import ar.edu.unsam.arena.model.FinalizarCompraModel
 
 class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 
@@ -196,9 +197,17 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 
 		]
 	}
+	
+	def limpiarCarrito() {
+		this.modelObject.limpiarCarrito
+	}
+	
+	def sacarDelCarrito() {
+		this.modelObject.sacarDelCarrito
+	}
 
 	def finalizarCompra() {
-		new FinalizarCompraView(this, this.modelObject).open
+		new FinalizarCompraView(this, new FinalizarCompraModel(this.modelObject.usuario, this.modelObject.carrito)).open
 	}
 
 	def panelDeControl() {
