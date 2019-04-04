@@ -1,9 +1,11 @@
 package ar.edu.unsam.domain.rodaje
 
+import javax.persistence.Entity
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
+@Entity
 @Accessors
 @Observable
 class Pelicula extends Rodaje {
