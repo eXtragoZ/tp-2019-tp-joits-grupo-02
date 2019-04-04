@@ -1,15 +1,24 @@
 package ar.edu.unsam.domain.rodaje
 
 import java.util.List
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
+@Entity
 @Accessors
 @Observable
 class Saga extends Rodaje {
 
+	@OneToMany (fetch=FetchType.LAZY)
 	List<Pelicula> peliculas = newArrayList
+	
+	@Column
 	int nivelDeClasico
+	
 	val PLUS = 5
 
 	new() {

@@ -3,9 +3,16 @@ package ar.edu.unsam.domain.funcion
 import ar.edu.unsam.domain.rodaje.Rodaje
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.OneToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
+@Entity
 @Accessors
 @Observable
 class Funcion {
@@ -13,8 +20,17 @@ class Funcion {
 	val formatterTime = DateTimeFormatter.ofPattern("HH:mm")
 	val formatterDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
 	
+	@Id
+	@GeneratedValue
+	long id
+	
+	@Column
 	LocalDateTime fechaHora
+	
+	@Column(length=100)
 	String nombreSala
+	
+	@OneToOne(fetch=FetchType.LAZY)
 	Rodaje rodaje
 	
 	new() {

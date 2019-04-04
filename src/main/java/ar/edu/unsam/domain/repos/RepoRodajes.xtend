@@ -4,51 +4,38 @@ import ar.edu.unsam.domain.rodaje.Pelicula
 import ar.edu.unsam.domain.rodaje.Rodaje
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import javax.persistence.criteria.CriteriaBuilder
+import javax.persistence.criteria.CriteriaQuery
+import javax.persistence.criteria.Root
 
-class RepoRodajes implements Repo<Rodaje> {
+class RepoRodajes extends RepoDefault<Rodaje> {
 
-	List<Rodaje> rodajes = newArrayList
-	int nextId = 1
 	@Accessors
 	List<Rodaje> recomendados = newArrayList
 
-	override allInstances() {
-		rodajes
-	}
-
-	override create(Rodaje object) {
-		object.id = this.nextId
-		rodajes.add(object)
-		this.nextId++
-	}
-
-	override createExample() {
+	def createExample() {
 		new Pelicula
 	}
 
-	override delete(Rodaje object) {
-		rodajes.remove(object)
-	}
+//	def delete(Rodaje object) {
+//		rodajes.remove(object)
+//	}
 
 	override getEntityType() {
 		Rodaje
 	}
 
-	override searchByExample(Rodaje example) {
-		rodajes.filter[tieneValorBuscado(example.titulo)].toList
-	}
-
+	//reemplazar despues el allInstance
 	override searchById(long _id) {
-		rodajes.findFirst[id == _id]
+		allInstances.findFirst[id == _id]
 	}
 
-	override update(Rodaje object) {
-		delete(searchById(object.id))
-		create(object)
+	def searchByString(String valor) {
+		allInstances.findFirst[titulo == valor]
 	}
-
-	override searchByString(String valor) {
-		rodajes.findFirst[titulo == valor]
+	
+	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Rodaje> query, Root<Rodaje> camposCandidato, Rodaje t) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 }
