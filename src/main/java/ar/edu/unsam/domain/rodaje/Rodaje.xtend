@@ -6,6 +6,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
@@ -16,12 +17,12 @@ import org.uqbar.commons.model.annotations.Observable
 
 @Entity
 @Observable
-@Accessors
 @Inheritance(strategy=InheritanceType.JOINED)
+@Accessors
 abstract class Rodaje {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id
 	
 	@Column(length=100)

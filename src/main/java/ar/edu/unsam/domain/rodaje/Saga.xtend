@@ -1,6 +1,7 @@
 package ar.edu.unsam.domain.rodaje
 
 import java.util.List
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -13,7 +14,7 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Saga extends Rodaje {
 
-	@OneToMany (fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	List<Pelicula> peliculas = newArrayList
 	
 	@Column

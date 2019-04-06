@@ -16,9 +16,6 @@ import org.uqbar.commons.model.annotations.Observable
 @Accessors
 @Observable
 class Funcion {
-	val formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-	val formatterTime = DateTimeFormatter.ofPattern("HH:mm")
-	val formatterDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
 	
 	@Id
 	@GeneratedValue
@@ -33,6 +30,7 @@ class Funcion {
 	@OneToOne(fetch=FetchType.LAZY)
 	Rodaje rodaje
 	
+	
 	new() {
 		super()
 	}
@@ -44,14 +42,17 @@ class Funcion {
 	}
 	
 	def getFecha() {
+		val formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 		formatterDate.format(fechaHora)
 	}
 	
 	def getHora() {
+		val formatterTime = DateTimeFormatter.ofPattern("HH:mm")
 		formatterTime.format(fechaHora)
 	}
 	
 	def getFechaHora() {
+		val formatterDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
 		formatterDateTime.format(fechaHora)
 	}
 	
