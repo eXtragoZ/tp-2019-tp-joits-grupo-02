@@ -1,6 +1,5 @@
 package ar.edu.unsam.arena.view
 
-import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.domain.usuario.Usuario
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Panel
@@ -12,10 +11,8 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 class TablaUsuarioView {
 
 	String lista
-	BuscarAmigosModel model
 
 	new(String lista) {
-//		this.model = model
 		this.lista = lista
 	}
 

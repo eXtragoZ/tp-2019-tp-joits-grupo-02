@@ -11,9 +11,9 @@
 		<class>ar.edu.unsam.domain.entrada.Entrada</class>
         <class>ar.edu.unsam.domain.funcion.Funcion</class>
         <class>ar.edu.unsam.domain.usuario.Usuario</class>
+        <class>ar.edu.unsam.domain.rodaje.Rodaje</class>
         <class>ar.edu.unsam.domain.rodaje.Pelicula</class>
         <class>ar.edu.unsam.domain.rodaje.Saga</class>
-        <class>ar.edu.unsam.domain.rodaje.Rodaje</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/politics" />

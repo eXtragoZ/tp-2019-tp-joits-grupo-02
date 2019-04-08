@@ -17,8 +17,7 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Funcion {
 	
-	@Id
-	@GeneratedValue
+	@Id	@GeneratedValue
 	long id
 	
 	@Column

@@ -3,7 +3,6 @@ package ar.edu.unsam.domain.entrada
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.rodaje.Rodaje
 import java.time.LocalDateTime
-import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -25,10 +24,10 @@ class Entrada {
 	@Column
 	LocalDateTime fechaHora
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	Rodaje rodaje
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	Funcion funcion
 	
 	new(Rodaje rodaje) {

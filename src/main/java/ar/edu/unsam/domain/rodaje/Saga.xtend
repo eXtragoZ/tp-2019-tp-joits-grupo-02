@@ -15,7 +15,7 @@ import org.uqbar.commons.model.annotations.Observable
 class Saga extends Rodaje {
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	List<Pelicula> peliculas = newArrayList
+	List<Rodaje> peliculas = newArrayList
 	
 	@Column
 	int nivelDeClasico
@@ -28,13 +28,13 @@ class Saga extends Rodaje {
 	}
 
 	new(String titulo, int anio, float puntaje, String genero) {
-		super(titulo, anio, puntaje, genero)
+		super(anio, titulo, puntaje, genero)
 		this.peliculas = peliculas
 		this.precioBase = 10.00
 	}
 
-	new(List<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
-		super(titulo, anio, puntaje, genero)
+	new(List<Rodaje> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
+		super(anio, titulo, puntaje, genero)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico
 		this.precioBase = 10.00

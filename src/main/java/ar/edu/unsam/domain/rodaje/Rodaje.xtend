@@ -6,7 +6,6 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
@@ -19,10 +18,9 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 @Inheritance(strategy=InheritanceType.JOINED)
 @Accessors
-abstract class Rodaje {
+class Rodaje {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id	@GeneratedValue
 	long id
 	
 	@Column(length=100)
@@ -43,17 +41,16 @@ abstract class Rodaje {
 	@Column
 	int anio
 
-	new() {
-		super()
-	}
+	new() {		}
 
-	new(String titulo, int anio, float puntaje, String genero) {
+	new(int anio,String titulo, float puntaje, String genero) {
 		this.titulo = titulo
 		this.anio = anio
 		this.puntaje = puntaje
 		this.genero = genero
+		this.precioBase = 30.00
 	}
-
+	
 	def double getPrecioEntrada() {
 		this.precioBase
 	}

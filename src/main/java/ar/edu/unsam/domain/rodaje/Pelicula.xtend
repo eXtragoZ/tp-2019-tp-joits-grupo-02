@@ -16,15 +16,10 @@ class Pelicula extends Rodaje {
 	}
 	
 	new(int anio, String titulo, float puntaje, String genero){
-		super(titulo, anio, puntaje, genero)
+		super(anio,titulo, puntaje, genero)
 		this.precioBase = 30.00
 	}
 	
-	new(long id, int anio, String titulo, float puntaje, String genero){
-		super(titulo, anio, puntaje, genero)
-		this.id = id
-		this.precioBase = 30.00
-	}
 	
 	override tieneValorBuscado(String valorBusqueda) {
 		return StringUtils.containsIgnoreCase(titulo, valorBusqueda)
