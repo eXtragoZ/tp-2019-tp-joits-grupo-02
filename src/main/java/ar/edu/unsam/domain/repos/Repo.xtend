@@ -32,7 +32,7 @@ interface Repo<T> {
 
 abstract class RepoDefault<T> {
 	
-	static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Politics")
+	static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Joits")
 	
 	def List<T> allInstances() {
 		val entityManager = this.entityManager

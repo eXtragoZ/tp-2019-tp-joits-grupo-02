@@ -5,8 +5,8 @@
  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="Politics">
-		<description>Taller de encuestas de candidatos políticos</description>
+	<persistence-unit name="Joits">
+		<description>TP Joits</description>
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>ar.edu.unsam.domain.entrada.Entrada</class>
         <class>ar.edu.unsam.domain.funcion.Funcion</class>
@@ -16,7 +16,7 @@
         <class>ar.edu.unsam.domain.rodaje.Saga</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/politics" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/joits" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<!-- libuffa = Cuando lo seteo en mi compu paso el pass de "roor" a "" -->
 			<property name="javax.persistence.jdbc.password" value="" />
