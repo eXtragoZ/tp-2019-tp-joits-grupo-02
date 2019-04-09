@@ -8,13 +8,14 @@ import javax.persistence.FetchType
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import ar.edu.unsam.domain.funcion.Funcion
 
 @Entity
 @Accessors
 @Observable
 class Saga extends Rodaje {
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY)
 	List<Rodaje> peliculas = newArrayList
 	
 	@Column
@@ -37,6 +38,14 @@ class Saga extends Rodaje {
 		super(anio, titulo, puntaje, genero)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico
+		this.precioBase = 10.00
+	}
+	
+	new(List<Rodaje> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico, List<Funcion> funciones) {
+		super(anio, titulo, puntaje, genero, funciones)
+		this.peliculas = peliculas
+		this.nivelDeClasico = nivelDeClasico
+		this.funciones = funciones
 		this.precioBase = 10.00
 	}
 

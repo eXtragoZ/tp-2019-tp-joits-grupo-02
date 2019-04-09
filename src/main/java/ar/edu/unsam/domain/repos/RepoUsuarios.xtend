@@ -8,22 +8,22 @@ import javax.persistence.criteria.Root
 
 class RepoUsuarios extends RepoDefault<Usuario> {
 
-	override create(Usuario object) {
-		val entityManager = this.entityManager
-		try {
-			entityManager => [
-				transaction.begin
-				persist(object)
-				transaction.commit
-			]
-		} catch (PersistenceException e) {
-			e.printStackTrace
-			entityManager.transaction.rollback
-			throw new RuntimeException("Ocurrió un error, la operación no puede completarse", e)
-		} finally {
-			entityManager.close
-		}
-	}
+//	override create(Usuario object) {
+//		val entityManager = this.entityManager
+//		try {
+//			entityManager => [
+//				transaction.begin
+//				persist(object)
+//				transaction.commit
+//			]
+//		} catch (PersistenceException e) {
+//			e.printStackTrace
+//			entityManager.transaction.rollback
+//			throw new RuntimeException("Ocurrió un error en Repo de usuarios, la operación no puede completarse", e)
+//		} finally {
+//			entityManager.close
+//		}
+//	}
 
 	def createExample() {
 		new Usuario
@@ -45,14 +45,15 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 //	override searchByString(String valor) {
 //		usuarios.findFirst[nombreUsuario.equals(valor)]
 //	}
+
 	def amigosRecomendados(Usuario usuario) {
 		#[allInstances.get(0), allInstances.get(4), allInstances.get(5)]
 	}
 
 	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario,
 		Usuario t) {
-		if (t.nombre !== null) {
-			query.where(criteria.equal(camposUsuario.get("descripcion"), t.nombre))
+		if (t.nombreUsuario !== null) {
+			query.where(criteria.equal(camposUsuario.get("nombreUsuario"), t.nombreUsuario))
 		}
 
 	}

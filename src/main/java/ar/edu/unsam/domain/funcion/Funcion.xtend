@@ -26,8 +26,8 @@ class Funcion {
 	@Column(length=100)
 	String nombreSala
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	Rodaje rodaje
+//	@OneToOne(fetch=FetchType.LAZY)
+//	Rodaje rodaje
 	
 	
 	new() {
@@ -35,7 +35,12 @@ class Funcion {
 	}
 
 	new(Rodaje rodaje, LocalDateTime fechaHora, String nombreSala) {
-		this.rodaje = rodaje
+//		this.rodaje = rodaje
+		this.fechaHora = fechaHora
+		this.nombreSala = nombreSala
+	}
+	
+	new(LocalDateTime fechaHora, String nombreSala) {
 		this.fechaHora = fechaHora
 		this.nombreSala = nombreSala
 	}
@@ -68,7 +73,8 @@ class Funcion {
 	}
 	
 	def getPrecio() {
-		rodaje.precioEntrada + this.precioPorDiaDeFuncion
+//		rodaje.precioEntrada + 
+		this.precioPorDiaDeFuncion
 	}
 	
 }

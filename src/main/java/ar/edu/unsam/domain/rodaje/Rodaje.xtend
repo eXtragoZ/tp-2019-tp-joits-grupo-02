@@ -2,6 +2,7 @@ package ar.edu.unsam.domain.rodaje
 
 import ar.edu.unsam.domain.funcion.Funcion
 import java.util.List
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -21,7 +22,7 @@ import org.uqbar.commons.model.annotations.Observable
 class Rodaje {
 
 	@Id	@GeneratedValue
-	long id
+	Long id
 	
 	@Column(length=100)
 	String titulo
@@ -32,7 +33,7 @@ class Rodaje {
 	@Column(length=100)
 	String genero
 	
-	@OneToMany (fetch=FetchType.LAZY)
+	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	List<Funcion> funciones = newArrayList
 	
 	@Column
@@ -48,6 +49,15 @@ class Rodaje {
 		this.anio = anio
 		this.puntaje = puntaje
 		this.genero = genero
+		this.precioBase = 30.00
+	}
+	
+	new(int anio,String titulo, float puntaje, String genero, List<Funcion> funciones) {
+		this.titulo = titulo
+		this.anio = anio
+		this.puntaje = puntaje
+		this.genero = genero
+		this.funciones = funciones
 		this.precioBase = 30.00
 	}
 	

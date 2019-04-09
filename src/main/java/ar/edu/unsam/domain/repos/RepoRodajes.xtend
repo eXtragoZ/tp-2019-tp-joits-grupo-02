@@ -34,8 +34,24 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 		allInstances.findFirst[titulo == valor]
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Rodaje> query, Root<Rodaje> camposCandidato, Rodaje t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Rodaje> query, Root<Rodaje> camposRodaje, Rodaje t) {
+		if (t.titulo !== null) {
+			query.where(criteria.equal(camposRodaje.get("titulo"), t.titulo))
+		}
 	}
+	
+//	override List<Rodaje> allInstances() {
+//		val entityManager = this.entityManager
+//		try {
+//			val criteria = entityManager.criteriaBuilder
+//			val query = criteria.createQuery(entityType)
+//			val from = query.from(entityType)
+//			from.fetch("funciones")
+//			query.select(from)
+//			entityManager.createQuery(query).resultList
+//		} finally {
+//			entityManager?.close
+//		}
+//	}
 
 }

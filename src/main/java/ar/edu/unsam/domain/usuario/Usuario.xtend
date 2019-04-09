@@ -20,7 +20,7 @@ class Usuario {
 
 	@Id
 	@GeneratedValue
-	long id
+	Long id
 	
 	@Column(length=100)
 	String nombreUsuario
