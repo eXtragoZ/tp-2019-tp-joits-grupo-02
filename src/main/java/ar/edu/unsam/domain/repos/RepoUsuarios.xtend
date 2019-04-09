@@ -41,10 +41,22 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 //		delete(searchById(object.id))
 //		create(object)
 //	}
-//
-//	override searchByString(String valor) {
-//		usuarios.findFirst[nombreUsuario.equals(valor)]
-//	}
+
+	def searchByString(String nombreUsuario) {
+		val entityManager = entityManager
+        try {
+            val criteria = entityManager.criteriaBuilder
+            val query = criteria.createQuery(entityType)
+            val camposUsuario = query.from(entityType)
+//            val camposCandidato = camposZona.fetch("candidatos")
+//            camposCandidato.fetch("partido")
+            query.select(camposUsuario)
+            query.where(criteria.equal(camposUsuario.get("nombreUsuario"), nombreUsuario))
+            entityManager.createQuery(query).singleResult
+        } finally {
+            entityManager?.close
+        }
+	}
 
 	def amigosRecomendados(Usuario usuario) {
 		#[allInstances.get(0), allInstances.get(4), allInstances.get(5)]

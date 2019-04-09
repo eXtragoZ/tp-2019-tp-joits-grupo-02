@@ -1,6 +1,6 @@
 package ar.edu.unsam.arena.model
 
-import ar.edu.unsam.domain.repos.Repo
+import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -32,6 +32,6 @@ class LoginModel {
 	}
 	
 	def repoUsuario() {
-		ApplicationContext.instance.getSingleton(Usuario) as Repo<Usuario>
+		ApplicationContext.instance.getSingleton(Usuario) as RepoUsuarios
 	}
 }
