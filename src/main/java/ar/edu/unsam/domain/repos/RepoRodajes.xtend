@@ -26,9 +26,9 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 	}
 
 	//reemplazar despues el allInstance
-	override searchById(long _id) {
-		allInstances.findFirst[id == _id]
-	}
+//	override searchById(long _id) {
+//		allInstances.findFirst[id == _id]
+//	}
 
 	def searchByString(String valor) {
 		allInstances.findFirst[titulo == valor]
@@ -53,5 +53,21 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 //			entityManager?.close
 //		}
 //	}
+
+	override searchById(long id) {
+		val entityManager = entityManager
+		try {
+			val criteria = entityManager.criteriaBuilder
+			val query = criteria.createQuery(entityType)
+			val from = query.from(entityType)
+			from.fetch("funciones")
+			query.select(from)
+			query.where(criteria.equal(from.get("id"), id))
+			entityManager.createQuery(query).singleResult
+		} finally {
+			entityManager?.close
+		}
+	}
+	
 
 }

@@ -37,7 +37,7 @@ class Rodaje {
 	List<Funcion> funciones = newArrayList
 	
 	@Column
-	double precioBase = 30.00
+	double precioBase = 30.00 //contemplar bigdecimal
 	
 	@Column
 	int anio

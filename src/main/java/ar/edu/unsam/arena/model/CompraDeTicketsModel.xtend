@@ -56,7 +56,7 @@ class CompraDeTicketsModel {
 		carrito.add(this.getNewEntrada)
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
-		
+
 	def sacarDelCarrito() {
 		carrito.remove(funcionCarritoSeleccionada)
 		this.mensajeError = ""
@@ -64,7 +64,7 @@ class CompraDeTicketsModel {
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
 	}
-	
+
 	def limpiarCarrito() {
 		carrito.clear
 		this.mensajeError = ""
@@ -72,10 +72,11 @@ class CompraDeTicketsModel {
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
 	}
-	
+
 	def comprar() {
-		if(this.totalPrecioCarrito > usuario.saldo)	throw new UserException("ERROR no tiene saldo para realizar la compra")
-		carrito.forEach[ funcion | usuario.comprarEntrada(funcion)]
+		if(this.totalPrecioCarrito > usuario.saldo) throw new UserException(
+			"ERROR no tiene saldo para realizar la compra")
+		carrito.forEach[funcion|usuario.comprarEntrada(funcion)]
 		limpiarCarrito
 	}
 
@@ -91,22 +92,29 @@ class CompraDeTicketsModel {
 	def getFechaActual() {
 		formatterDate.format(LocalDate.now)
 	}
-	
+
 	def getPrecioEntrada() {
 		return getNewEntrada().precio
 	}
-	
+
 	@Dependencies("funcionSeleccionada")
 	def Entrada getNewEntrada() {
 		new Entrada(rodajeSeleccionado, funcionSeleccionada)
 	}
-	
+
 	def getTotalPrecioCarrito() {
-		carrito.fold(0d, [total, entrada | total + entrada.precio])
+		carrito.fold(0d, [total, entrada|total + entrada.precio])
+	}
+
+//	@Dependencies("rodajeSeleccionado")
+	def getRodajeSeleccionado() {
+		if(this.rodajeSeleccionado !== null){
+			repoRodaje.searchById(this.rodajeSeleccionado.id)
+		}
 	}
 
 	def repoRodaje() {
 		ApplicationContext.instance.getSingleton(Rodaje) as RepoRodajes
 	}
-	
+
 }

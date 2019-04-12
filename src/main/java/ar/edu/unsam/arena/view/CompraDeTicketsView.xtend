@@ -50,8 +50,8 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			]
 			new Panel(it) => [
 				layout = new HorizontalLayout
-//				agregarPanelPeliculas()
-//				agregarPanelFunciones()
+				agregarPanelPeliculas()
+				agregarPanelFunciones()
 			]
 			new Panel(it) => [
 				layout = new HorizontalLayout

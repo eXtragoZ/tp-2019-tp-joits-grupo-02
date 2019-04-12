@@ -82,5 +82,10 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		}
 		funciones
 	}
+	
+	override isPending(){
+		true
+	}
+	
 
 }
