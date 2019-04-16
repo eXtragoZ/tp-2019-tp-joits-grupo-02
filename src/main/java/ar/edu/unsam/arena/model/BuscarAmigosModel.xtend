@@ -37,6 +37,8 @@ class BuscarAmigosModel {
 	}
 	
 	private def List<Usuario> getListaDePersonas() {
+		println(this.repoUsuario.allInstances.size)
+		println("hola" + this.getNoSonAmigos(this.repoUsuario.allInstances).size)
 		this.getNoSonAmigos(this.repoUsuario.allInstances)
 	}
 
@@ -49,11 +51,12 @@ class BuscarAmigosModel {
 	}
 	
 	def repoUsuario() {
-		ApplicationContext.instance.getSingleton(Usuario) as RepoUsuarios
+		RepoUsuarios.instance
 	}
 	
 	def agregarAmigo() {
 		this.usuario.amigos.add(this.seleccionado)
+		this.repoUsuario.update(usuario)
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
 		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
 	}

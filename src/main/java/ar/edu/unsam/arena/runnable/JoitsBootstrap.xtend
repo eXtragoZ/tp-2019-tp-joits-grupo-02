@@ -17,9 +17,7 @@ import org.uqbar.commons.applicationContext.ApplicationContext
 class JoitsBootstrap extends CollectionBasedBootstrap {
 
 	override run() {
-//		val salas = newArrayList("A", "B", "C", "Premium")
 		RepoRodajes.instance => [
-			ApplicationContext.instance.configureSingleton(Rodaje, it)
 			create(new Rodaje(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom()))
 			create(new Rodaje(1974, "The Godfather: Part II", 9.0f, "Crime, Drama", this.getFuncionesRandom()))
 			create(new Rodaje(1999, "Fight Club", 8.8f, "Drama", this.getFuncionesRandom()))
@@ -45,10 +43,11 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 //		]
 
 		RepoUsuarios.instance => [
-			ApplicationContext.instance.configureSingleton(Usuario, it)
+//			ApplicationContext.instance.configureSingleton(Usuario, it)
 			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom]
 			])
 			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234"))
 			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234"))
@@ -67,7 +66,19 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 //				entradas.add(new Entrada(rodaje, funciones.get(new Random().nextInt(funciones.size))))
 //			}
 //		]
-//		repoUsuarios.allInstances.get(1).amigos.add(repoUsuarios.allInstances.get(0))
+		val usuario = RepoUsuarios.instance.allInstances.get(1)
+		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)]
+		RepoUsuarios.instance.update(usuario)
+		
+	}
+	
+	private def Entrada getEntradaRandom() {
+		val rodajes = RepoRodajes.instance.allInstances
+		val rodajeAux = rodajes.get(new Random().nextInt(rodajes.size))
+		val rodaje = RepoRodajes.instance.searchById(rodajeAux.id)
+		val funciones = rodaje.funciones
+		val funcion = funciones.get(new Random().nextInt(funciones.size))
+		new Entrada(rodaje, funcion)
 	}
 	
 	private def List<Funcion> getFuncionesRandom() {
@@ -84,7 +95,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	}
 	
 	override isPending(){
-		RepoUsuarios.instance.allInstances === null
+		RepoUsuarios.instance.allInstances !== null
+//		true	
 	}
 	
 

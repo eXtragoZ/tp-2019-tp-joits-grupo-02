@@ -4,6 +4,7 @@ import ar.edu.unsam.domain.usuario.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
+import ar.edu.unsam.domain.repos.RepoUsuarios
 
 @Observable
 @Accessors
@@ -18,7 +19,7 @@ class PanelDeControlModel {
 	double saldoNuevo
 
 	new(Usuario usuario) {
-		this.usuario = usuario
+		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 		this.edadAnterior = usuario.edad
 		this.saldoAnterior = usuario.saldo
 	}

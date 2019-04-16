@@ -2,11 +2,13 @@ package ar.edu.unsam.domain.usuario
 
 import ar.edu.unsam.domain.entrada.Entrada
 import java.util.List
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.ManyToMany
 import javax.persistence.OneToMany
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -34,13 +36,13 @@ class Usuario {
 	@Column
 	int edad
 	
-	@OneToMany (fetch=FetchType.LAZY)
+	@ManyToMany (fetch=FetchType.LAZY)
 	List<Usuario> amigos = newArrayList
 	
 	@Column
 	double saldo
 	
-	@OneToMany (fetch=FetchType.LAZY)
+	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	List<Entrada> entradas = newArrayList
 	
 	@Column(length=100)

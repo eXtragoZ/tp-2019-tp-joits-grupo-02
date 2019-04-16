@@ -16,37 +16,39 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 @Accessors
 class Entrada {
-	
+
 	@Id
 	@GeneratedValue
 	long id
-	
+
 	@Column
 	LocalDateTime fechaHora
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	Rodaje rodaje
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	Funcion funcion
-	
+
+	new() {	}
+
 	new(Rodaje rodaje) {
 		this.fechaHora = LocalDateTime.now
-		this.rodaje = rodaje		
+		this.rodaje = rodaje
 	}
-	
+
 	new(Rodaje rodaje, Funcion funcion) {
 		this.fechaHora = LocalDateTime.now
 		this.rodaje = rodaje
 		this.funcion = funcion
 	}
-	
+
 	def getTituloRodaje() {
 		rodaje.titulo
 	}
-	
+
 	def getPrecio() {
 		rodaje.precioEntrada + funcion.precio
 	}
-	
+
 }

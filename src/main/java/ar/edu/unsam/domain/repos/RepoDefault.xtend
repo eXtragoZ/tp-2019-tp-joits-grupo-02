@@ -8,28 +8,6 @@ import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
-interface Repo<T> {
-
-	def Class<T> getEntityType()
-
-	def T searchById(long id)
-	
-	def T searchByString(String valor)
-
-	def List<T> searchByExample(T example)
-
-	def T createExample()
-
-	def List<T> allInstances()
-
-	def void create(T object)
-
-	def void update(T object)
-
-	def void delete(T object)
-
-}
-
 abstract class RepoDefault<T> {
 	
 	static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Joits")

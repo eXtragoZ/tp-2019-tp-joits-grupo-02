@@ -46,7 +46,20 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 //	}
 
 	override searchById(long _id) {
-		allInstances.findFirst[id == _id]
+		val entityManager = entityManager
+		println(_id)
+		try {
+			val criteria = entityManager.criteriaBuilder
+			val query = criteria.createQuery(entityType)
+			val from = query.from(entityType)
+			from.fetch("amigos")
+//			from.fetch("entradas")
+			query.select(from)
+			query.where(criteria.equal(from.get("id"), _id))
+			entityManager.createQuery(query).singleResult
+		} finally {
+			entityManager?.close
+		}
 	}
 
 //	override update(Usuario object) {

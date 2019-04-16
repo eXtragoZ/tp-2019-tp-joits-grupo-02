@@ -50,16 +50,16 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				alignLeft
 			]
 
-			new Table<Rodaje>(it, typeof(Rodaje)) => [
-				items <=> "usuario.peliculasVistas"
-				numberVisibleRows = 6
-
-				new Column<Rodaje>(it) => [
-					title = "Titulo"
-					bindContentsToProperty("titulo")
-					fixedSize = 150
-				]
-			]
+//			new Table<Rodaje>(it, typeof(Rodaje)) => [
+//				items <=> "usuario.peliculasVistas"
+//				numberVisibleRows = 6
+//
+//				new Column<Rodaje>(it) => [
+//					title = "Titulo"
+//					bindContentsToProperty("titulo")
+//					fixedSize = 150
+//				]
+//			]
 
 			new Panel(it) => [
 				layout = new HorizontalLayout

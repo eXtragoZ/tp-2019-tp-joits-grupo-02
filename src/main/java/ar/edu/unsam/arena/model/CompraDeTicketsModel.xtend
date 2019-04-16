@@ -106,7 +106,6 @@ class CompraDeTicketsModel {
 		carrito.fold(0d, [total, entrada|total + entrada.precio])
 	}
 
-//	@Dependencies("rodajeSeleccionado")
 	def getRodajeSeleccionado() {
 		if(this.rodajeSeleccionado !== null){
 			repoRodaje.searchById(this.rodajeSeleccionado.id)

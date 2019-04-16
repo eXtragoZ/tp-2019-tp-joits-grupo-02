@@ -26,16 +26,11 @@ class Funcion {
 	@Column(length=100)
 	String nombreSala
 	
-//	@OneToOne(fetch=FetchType.LAZY)
-//	Rodaje rodaje
-	
-	
 	new() {
 		super()
 	}
 
 	new(Rodaje rodaje, LocalDateTime fechaHora, String nombreSala) {
-//		this.rodaje = rodaje
 		this.fechaHora = fechaHora
 		this.nombreSala = nombreSala
 	}
