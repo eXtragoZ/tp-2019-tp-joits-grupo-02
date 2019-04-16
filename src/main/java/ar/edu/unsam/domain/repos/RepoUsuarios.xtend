@@ -7,6 +7,18 @@ import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
 class RepoUsuarios extends RepoDefault<Usuario> {
+	
+	static RepoUsuarios instance
+	
+	private new(){}
+	
+	def static getInstance(){
+		if(instance === null){
+			instance = new RepoUsuarios
+		}else {
+			instance
+		}
+	}
 
 //	override create(Usuario object) {
 //		val entityManager = this.entityManager

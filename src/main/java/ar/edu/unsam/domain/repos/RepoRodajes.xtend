@@ -10,6 +10,18 @@ import javax.persistence.criteria.Root
 
 class RepoRodajes extends RepoDefault<Rodaje> {
 
+	static RepoRodajes instance
+	
+	private new(){}
+	
+	def static getInstance(){
+		if(instance === null){
+			instance = new RepoRodajes
+		}else {
+			instance
+		}
+	}
+	
 	@Accessors
 	List<Rodaje> recomendados = newArrayList
 

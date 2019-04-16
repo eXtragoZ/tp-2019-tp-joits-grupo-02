@@ -114,7 +114,7 @@ class CompraDeTicketsModel {
 	}
 
 	def repoRodaje() {
-		ApplicationContext.instance.getSingleton(Rodaje) as RepoRodajes
+		RepoRodajes.instance
 	}
 
 }

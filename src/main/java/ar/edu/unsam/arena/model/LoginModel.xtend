@@ -32,6 +32,6 @@ class LoginModel {
 	}
 	
 	def repoUsuario() {
-		ApplicationContext.instance.getSingleton(Usuario) as RepoUsuarios
+		RepoUsuarios.instance
 	}
 }

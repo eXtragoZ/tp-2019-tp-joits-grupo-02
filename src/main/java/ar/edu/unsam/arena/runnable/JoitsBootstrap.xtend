@@ -18,7 +18,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 	override run() {
 //		val salas = newArrayList("A", "B", "C", "Premium")
-		val repoRodajes = new RepoRodajes => [
+		RepoRodajes.instance => [
 			ApplicationContext.instance.configureSingleton(Rodaje, it)
 			create(new Rodaje(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom()))
 			create(new Rodaje(1974, "The Godfather: Part II", 9.0f, "Crime, Drama", this.getFuncionesRandom()))
@@ -34,17 +34,17 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 		]
 
-		repoRodajes.recomendados => [
-			add(repoRodajes.allInstances.get(1))
-			add(repoRodajes.allInstances.get(3))
-			add(repoRodajes.allInstances.get(6))
+		RepoRodajes.instance.recomendados => [
+			add(RepoRodajes.instance.allInstances.get(1))
+			add(RepoRodajes.instance.allInstances.get(3))
+			add(RepoRodajes.instance.allInstances.get(6))
 		]
 
 //		repoRodajes.allInstances.forEach [
 //			getFuncionesRandom(it)
 //		]
 
-		val repoUsuarios = new RepoUsuarios => [
+		RepoUsuarios.instance => [
 			ApplicationContext.instance.configureSingleton(Usuario, it)
 			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
@@ -84,7 +84,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	}
 	
 	override isPending(){
-		true
+		RepoUsuarios.instance.allInstances === null
 	}
 	
 
