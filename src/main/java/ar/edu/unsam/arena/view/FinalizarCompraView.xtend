@@ -1,7 +1,7 @@
 package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.FinalizarCompraModel
-import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.entrada.Entrada
 import java.awt.Color
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
@@ -103,32 +103,32 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 	def agregarListaCarrito(Panel panel) {
 		new Panel(panel) => [
 			layout = new VerticalLayout
-			new Table<Funcion>(it, typeof(Funcion)) => [
+			new Table<Entrada>(it, typeof(Entrada)) => [
 				items <=> "carrito"
 				value <=> "seleccionado"
 				numberVisibleRows = 6
 
-				new Column<Funcion>(it) => [
+				new Column<Entrada>(it) => [
 					title = "Nombre"
-					bindContentsToProperty("rodaje.titulo")
+					bindContentsToProperty("pelicula.titulo")
 					fixedSize = 200
 				]
-				new Column<Funcion>(it) => [
+				new Column<Entrada>(it) => [
 					title = "Rating"
-					bindContentsToProperty("rodaje.puntaje")
+					bindContentsToProperty("pelicula.puntaje")
 					fixedSize = 60
 				]
-				new Column<Funcion>(it) => [
+				new Column<Entrada>(it) => [
 					title = "Género"
-					bindContentsToProperty("rodaje.genero")
+					bindContentsToProperty("pelicula.genero")
 					fixedSize = 100
 				]
-				new Column<Funcion>(it) => [
+				new Column<Entrada>(it) => [
 					title = "Fecha y Hora"
-					bindContentsToProperty("fechaHora")
+					bindContentsToProperty("funcion.fechaHora")
 					fixedSize = 120
 				]
-				new Column<Funcion>(it) => [
+				new Column<Entrada>(it) => [
 					title = "Precio"
 					bindContentsToProperty("precio")
 					fixedSize = 60

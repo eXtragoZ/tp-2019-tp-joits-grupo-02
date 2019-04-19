@@ -1,6 +1,7 @@
 package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.domain.entrada.Entrada
+import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -19,7 +20,7 @@ class FinalizarCompraModel {
 	Entrada seleccionado
 	
 	new(Usuario usuario, List<Entrada> carrito) {
-		this.usuario = usuario
+		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 		this.carrito = carrito
 	}
 		
@@ -49,6 +50,7 @@ class FinalizarCompraModel {
 	def comprar() {
 		if(this.totalPrecioCarrito > usuario.saldo)	throw new UserException("ERROR no tiene saldo para realizar la compra")
 		carrito.forEach[ entrada | usuario.comprarEntrada(entrada)]
+		RepoUsuarios.instance.update(this.usuario)
 	}
 	
 }

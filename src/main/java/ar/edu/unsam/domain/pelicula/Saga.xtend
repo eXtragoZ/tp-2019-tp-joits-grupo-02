@@ -1,4 +1,4 @@
-package ar.edu.unsam.domain.rodaje
+package ar.edu.unsam.domain.pelicula
 
 import java.util.List
 import javax.persistence.CascadeType
@@ -13,10 +13,10 @@ import ar.edu.unsam.domain.funcion.Funcion
 @Entity
 @Accessors
 @Observable
-class Saga extends Rodaje {
+class Saga extends Pelicula {
 
 	@OneToMany(fetch=FetchType.LAZY)
-	List<Rodaje> peliculas = newArrayList
+	List<Pelicula> peliculas = newArrayList
 	
 	@Column
 	int nivelDeClasico
@@ -34,14 +34,14 @@ class Saga extends Rodaje {
 		this.precioBase = 10.00
 	}
 
-	new(List<Rodaje> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
+	new(List<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
 		super(anio, titulo, puntaje, genero)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico
 		this.precioBase = 10.00
 	}
 	
-	new(List<Rodaje> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico, List<Funcion> funciones) {
+	new(List<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico, List<Funcion> funciones) {
 		super(anio, titulo, puntaje, genero, funciones)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico

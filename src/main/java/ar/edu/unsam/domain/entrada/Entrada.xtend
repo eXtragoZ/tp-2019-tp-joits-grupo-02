@@ -1,7 +1,7 @@
 package ar.edu.unsam.domain.entrada
 
 import ar.edu.unsam.domain.funcion.Funcion
-import ar.edu.unsam.domain.rodaje.Rodaje
+import ar.edu.unsam.domain.pelicula.Pelicula
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -25,30 +25,30 @@ class Entrada {
 	LocalDateTime fechaHora
 
 	@OneToOne(fetch=FetchType.LAZY)
-	Rodaje rodaje
+	Pelicula pelicula
 
 	@OneToOne(fetch=FetchType.LAZY)
 	Funcion funcion
 
 	new() {	}
 
-	new(Rodaje rodaje) {
+	new(Pelicula pelicula) {
 		this.fechaHora = LocalDateTime.now
-		this.rodaje = rodaje
+		this.pelicula = pelicula
 	}
 
-	new(Rodaje rodaje, Funcion funcion) {
+	new(Pelicula pelicula, Funcion funcion) {
 		this.fechaHora = LocalDateTime.now
-		this.rodaje = rodaje
+		this.pelicula = pelicula
 		this.funcion = funcion
 	}
 
-	def getTituloRodaje() {
-		rodaje.titulo
+	def getTituloPelicula() {
+		pelicula.titulo
 	}
 
 	def getPrecio() {
-		rodaje.precioEntrada + funcion.precio
+		pelicula.precioEntrada + funcion.precio
 	}
 
 }

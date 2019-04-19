@@ -1,4 +1,4 @@
-package ar.edu.unsam.domain.rodaje
+package ar.edu.unsam.domain.pelicula
 
 import ar.edu.unsam.domain.funcion.Funcion
 import java.util.List
@@ -19,7 +19,7 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 @Inheritance(strategy=InheritanceType.JOINED)
 @Accessors
-class Rodaje {
+class Pelicula {
 
 	@Id	@GeneratedValue
 	Long id

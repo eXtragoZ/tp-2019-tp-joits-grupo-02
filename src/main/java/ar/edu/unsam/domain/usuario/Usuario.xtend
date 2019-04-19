@@ -84,7 +84,7 @@ class Usuario {
 	}
 	
 	def getPeliculasVistas(){
-		entradas.map[rodaje].toSet
+		entradas.map[pelicula].toSet
 	}
 
 }

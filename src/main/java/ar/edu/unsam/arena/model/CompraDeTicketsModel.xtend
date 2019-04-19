@@ -2,15 +2,14 @@ package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.funcion.Funcion
+import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.repos.RepoRodajes
-import ar.edu.unsam.domain.rodaje.Rodaje
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
@@ -24,7 +23,7 @@ class CompraDeTicketsModel {
 	Usuario usuario
 	String busquedaIngresada
 	String busquedaActual
-	Rodaje rodajeSeleccionado
+	Pelicula peliculaSeleccionado
 	Funcion funcionSeleccionada
 	List<Entrada> carrito
 	Funcion funcionCarritoSeleccionada
@@ -80,9 +79,9 @@ class CompraDeTicketsModel {
 		limpiarCarrito
 	}
 
-	@Dependencies("rodajeSeleccionado", "funcionSeleccionada")
+	@Dependencies("peliculaSeleccionado", "funcionSeleccionada")
 	def getValidarFuncion() {
-		rodajeSeleccionado !== null && funcionSeleccionada !== null
+		peliculaSeleccionado !== null && funcionSeleccionada !== null
 	}
 
 	def getCantidadItems() {
@@ -99,21 +98,26 @@ class CompraDeTicketsModel {
 
 	@Dependencies("funcionSeleccionada")
 	def Entrada getNewEntrada() {
-		new Entrada(rodajeSeleccionado, funcionSeleccionada)
+		new Entrada(peliculaSeleccionado, funcionSeleccionada)
 	}
 
 	def getTotalPrecioCarrito() {
 		carrito.fold(0d, [total, entrada|total + entrada.precio])
 	}
 
-	def getRodajeSeleccionado() {
-		if(this.rodajeSeleccionado !== null){
-			repoRodaje.searchById(this.rodajeSeleccionado.id)
+	def getPeliculaSeleccionado() {
+		if(this.peliculaSeleccionado !== null){
+			repoRodaje.searchById(this.peliculaSeleccionado.id)
 		}
 	}
 
 	def repoRodaje() {
 		RepoRodajes.instance
+	}
+	
+	@Dependencies("carrito")
+	def getValidarCarrito() {
+		this.carrito !== null
 	}
 
 }

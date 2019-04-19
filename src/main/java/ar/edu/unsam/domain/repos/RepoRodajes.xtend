@@ -1,14 +1,13 @@
 package ar.edu.unsam.domain.repos
 
-import ar.edu.unsam.domain.rodaje.Pelicula
-import ar.edu.unsam.domain.rodaje.Rodaje
+import ar.edu.unsam.domain.pelicula.Pelicula
 import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
+import org.eclipse.xtend.lib.annotations.Accessors
 
-class RepoRodajes extends RepoDefault<Rodaje> {
+class RepoRodajes extends RepoDefault<Pelicula> {
 
 	static RepoRodajes instance
 	
@@ -23,7 +22,7 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 	}
 	
 	@Accessors
-	List<Rodaje> recomendados = newArrayList
+	List<Pelicula> recomendados = newArrayList
 
 	def createExample() {
 		new Pelicula
@@ -34,7 +33,7 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 //	}
 
 	override getEntityType() {
-		Rodaje
+		Pelicula
 	}
 
 	//reemplazar despues el allInstance
@@ -46,7 +45,7 @@ class RepoRodajes extends RepoDefault<Rodaje> {
 		allInstances.findFirst[titulo == valor]
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Rodaje> query, Root<Rodaje> camposRodaje, Rodaje t) {
+	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Pelicula> query, Root<Pelicula> camposRodaje, Pelicula t) {
 		if (t.titulo !== null) {
 			query.where(criteria.equal(camposRodaje.get("titulo"), t.titulo))
 		}

@@ -1,14 +1,12 @@
 package ar.edu.unsam.domain.funcion
 
-import ar.edu.unsam.domain.rodaje.Rodaje
+import ar.edu.unsam.domain.pelicula.Pelicula
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.OneToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
@@ -30,7 +28,7 @@ class Funcion {
 		super()
 	}
 
-	new(Rodaje rodaje, LocalDateTime fechaHora, String nombreSala) {
+	new(Pelicula rodaje, LocalDateTime fechaHora, String nombreSala) {
 		this.fechaHora = fechaHora
 		this.nombreSala = nombreSala
 	}

@@ -2,7 +2,6 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
-import ar.edu.unsam.domain.rodaje.Rodaje
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -10,8 +9,6 @@ import org.uqbar.arena.widgets.Container
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.widgets.tables.Column
-import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 

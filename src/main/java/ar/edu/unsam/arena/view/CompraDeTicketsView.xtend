@@ -4,7 +4,7 @@ import ar.edu.unsam.arena.model.CompraDeTicketsModel
 import ar.edu.unsam.arena.model.FinalizarCompraModel
 import ar.edu.unsam.arena.runnable.JoitsApplication
 import ar.edu.unsam.domain.funcion.Funcion
-import ar.edu.unsam.domain.rodaje.Pelicula
+import ar.edu.unsam.domain.pelicula.Pelicula
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -58,6 +58,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				new Button(it) => [
 					caption = "Finalizar compra"
 					onClick [this.finalizarCompra]
+					enabled <=> "validarCarrito"
 				]
 				new Label(it) => [
 					width = 540
@@ -142,7 +143,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 			layout = new VerticalLayout
 			new Table<Pelicula>(it, typeof(Pelicula)) => [
 				items <=> lista
-				value <=> "rodajeSeleccionado"
+				value <=> "peliculaSeleccionado"
 				numberVisibleRows = 6
 
 				new Column<Pelicula>(it) => [
@@ -174,7 +175,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 		new Panel(panel) => [
 			layout = new VerticalLayout
 			new Table<Funcion>(it, typeof(Funcion)) => [
-				items <=> "rodajeSeleccionado.funciones"
+				items <=> "peliculaSeleccionado.funciones"
 				value <=> "funcionSeleccionada"
 				numberVisibleRows = 9
 				new Column<Funcion>(it) => [
