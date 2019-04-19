@@ -37,5 +37,9 @@ class PanelDeControlModel {
 	def getValidar() {
 		!Double.isNaN(this.saldoNuevo) && this.saldoNuevo > 0
 	}
+	
+	def aceptar() {
+		RepoUsuarios.instance.update(this.usuario)
+	}
 
 }

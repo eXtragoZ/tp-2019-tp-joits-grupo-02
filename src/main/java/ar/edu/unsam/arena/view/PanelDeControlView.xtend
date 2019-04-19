@@ -69,7 +69,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				]
 				new Button(it) => [
 					caption = "Aceptar"
-					onClick[this.close]
+					onClick[this.aceptar]
 				]
 				new Button(it) => [
 					caption = "Cancelar"
@@ -78,6 +78,11 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 			]
 
 		]
+	}
+	
+	def aceptar() {
+		this.modelObject.aceptar
+		this.close
 	}
 
 	private def Panel panelIzquierdo(Panel it) {
