@@ -8,9 +8,8 @@ import ar.edu.unsam.domain.repos.RepoRodajes
 import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDateTime
-import java.util.ArrayList
-import java.util.List
 import java.util.Random
+import java.util.Set
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
 
 class JoitsBootstrap extends CollectionBasedBootstrap {
@@ -26,22 +25,16 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			create(new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi", this.getFuncionesRandom()))
 			create(new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi", this.getFuncionesRandom()))
 			create(
-				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula], "The Godfather Collection", 2000,
-					9.2f, "Crime, Drama", 9, this.getFuncionesRandom()))
+				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula].toSet,
+					"The Godfather Collection", 2000, 9.2f, "Crime, Drama", 9, this.getFuncionesRandom()))
 
-		]
-
-		RepoRodajes.instance.recomendados => [
-			add(RepoRodajes.instance.allInstances.get(1))
-			add(RepoRodajes.instance.allInstances.get(3))
-			add(RepoRodajes.instance.allInstances.get(6))
 		]
 
 		RepoUsuarios.instance => [
 			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom]
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234"))
 			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234"))
@@ -52,8 +45,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 		]
 
-		val usuario = RepoUsuarios.instance.allInstances.get(1)
-		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)]
+		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
+		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)].toSet
 		RepoUsuarios.instance.update(usuario)
 		
 	}
@@ -67,10 +60,10 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		new Entrada(rodaje, funcion)
 	}
 	
-	private def List<Funcion> getFuncionesRandom() {
-		val salas = newArrayList("A", "B", "C", "Premium")
+	private def Set<Funcion> getFuncionesRandom() {
+		val salas = newHashSet("A", "B", "C", "Premium")
 		val iFun = new Random().nextInt(12) + 3
-		var List<Funcion> funciones = new ArrayList
+		var Set<Funcion> funciones = newHashSet
 		for (var i = 0; i < iFun; i++) {
 			val hours = new Random().nextInt(64) + -6
 			funciones.add(
@@ -81,8 +74,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	}
 	
 	override isPending(){
-//		RepoUsuarios.instance.allInstances === null
-		true	
+		RepoUsuarios.instance.allInstances.isEmpty
 	}
 	
 

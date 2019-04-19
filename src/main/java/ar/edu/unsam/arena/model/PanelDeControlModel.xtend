@@ -5,6 +5,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import ar.edu.unsam.domain.repos.RepoUsuarios
+import org.uqbar.commons.model.utils.ObservableUtils
 
 @Observable
 @Accessors
@@ -43,7 +44,8 @@ class PanelDeControlModel {
 	}
 	
 	def actualizar() {
-		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
+		ObservableUtils.firePropertyChanged(this, "usuario")
+		//this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 	}
 
 }

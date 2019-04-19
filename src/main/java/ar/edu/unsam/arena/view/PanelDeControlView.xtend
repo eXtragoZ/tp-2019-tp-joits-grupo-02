@@ -2,7 +2,6 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
-import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.pelicula.Pelicula
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -51,13 +50,13 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				alignLeft
 			]
 
-			new Table<Entrada>(it, typeof(Entrada)) => [
-				items <=> "usuario.entradas"
+			new Table<Pelicula>(it, typeof(Pelicula)) => [
+				items <=> "usuario.peliculasVistas"
 				numberVisibleRows = 6
 
-				new Column<Entrada>(it) => [
+				new Column<Pelicula>(it) => [
 					title = "Titulo"
-					bindContentsToProperty("tituloPelicula")
+					bindContentsToProperty("titulo")
 					fixedSize = 150
 				]
 			]

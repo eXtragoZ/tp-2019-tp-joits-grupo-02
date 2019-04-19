@@ -18,7 +18,7 @@ class BuscarAmigosModel {
 	String busquedaActual
 
 	new(Usuario usuario) {
-		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
+		this.usuario = usuario
 	}
 
 	def buscar() {
@@ -57,7 +57,7 @@ class BuscarAmigosModel {
 	
 	def agregarAmigo() {
 		this.usuario.amigos.add(this.seleccionado)
-		this.repoUsuario.update(usuario)
+		//this.repoUsuario.update(usuario)
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
 		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
 	}

@@ -13,7 +13,7 @@ abstract class RepoDefault<T> {
 	static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Joits")
 	
 	def List<T> allInstances() {
-		val entityManager = this.entityManager
+		val entityManager = generateEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
@@ -28,7 +28,7 @@ abstract class RepoDefault<T> {
 	abstract def Class<T> getEntityType()
 
 	def searchByExample(T t) {
-		val entityManager = this.entityManager
+		val entityManager = generateEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
@@ -44,7 +44,7 @@ abstract class RepoDefault<T> {
 	abstract def void generateWhere(CriteriaBuilder criteria, CriteriaQuery<T> query, Root<T> campos,T t)
 	
 	def create(T t) {
-		val entityManager = this.entityManager
+		val entityManager = generateEntityManager
 		try {
 			entityManager => [
 				transaction.begin
@@ -61,7 +61,7 @@ abstract class RepoDefault<T> {
 	}
 
 	def update(T t) {
-		val entityManager = this.entityManager
+		val entityManager = generateEntityManager
 		try {
 			entityManager => [
 				transaction.begin
@@ -77,7 +77,7 @@ abstract class RepoDefault<T> {
 		}
 	}
 
-	def getEntityManager() {
+	def generateEntityManager() {
 		entityManagerFactory.createEntityManager
 	}
 	

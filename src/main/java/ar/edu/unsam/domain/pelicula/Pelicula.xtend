@@ -1,7 +1,7 @@
 package ar.edu.unsam.domain.pelicula
 
 import ar.edu.unsam.domain.funcion.Funcion
-import java.util.List
+import java.util.Set
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -34,7 +34,7 @@ class Pelicula {
 	String genero
 	
 	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	List<Funcion> funciones = newArrayList
+	Set<Funcion> funciones = newHashSet
 	
 	@Column
 	double precioBase = 30.00 //contemplar bigdecimal
@@ -52,7 +52,7 @@ class Pelicula {
 		this.precioBase = 30.00
 	}
 	
-	new(int anio,String titulo, float puntaje, String genero, List<Funcion> funciones) {
+	new(int anio,String titulo, float puntaje, String genero, Set<Funcion> funciones) {
 		this.titulo = titulo
 		this.anio = anio
 		this.puntaje = puntaje

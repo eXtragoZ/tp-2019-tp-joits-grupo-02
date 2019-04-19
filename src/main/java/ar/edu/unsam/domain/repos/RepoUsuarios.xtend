@@ -1,11 +1,10 @@
 package ar.edu.unsam.domain.repos
 
 import ar.edu.unsam.domain.usuario.Usuario
-import javax.persistence.PersistenceException
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
-import javax.persistence.criteria.Root
 import javax.persistence.criteria.JoinType
+import javax.persistence.criteria.Root
 
 class RepoUsuarios extends RepoDefault<Usuario> {
 	
@@ -21,44 +20,30 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 		}
 	}
 
-	def createExample() {
-		new Usuario
-	}
-
-//	def delete(Usuario object) {
-//		usuarios.remove(object)
-//	}
-
 	override searchById(long _id) {
-		val entityManager = entityManager
-		println(_id)
+		val entityManager = generateEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
-			val from = query.from(entityType)
-			from.fetch("amigos", JoinType.LEFT)
-//			from.fetch("entradas")
-			query.select(from)
-			query.where(criteria.equal(from.get("id"), _id))
+			val camposUsuario = query.from(entityType)
+			camposUsuario.fetch("amigos", JoinType.LEFT)
+			val fetchEntrada = camposUsuario.fetch("entradas", JoinType.LEFT)
+			fetchEntrada.fetch("pelicula", JoinType.LEFT)
+			query.select(camposUsuario)
+			query.where(criteria.equal(camposUsuario.get("id"), _id))
 			entityManager.createQuery(query).singleResult
 		} finally {
 			entityManager?.close
 		}
 	}
 
-//	override update(Usuario object) {
-//		delete(searchById(object.id))
-//		create(object)
-//	}
-
 	def searchByString(String nombreUsuario) {
-		val entityManager = entityManager
+		val entityManager = generateEntityManager
         try {
             val criteria = entityManager.criteriaBuilder
             val query = criteria.createQuery(entityType)
             val camposUsuario = query.from(entityType)
-//            val camposCandidato = camposZona.fetch("candidatos")
-//            camposCandidato.fetch("partido")
+            camposUsuario.fetch("entradas", JoinType.LEFT)
             query.select(camposUsuario)
             query.where(criteria.equal(camposUsuario.get("nombreUsuario"), nombreUsuario))
             entityManager.createQuery(query).singleResult
@@ -68,7 +53,20 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 	}
 
 	def amigosRecomendados(Usuario usuario) {
-		#[allInstances.get(0), allInstances.get(4), allInstances.get(5)]
+		val entityManager = generateEntityManager
+        try {
+            val criteria = entityManager.criteriaBuilder
+            val query = criteria.createQuery(entityType)
+            val camposUsuario = query.from(entityType)
+            query.select(camposUsuario)
+            query.where(criteria.notEqual(camposUsuario.get("id"), usuario.id))
+            query.orderBy(criteria.desc(camposUsuario.get("saldo")))
+            val queryResult = entityManager.createQuery(query)
+            queryResult.maxResults = 3
+            queryResult.resultList
+        } finally {
+            entityManager?.close
+        }
 	}
 
 	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario,

@@ -1,7 +1,7 @@
 package ar.edu.unsam.domain.usuario
 
 import ar.edu.unsam.domain.entrada.Entrada
-import java.util.List
+import java.util.Set
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -37,13 +37,13 @@ class Usuario {
 	int edad
 	
 	@ManyToMany (fetch=FetchType.LAZY)
-	List<Usuario> amigos = newArrayList
+	Set<Usuario> amigos = newHashSet
 	
 	@Column
 	double saldo
 	
-	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	List<Entrada> entradas = newArrayList
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)
 	String password
@@ -84,7 +84,7 @@ class Usuario {
 	}
 	
 	def getPeliculasVistas(){
-		entradas.map[pelicula].toList
+		entradas.map[pelicula].toSet
 	}
 
 }

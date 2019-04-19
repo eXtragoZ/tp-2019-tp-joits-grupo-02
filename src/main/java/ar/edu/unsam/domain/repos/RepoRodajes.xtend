@@ -1,11 +1,10 @@
 package ar.edu.unsam.domain.repos
 
 import ar.edu.unsam.domain.pelicula.Pelicula
-import java.util.List
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
+import javax.persistence.criteria.JoinType
 import javax.persistence.criteria.Root
-import org.eclipse.xtend.lib.annotations.Accessors
 
 class RepoRodajes extends RepoDefault<Pelicula> {
 
@@ -20,26 +19,10 @@ class RepoRodajes extends RepoDefault<Pelicula> {
 			instance
 		}
 	}
-	
-	@Accessors
-	List<Pelicula> recomendados = newArrayList
-
-	def createExample() {
-		new Pelicula
-	}
-
-//	def delete(Rodaje object) {
-//		rodajes.remove(object)
-//	}
 
 	override getEntityType() {
 		Pelicula
 	}
-
-	//reemplazar despues el allInstance
-//	override searchById(long _id) {
-//		allInstances.findFirst[id == _id]
-//	}
 
 	def searchByString(String valor) {
 		allInstances.findFirst[titulo == valor]
@@ -51,27 +34,13 @@ class RepoRodajes extends RepoDefault<Pelicula> {
 		}
 	}
 	
-//	override List<Rodaje> allInstances() {
-//		val entityManager = this.entityManager
-//		try {
-//			val criteria = entityManager.criteriaBuilder
-//			val query = criteria.createQuery(entityType)
-//			val from = query.from(entityType)
-//			from.fetch("funciones")
-//			query.select(from)
-//			entityManager.createQuery(query).resultList
-//		} finally {
-//			entityManager?.close
-//		}
-//	}
-
 	override searchById(long id) {
-		val entityManager = entityManager
+		val entityManager = generateEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
 			val from = query.from(entityType)
-			from.fetch("funciones")
+			from.fetch("funciones", JoinType.LEFT)
 			query.select(from)
 			query.where(criteria.equal(from.get("id"), id))
 			entityManager.createQuery(query).singleResult
@@ -80,5 +49,21 @@ class RepoRodajes extends RepoDefault<Pelicula> {
 		}
 	}
 	
+	
+	def getRecomendados() {
+		val entityManager = generateEntityManager
+        try {
+            val criteria = entityManager.criteriaBuilder
+            val query = criteria.createQuery(entityType)
+            val camposRodaje = query.from(entityType)
+            query.select(camposRodaje)
+            query.orderBy(criteria.desc(camposRodaje.get("puntaje")))
+            val queryResult = entityManager.createQuery(query)
+            queryResult.maxResults = 3
+            queryResult.resultList
+        } finally {
+            entityManager?.close
+        }
+	}
 
 }

@@ -1,22 +1,21 @@
 package ar.edu.unsam.domain.pelicula
 
-import java.util.List
-import javax.persistence.CascadeType
+import ar.edu.unsam.domain.funcion.Funcion
+import java.util.Set
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import ar.edu.unsam.domain.funcion.Funcion
 
 @Entity
 @Accessors
 @Observable
 class Saga extends Pelicula {
 
-	@OneToMany(fetch=FetchType.LAZY)
-	List<Pelicula> peliculas = newArrayList
+	@OneToMany(fetch=FetchType.EAGER)
+	Set<Pelicula> peliculas = newHashSet
 	
 	@Column
 	int nivelDeClasico
@@ -34,14 +33,14 @@ class Saga extends Pelicula {
 		this.precioBase = 10.00
 	}
 
-	new(List<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
+	new(Set<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico) {
 		super(anio, titulo, puntaje, genero)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico
 		this.precioBase = 10.00
 	}
 	
-	new(List<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico, List<Funcion> funciones) {
+	new(Set<Pelicula> peliculas, String titulo, int anio, float puntaje, String genero, int nivelDeClasico, Set<Funcion> funciones) {
 		super(anio, titulo, puntaje, genero, funciones)
 		this.peliculas = peliculas
 		this.nivelDeClasico = nivelDeClasico
