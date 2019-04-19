@@ -5,6 +5,7 @@ import javax.persistence.PersistenceException
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
+import javax.persistence.criteria.JoinType
 
 class RepoUsuarios extends RepoDefault<Usuario> {
 	
@@ -35,7 +36,7 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
 			val from = query.from(entityType)
-			from.fetch("amigos")
+			from.fetch("amigos", JoinType.LEFT)
 //			from.fetch("entradas")
 			query.select(from)
 			query.where(criteria.equal(from.get("id"), _id))
