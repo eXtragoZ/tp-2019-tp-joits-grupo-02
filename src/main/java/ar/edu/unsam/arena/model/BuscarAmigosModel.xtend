@@ -5,7 +5,6 @@ import ar.edu.unsam.domain.usuario.Usuario
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.applicationContext.ApplicationContext
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.utils.ObservableUtils
 
@@ -19,7 +18,7 @@ class BuscarAmigosModel {
 	String busquedaActual
 
 	new(Usuario usuario) {
-		this.usuario = usuario
+		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 	}
 
 	def buscar() {
@@ -37,8 +36,6 @@ class BuscarAmigosModel {
 	}
 	
 	private def List<Usuario> getListaDePersonas() {
-		println(this.repoUsuario.allInstances.size)
-		println("hola" + this.getNoSonAmigos(this.repoUsuario.allInstances).size)
 		this.getNoSonAmigos(this.repoUsuario.allInstances)
 	}
 
@@ -47,7 +44,11 @@ class BuscarAmigosModel {
 	}
 	
 	def getNoSonAmigos(List<Usuario> usuarios) {
-		usuarios.filter[!usuario.esAmigo(it)].toList
+		usuarios.filter(noEsAmigoNiSoyYo).toList
+	}
+	
+	private def (Usuario)=>boolean noEsAmigoNiSoyYo() {
+		[!(usuario.esAmigo(it) || it.id == usuario.id)]
 	}
 	
 	def repoUsuario() {

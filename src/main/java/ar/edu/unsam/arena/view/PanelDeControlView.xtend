@@ -2,6 +2,8 @@ package ar.edu.unsam.arena.view
 
 import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
+import ar.edu.unsam.domain.entrada.Entrada
+import ar.edu.unsam.domain.pelicula.Pelicula
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -9,6 +11,8 @@ import org.uqbar.arena.widgets.Container
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
+import org.uqbar.arena.widgets.tables.Column
+import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
 
@@ -47,16 +51,16 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 				alignLeft
 			]
 
-//			new Table<Rodaje>(it, typeof(Rodaje)) => [
-//				items <=> "usuario.peliculasVistas"
-//				numberVisibleRows = 6
-//
-//				new Column<Rodaje>(it) => [
-//					title = "Titulo"
-//					bindContentsToProperty("titulo")
-//					fixedSize = 150
-//				]
-//			]
+			new Table<Entrada>(it, typeof(Entrada)) => [
+				items <=> "usuario.entradas"
+				numberVisibleRows = 6
+
+				new Column<Entrada>(it) => [
+					title = "Titulo"
+					bindContentsToProperty("tituloPelicula")
+					fixedSize = 150
+				]
+			]
 
 			new Panel(it) => [
 				layout = new HorizontalLayout
@@ -76,7 +80,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 		]
 	}
-	
+
 	def aceptar() {
 		this.modelObject.aceptar
 		this.close
@@ -99,7 +103,7 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 					width = 100
 					alignLeft
 				]
-				
+
 				new TablaUsuarioView("usuario.amigos").crearTabla(it)
 
 			]
@@ -155,9 +159,13 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 		this.modelObject.cancelarCambios()
 		this.close
 	}
-	
+
 	def buscarAmigos() {
 		new BuscarAmigosView(this, new BuscarAmigosModel(this.modelObject.usuario)).open
+	}
+		
+	def actualizarAmigos() {
+		this.modelObject.actualizar
 	}
 
 }

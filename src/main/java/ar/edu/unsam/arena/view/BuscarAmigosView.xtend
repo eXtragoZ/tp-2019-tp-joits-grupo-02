@@ -44,7 +44,7 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 				]
 				new Button(it) => [
 					caption = "Agregar Amigo"
-					onClick[this.modelObject.agregarAmigo]
+					onClick[agregarAmigo()]
 				]
 				new Button(it) => [
 					caption = "Volver"
@@ -67,6 +67,15 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 				setAsDefault
 			]
 		]
+	}
+	
+	private def void agregarAmigo() {
+		this.modelObject.agregarAmigo
+		this.actualizarOwner
+	}
+	
+	private def void actualizarOwner(){
+		(this.owner as PanelDeControlView).actualizarAmigos
 	}
 
 }

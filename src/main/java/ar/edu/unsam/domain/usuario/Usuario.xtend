@@ -42,7 +42,7 @@ class Usuario {
 	@Column
 	double saldo
 	
-	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	List<Entrada> entradas = newArrayList
 	
 	@Column(length=100)
@@ -66,7 +66,7 @@ class Usuario {
 	}
 
 	def esAmigo(Usuario amigo) {
-		amigos.contains(amigo)
+		amigos.exists[ usuario | usuario.id == amigo.id ]
 	}
 
 	def comprarEntrada(Entrada entrada) {
@@ -84,7 +84,7 @@ class Usuario {
 	}
 	
 	def getPeliculasVistas(){
-		entradas.map[pelicula].toSet
+		entradas.map[pelicula].toList
 	}
 
 }

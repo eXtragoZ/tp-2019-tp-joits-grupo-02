@@ -20,23 +20,6 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 		}
 	}
 
-//	override create(Usuario object) {
-//		val entityManager = this.entityManager
-//		try {
-//			entityManager => [
-//				transaction.begin
-//				persist(object)
-//				transaction.commit
-//			]
-//		} catch (PersistenceException e) {
-//			e.printStackTrace
-//			entityManager.transaction.rollback
-//			throw new RuntimeException("Ocurrió un error en Repo de usuarios, la operación no puede completarse", e)
-//		} finally {
-//			entityManager.close
-//		}
-//	}
-
 	def createExample() {
 		new Usuario
 	}

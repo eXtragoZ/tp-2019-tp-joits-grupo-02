@@ -1,9 +1,9 @@
+import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDateTime
 import org.junit.Assert
 import org.junit.Test
-import ar.edu.unsam.domain.entrada.Entrada
 
 class TestUsuario {
 	

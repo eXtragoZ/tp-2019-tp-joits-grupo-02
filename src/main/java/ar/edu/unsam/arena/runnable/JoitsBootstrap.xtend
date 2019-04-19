@@ -37,12 +37,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			add(RepoRodajes.instance.allInstances.get(6))
 		]
 
-//		repoRodajes.allInstances.forEach [
-//			getFuncionesRandom(it)
-//		]
-
 		RepoUsuarios.instance => [
-//			ApplicationContext.instance.configureSingleton(Usuario, it)
 			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
@@ -56,15 +51,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 			create(new Usuario("san", "Santiago", "Vargas", 30, "1234"))
 
 		]
-//		repoUsuarios.allInstances.forEach[
-//			val iFun = new Random().nextInt(3) + 2
-//			for (var i = 0; i < iFun; i++) {
-//				val rodaje = repoRodajes.allInstances.get(new Random().nextInt(repoRodajes.allInstances.size))
-//				val funciones = rodaje.funciones
-//				val funcion = funciones.get(new Random().nextInt(funciones.size))
-//				entradas.add(new Entrada(rodaje, funciones.get(new Random().nextInt(funciones.size))))
-//			}
-//		]
+
 		val usuario = RepoUsuarios.instance.allInstances.get(1)
 		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)]
 		RepoUsuarios.instance.update(usuario)
@@ -94,8 +81,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	}
 	
 	override isPending(){
-		RepoUsuarios.instance.allInstances !== null
-//		true	
+//		RepoUsuarios.instance.allInstances === null
+		true	
 	}
 	
 

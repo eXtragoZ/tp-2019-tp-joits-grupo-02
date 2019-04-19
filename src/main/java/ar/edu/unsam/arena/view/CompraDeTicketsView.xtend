@@ -5,6 +5,7 @@ import ar.edu.unsam.arena.model.FinalizarCompraModel
 import ar.edu.unsam.arena.runnable.JoitsApplication
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
+import java.awt.Color
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -15,6 +16,7 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.Window
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.model.exceptions.UserException
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
@@ -58,7 +60,7 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 				new Button(it) => [
 					caption = "Finalizar compra"
 					onClick [this.finalizarCompra]
-					enabled <=> "validarCarrito"
+//					enabled <=> "validarCarrito"
 				]
 				new Label(it) => [
 					width = 540
@@ -67,6 +69,10 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 					caption = "Panel de Control"
 					onClick [this.panelDeControl]
 				]
+			]
+			new Label(it) => [
+				foreground = Color.RED
+				value <=> "mensajeError"
 			]
 
 		]
@@ -198,17 +204,23 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 
 		]
 	}
-	
+
 	def limpiarCarrito() {
 		this.modelObject.limpiarCarrito
 	}
-	
+
 	def sacarDelCarrito() {
 		this.modelObject.sacarDelCarrito
 	}
 
 	def finalizarCompra() {
-		new FinalizarCompraView(this, new FinalizarCompraModel(this.modelObject.usuario, this.modelObject.carrito)).open
+		try {
+			this.modelObject.validarCarrito
+			new FinalizarCompraView(this, new FinalizarCompraModel(this.modelObject.usuario, this.modelObject.carrito)).
+				open
+		} catch (UserException exception) {
+			this.modelObject.mensajeError = exception.message;
+		}
 	}
 
 	def panelDeControl() {

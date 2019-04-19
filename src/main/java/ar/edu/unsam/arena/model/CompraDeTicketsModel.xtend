@@ -53,6 +53,7 @@ class CompraDeTicketsModel {
 
 	def agregarAlCarrito() {
 		carrito.add(this.getNewEntrada)
+		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
 
@@ -115,9 +116,7 @@ class CompraDeTicketsModel {
 		RepoRodajes.instance
 	}
 	
-	@Dependencies("carrito")
 	def getValidarCarrito() {
-		this.carrito !== null
+		if(this.carrito.size < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
 	}
-
 }
