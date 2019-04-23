@@ -6,19 +6,40 @@
 <hibernate-mapping>
 	<database-object>
 		<create>
-			
+			CREATE VIEW
+					peliculas_con_entradas
+				AS
+					SELECT
+						p.id,
+						p.titulo,
+						p.anio,
+						p.genero,
+						p.puntaje
+					FROM
+						joits.Pelicula p
+					WHERE
+						(
+							SELECT
+								Count(*)
+							FROM
+								joits.Entrada e
+							WHERE e.pelicula_id = p.id
+							GROUP BY e.id
+						) > 3;
 		</create>
 		<drop>
-			
+			DROP VIEW peliculas_con_entradas;
 		</drop>
 		<dialect-scope name="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 	</database-object>
 	<database-object>
 		<create>
-			
+			ALTER TABLE joits.Usuario
+			CHANGE COLUMN saldo saldo DOUBLE NOT NULL ;
 		</create>
 		<drop>
-			
+			ALTER TABLE joits.Usuario
+			CHANGE COLUMN saldo saldo DOUBLE NULL ;
 		</drop>
 		<dialect-scope name="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 	</database-object>
