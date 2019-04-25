@@ -24,9 +24,9 @@ class RepoRodajes extends RepoDefault<Pelicula> {
 		Pelicula
 	}
 
-	def searchByString(String valor) {
-		allInstances.findFirst[titulo == valor]
-	}
+//	def searchByString(String valor) {
+//		allInstances.findFirst[titulo == valor]
+//	}
 	
 	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Pelicula> query, Root<Pelicula> camposRodaje, Pelicula t) {
 		if (t.titulo !== null) {
