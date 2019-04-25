@@ -31,17 +31,38 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		]
 
 		RepoUsuarios.instance => [
-			create(new Usuario("a", "Nombre", "Apeliido", 30, ""))
+			create(new Usuario("a", "Nombre", "Apeliido", 30, "") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
 				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
-			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234"))
-			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234"))
-			create(new Usuario("hug", "Hugo", "Ferrer", 30, "1234"))
-			create(new Usuario("mar", "Marcos", "Guerrero", 30, "1234"))
-			create(new Usuario("rau", "Raúl", "Romero", 30, "1234"))
-			create(new Usuario("san", "Santiago", "Vargas", 30, "1234"))
+			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
+			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
+			create(new Usuario("hug", "Hugo", "Ferrer", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
+			create(new Usuario("mar", "Marcos", "Guerrero", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
+			create(new Usuario("rau", "Raúl", "Romero", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
+			create(new Usuario("san", "Santiago", "Vargas", 30, "1234") => [
+				saldo = 1000
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+			])
 
 		]
 
