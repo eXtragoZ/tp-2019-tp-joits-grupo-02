@@ -36,6 +36,7 @@ class BuscarAmigosModel {
 	}
 	
 	private def List<Usuario> getListaDePersonas() {
+//		repoUsuario.searchingAmigos(usuario)
 		this.getNoSonAmigos(this.repoUsuario.allInstances)
 	}
 

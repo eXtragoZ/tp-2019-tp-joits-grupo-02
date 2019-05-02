@@ -59,10 +59,10 @@ class RepoUsuarios extends RepoDefault<Usuario> {
             val query = criteria.createQuery(entityType)
             val camposUsuario = query.from(entityType)
             query.select(camposUsuario)
-            query.where(criteria.notEqual(camposUsuario.get("id"), usuario.id))
+            query.where(criteria. notEqual(camposUsuario.get("id"), usuario.id))
             query.orderBy(criteria.desc(camposUsuario.get("saldo")))
             val queryResult = entityManager.createQuery(query)
-            queryResult.maxResults = 3
+            queryResult.maxResults = 3 
             queryResult.resultList
         } finally {
             entityManager?.close
@@ -75,6 +75,24 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 			query.where(criteria.equal(camposUsuario.get("nombreUsuario"), t.nombreUsuario))
 		}
 
+	}
+	
+	def searchingAmigos(Usuario usuario) {
+		val entityManager = generateEntityManager
+        try {
+            val amigos = usuario.amigos
+            val ids = amigos.map[id]
+            val criteria = entityManager.criteriaBuilder
+            val query = criteria.createQuery(entityType)
+            val camposUsuario = query.from(entityType)
+            query.select(camposUsuario)
+            query.where(camposUsuario.get("id").in(ids))
+            val queryResult = entityManager.createQuery(query)
+            queryResult.maxResults = 3 //hay que sacarlo despues
+            queryResult.resultList
+        } finally {
+            entityManager?.close
+        }
 	}
 
 	override getEntityType() {
