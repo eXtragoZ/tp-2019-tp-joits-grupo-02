@@ -23,11 +23,14 @@ class Entrada {
 
 	@Column
 	LocalDateTime fechaHora
+	
+	@Column
+	Double precio
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	Pelicula pelicula
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	Funcion funcion
 
 	new() {	}
@@ -35,20 +38,19 @@ class Entrada {
 	new(Pelicula pelicula) {
 		this.fechaHora = LocalDateTime.now
 		this.pelicula = pelicula
+		this.precio = pelicula.precioEntrada + funcion.precio
 	}
 
 	new(Pelicula pelicula, Funcion funcion) {
 		this.fechaHora = LocalDateTime.now
 		this.pelicula = pelicula
 		this.funcion = funcion
+		this.precio = pelicula.precioEntrada + funcion.precio
 	}
 
 	def getTituloPelicula() {
 		pelicula.titulo
 	}
 
-	def getPrecio() {
-		pelicula.precioEntrada + funcion.precio
-	}
 
 }
