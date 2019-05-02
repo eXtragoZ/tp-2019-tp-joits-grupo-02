@@ -27,7 +27,7 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 			val query = criteria.createQuery(entityType)
 			val camposUsuario = query.from(entityType)
 			camposUsuario.fetch("amigos", JoinType.LEFT)
-			val fetchEntrada = camposUsuario.fetch("entradas", JoinType.LEFT)
+			camposUsuario.fetch("entradas", JoinType.LEFT)
 //			fetchEntrada.fetch("pelicula", JoinType.LEFT)
 			query.select(camposUsuario)
 			query.where(criteria.equal(camposUsuario.get("id"), _id))
@@ -43,7 +43,7 @@ class RepoUsuarios extends RepoDefault<Usuario> {
             val criteria = entityManager.criteriaBuilder
             val query = criteria.createQuery(entityType)
             val camposUsuario = query.from(entityType)
-            camposUsuario.fetch("entradas", JoinType.LEFT)
+//            camposUsuario.fetch("entradas", JoinType.LEFT)
             query.select(camposUsuario)
             query.where(criteria.equal(camposUsuario.get("nombreUsuario"), nombreUsuario))
             entityManager.createQuery(query).singleResult
@@ -89,7 +89,6 @@ class RepoUsuarios extends RepoDefault<Usuario> {
             query.select(camposUsuario)
             query.where(camposUsuario.get("id").in(ids).not)
             val queryResult = entityManager.createQuery(query)
-//            queryResult.maxResults = 3 
             queryResult.resultList
         } finally {
             entityManager?.close

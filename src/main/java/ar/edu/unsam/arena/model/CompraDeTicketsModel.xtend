@@ -4,6 +4,7 @@ import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.repos.RepoRodajes
+import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -30,7 +31,7 @@ class CompraDeTicketsModel {
 	String mensajeError = ""
 
 	new(Usuario usuario) {
-		this.usuario = usuario
+		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 		this.carrito = newArrayList
 	}
 

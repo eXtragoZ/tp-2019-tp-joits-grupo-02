@@ -1,6 +1,8 @@
 package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.domain.repos.RepoUsuarios
+import ar.edu.unsam.domain.usuario.Usuario
+import javax.persistence.NoResultException
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
@@ -17,18 +19,22 @@ class LoginModel {
 
 	@Dependencies("nombreUsuario", "password")
 	def getValidar() {
-		return StringUtils.isNotBlank(nombreUsuario)// && StringUtils.isNotBlank(password)
+		return StringUtils.isNotBlank(nombreUsuario) // && StringUtils.isNotBlank(password)
 	}
 
 	def obtenerUsuario() {
-		val usuario = repoUsuario.searchByString(nombreUsuario)
-		if (usuario === null) {
+//		if (usuario === null) {
+//		}
+		var Usuario usuario
+		try {
+			usuario = repoUsuario.searchByString(nombreUsuario)
+		} catch (NoResultException e) {
 			throw new UserException("El usuario no existe")
 		}
 		usuario.validarPassword(password)
 		usuario
 	}
-	
+
 	def repoUsuario() {
 		RepoUsuarios.instance
 	}
