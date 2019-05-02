@@ -5,7 +5,7 @@
 ## Enunciado:
 ###### Entrega 0: https://docs.google.com/document/d/1PFcfrZECUYEmmRUlMtdPVhCDOqjYC-_mPfZWANIrrq0/edit
 ###### Entrega 1: https://docs.google.com/document/d/1zaWJfD0XDY4pBFOozlDuKShMPIhMIf7whVqJP-4PCos/edit
-###### Entrega 2: 
+###### Entrega 2: https://docs.google.com/document/d/1pECBlX3tyhrRbkvpM_gVBB3yQiCcQXeJ-jAOxb9oYUc/edit
 ###### Entrega 3: 
 
 ## Alumnos:

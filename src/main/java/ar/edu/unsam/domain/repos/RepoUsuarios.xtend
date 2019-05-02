@@ -81,14 +81,15 @@ class RepoUsuarios extends RepoDefault<Usuario> {
 		val entityManager = generateEntityManager
         try {
             val amigos = usuario.amigos
-            val ids = amigos.map[id]
+            var ids = amigos.map[id].toList
+            ids.add(usuario.id)
             val criteria = entityManager.criteriaBuilder
             val query = criteria.createQuery(entityType)
             val camposUsuario = query.from(entityType)
             query.select(camposUsuario)
-            query.where(camposUsuario.get("id").in(ids))
+            query.where(camposUsuario.get("id").in(ids).not)
             val queryResult = entityManager.createQuery(query)
-            queryResult.maxResults = 3 //hay que sacarlo despues
+//            queryResult.maxResults = 3 
             queryResult.resultList
         } finally {
             entityManager?.close
