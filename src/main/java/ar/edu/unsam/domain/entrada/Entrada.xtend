@@ -11,6 +11,7 @@ import javax.persistence.Id
 import javax.persistence.OneToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.Transient
 
 @Entity
 @Observable
@@ -27,10 +28,10 @@ class Entrada {
 	@Column
 	Double precio
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@Transient //OneToOne(fetch=FetchType.LAZY)
 	Pelicula pelicula
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@Transient//OneToOne(fetch=FetchType.LAZY)
 	Funcion funcion
 
 	new() {	}

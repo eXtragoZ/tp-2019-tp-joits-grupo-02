@@ -3,7 +3,7 @@ package ar.edu.unsam.arena.model
 import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
-import ar.edu.unsam.domain.repos.RepoRodajes
+import ar.edu.unsam.domain.repos.RepoPeliculasMongoDB
 import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDate
@@ -49,7 +49,7 @@ class CompraDeTicketsModel {
 	}
 
 	def getRecomendadas() {
-		return repoRodaje.recomendados
+		return []//repoRodaje.searchByExample()
 	}
 
 	def agregarAlCarrito() {
@@ -114,7 +114,7 @@ class CompraDeTicketsModel {
 	}
 
 	def repoRodaje() {
-		RepoRodajes.instance
+		RepoPeliculasMongoDB.instance
 	}
 	
 	def getValidarCarrito() {

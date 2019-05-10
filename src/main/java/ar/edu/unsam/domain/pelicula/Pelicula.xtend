@@ -4,15 +4,15 @@ import ar.edu.unsam.domain.funcion.Funcion
 import java.util.Set
 import javax.persistence.CascadeType
 import javax.persistence.Column
-import javax.persistence.Entity
 import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
 import javax.persistence.OneToMany
 import org.apache.commons.lang.StringUtils
+import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.mongodb.morphia.annotations.Entity
+import org.mongodb.morphia.annotations.Id
 import org.uqbar.commons.model.annotations.Observable
 
 @Entity
@@ -21,25 +21,24 @@ import org.uqbar.commons.model.annotations.Observable
 @Accessors
 class Pelicula {
 
-	@Id	@GeneratedValue
-	Long id
+	@Id	ObjectId id
 	
-	@Column(length=100)
+//	@Column(length=100)
 	String titulo
 	
-	@Column
+//	@Column
 	float puntaje
 	
-	@Column(length=100)
+//	@Column(length=100)
 	String genero
 	
-	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Set<Funcion> funciones = newHashSet
 	
-	@Column
+//	@Column
 	double precioBase = 30.00 //contemplar bigdecimal
 	
-	@Column
+//	@Column
 	int anio
 
 	new() {		}

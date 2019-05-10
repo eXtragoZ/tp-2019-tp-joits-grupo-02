@@ -3,10 +3,10 @@ package ar.edu.unsam.domain.pelicula
 import ar.edu.unsam.domain.funcion.Funcion
 import java.util.Set
 import javax.persistence.Column
-import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.mongodb.morphia.annotations.Entity
 import org.uqbar.commons.model.annotations.Observable
 
 @Entity
@@ -14,10 +14,10 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Saga extends Pelicula {
 
-	@OneToMany(fetch=FetchType.EAGER)
+//	@OneToMany(fetch=FetchType.EAGER)
 	Set<Pelicula> peliculas = newHashSet
 	
-	@Column
+//	@Column
 	int nivelDeClasico
 	
 	val PLUS = 5
