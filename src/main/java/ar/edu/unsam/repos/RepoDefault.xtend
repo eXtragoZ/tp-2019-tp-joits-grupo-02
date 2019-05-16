@@ -1,4 +1,4 @@
-package ar.edu.unsam.domain.repos
+package ar.edu.unsam.repos
 
 import java.util.List
 import javax.persistence.EntityManagerFactory

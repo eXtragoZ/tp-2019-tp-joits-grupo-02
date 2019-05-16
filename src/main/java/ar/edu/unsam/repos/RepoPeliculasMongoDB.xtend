@@ -1,4 +1,4 @@
-package ar.edu.unsam.domain.repos
+package ar.edu.unsam.repos
 
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula

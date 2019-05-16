@@ -1,4 +1,4 @@
-package ar.edu.unsam.domain.repos
+package ar.edu.unsam.repos
 
 import ar.edu.unsam.domain.usuario.Usuario
 import javax.persistence.criteria.CriteriaBuilder

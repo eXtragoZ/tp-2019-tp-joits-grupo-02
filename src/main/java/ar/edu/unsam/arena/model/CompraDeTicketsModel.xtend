@@ -3,9 +3,9 @@ package ar.edu.unsam.arena.model
 import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
-import ar.edu.unsam.domain.repos.RepoPeliculasMongoDB
-import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
+import ar.edu.unsam.repos.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.RepoUsuarios
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
