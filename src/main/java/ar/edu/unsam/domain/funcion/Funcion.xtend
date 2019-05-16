@@ -3,11 +3,10 @@ package ar.edu.unsam.domain.funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.mongodb.morphia.annotations.Entity
+import org.mongodb.morphia.annotations.Id
 import org.uqbar.commons.model.annotations.Observable
 
 @Entity
@@ -15,13 +14,12 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Funcion {
 	
-	@Id	@GeneratedValue
-	long id
+	@Id	ObjectId id
 	
-	@Column
+//	@Column
 	LocalDateTime fechaHora
 	
-	@Column(length=100)
+//	@Column(length=100)
 	String nombreSala
 	
 	new() {

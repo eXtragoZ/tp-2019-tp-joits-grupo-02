@@ -23,7 +23,7 @@ class RepoPeliculasMongoDB {
 		if (ds === null) {
 			val mongo = new MongoClient("localhost", 27017)
 			new Morphia => [
-				map(typeof(Pelicula)).map(typeof(Funcion))
+				map(Pelicula).map(Funcion)
 				ds = createDatastore(mongo, "test")
 				ds.ensureIndexes
 			]
@@ -100,7 +100,7 @@ class RepoPeliculasMongoDB {
 	}
 
 	def Class<Pelicula> getEntityType() {
-		typeof(Pelicula)
+		Pelicula
 	}
 
 }

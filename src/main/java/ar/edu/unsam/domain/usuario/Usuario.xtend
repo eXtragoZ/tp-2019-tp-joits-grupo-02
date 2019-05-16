@@ -83,8 +83,4 @@ class Usuario {
 		this.saldo -= valor
 	}
 	
-	def getPeliculasVistas(){
-		entradas.map[pelicula].toSet
-	}
-
 }

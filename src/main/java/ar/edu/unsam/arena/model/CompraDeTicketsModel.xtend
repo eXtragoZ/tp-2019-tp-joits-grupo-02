@@ -8,6 +8,7 @@ import ar.edu.unsam.domain.repos.RepoUsuarios
 import ar.edu.unsam.domain.usuario.Usuario
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.ArrayList
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -29,10 +30,12 @@ class CompraDeTicketsModel {
 	List<Entrada> carrito
 	Funcion funcionCarritoSeleccionada
 	String mensajeError = ""
+	List<Pelicula> peliculas = new ArrayList
 
 	new(Usuario usuario) {
 		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
 		this.carrito = newArrayList
+		this.peliculas = repoPeliculas.allInstances
 	}
 
 	def buscar() {
@@ -40,16 +43,16 @@ class CompraDeTicketsModel {
 		ObservableUtils.firePropertyChanged(this, "peliculas")
 	}
 
-	def getPeliculas() {
+	def List <Pelicula> getPeliculas() {
 		if (StringUtils.isBlank(busquedaActual)) {
-			repoRodaje.allInstances
+			repoPeliculas.allInstances
 		} else {
-			repoRodaje.allInstances.filter[tieneValorBuscado(busquedaActual)].toList
+			repoPeliculas.allInstances.filter[tieneValorBuscado(busquedaActual)].toList
 		}
 	}
 
 	def getRecomendadas() {
-		return []//repoRodaje.searchByExample()
+		return repoPeliculas.searchByExample(new Pelicula)
 	}
 
 	def agregarAlCarrito() {
@@ -109,11 +112,11 @@ class CompraDeTicketsModel {
 
 	def getPeliculaSeleccionado() {
 		if(this.peliculaSeleccionado !== null){
-			repoRodaje.searchById(this.peliculaSeleccionado.id)
+			repoPeliculas.searchById(this.peliculaSeleccionado.id)
 		}
 	}
 
-	def repoRodaje() {
+	def repoPeliculas() {
 		RepoPeliculasMongoDB.instance
 	}
 	

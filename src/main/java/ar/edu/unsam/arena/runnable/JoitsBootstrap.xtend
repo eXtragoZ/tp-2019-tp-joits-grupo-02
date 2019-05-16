@@ -52,35 +52,35 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		RepoUsuarios.instance => [
 			create(new Usuario("a", "Nombre", "Apeliido", 30, "") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("hug", "Hugo", "Ferrer", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("mar", "Marcos", "Guerrero", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("rau", "Raúl", "Romero", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 			create(new Usuario("san", "Santiago", "Vargas", 30, "1234") => [
 				saldo = 1000
-//				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[this.entradaRandom, this.entradaRandom].toSet
 			])
 
 		]
@@ -91,14 +91,14 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		
 	}
 	
-//	private def Entrada getEntradaRandom() {
-//		val rodajes = RepoRodajes.instance.allInstances
-//		val rodajeAux = rodajes.get(new Random().nextInt(rodajes.size))
-//		val rodaje = RepoRodajes.instance.searchById(rodajeAux.id)
-//		val funciones = rodaje.funciones
-//		val funcion = funciones.get(new Random().nextInt(funciones.size))
-//		new Entrada(rodaje, funcion)
-//	}
+	private def Entrada getEntradaRandom() {
+		val peliculas = RepoPeliculasMongoDB.instance.allInstances
+		val peliculaAux = peliculas.get(new Random().nextInt(peliculas.size))
+		val pelicula = RepoPeliculasMongoDB.instance.searchById(peliculaAux.id)
+		val funciones = pelicula.funciones
+		val funcion = funciones.get(new Random().nextInt(funciones.size))
+		new Entrada(pelicula, funcion)
+	}
 	
 	private def Set<Funcion> getFuncionesRandom() {
 		val salas = newHashSet("A", "B", "C", "Premium")

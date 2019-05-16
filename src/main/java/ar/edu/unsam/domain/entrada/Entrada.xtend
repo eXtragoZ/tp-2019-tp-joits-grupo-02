@@ -27,6 +27,9 @@ class Entrada {
 	
 	@Column
 	Double precio
+	
+	@Column
+	String tituloPelicula
 
 	@Transient //OneToOne(fetch=FetchType.LAZY)
 	Pelicula pelicula
@@ -40,6 +43,7 @@ class Entrada {
 		this.fechaHora = LocalDateTime.now
 		this.pelicula = pelicula
 		this.precio = pelicula.precioEntrada + funcion.precio
+		this.tituloPelicula = pelicula.titulo
 	}
 
 	new(Pelicula pelicula, Funcion funcion) {
@@ -47,11 +51,7 @@ class Entrada {
 		this.pelicula = pelicula
 		this.funcion = funcion
 		this.precio = pelicula.precioEntrada + funcion.precio
+		this.tituloPelicula = pelicula.titulo
 	}
-
-	def getTituloPelicula() {
-		pelicula.titulo
-	}
-
 
 }
