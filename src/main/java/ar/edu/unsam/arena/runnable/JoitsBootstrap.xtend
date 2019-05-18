@@ -10,10 +10,21 @@ import java.time.LocalDateTime
 import java.util.Random
 import java.util.Set
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
+import redis.clients.jedis.Jedis
 
 class JoitsBootstrap extends CollectionBasedBootstrap {
+	
+	Jedis jedis = new Jedis("localhost")
 
 	override run() {
+		
+//		REDIS
+//		println("Running initial script")
+//		jedis => [
+//			del("")
+//			lpush("", "")
+//			set("", "")
+//		]
 		
 //		RepoRodajes.instance => [
 //			create(new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom()))
@@ -115,5 +126,4 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		RepoUsuarios.instance.allInstances.isEmpty
 	}
 	
-
 }
