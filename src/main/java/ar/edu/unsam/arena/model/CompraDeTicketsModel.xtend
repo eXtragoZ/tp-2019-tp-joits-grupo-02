@@ -88,7 +88,8 @@ class CompraDeTicketsModel {
 	def comprar() {
 		if(this.totalPrecioCarrito > usuario.saldo) throw new UserException(
 			"ERROR no tiene saldo para realizar la compra")
-		carrito.forEach[funcion|usuario.comprarEntrada(funcion)]
+//		carrito.forEach[funcion|usuario.comprarEntrada(funcion)]
+		carritoRedis.forEach[funcion|usuario.comprarEntrada(funcion)]
 		limpiarCarrito
 	}
 
@@ -115,7 +116,8 @@ class CompraDeTicketsModel {
 	}
 
 	def getTotalPrecioCarrito() {
-		carrito.fold(0d, [total, entrada|total + entrada.precio])
+//		carrito.fold(0d, [total, entrada|total + entrada.precio])
+		carritoRedis.fold(0d, [total, entrada|total + entrada.precio])
 	}
 
 	def getPeliculaSeleccionado() {
@@ -129,6 +131,7 @@ class CompraDeTicketsModel {
 	}
 	
 	def getValidarCarrito() {
+//		if(this.carrito.getCantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
 		if(this.carritoRedis.cantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
 	}
 }
