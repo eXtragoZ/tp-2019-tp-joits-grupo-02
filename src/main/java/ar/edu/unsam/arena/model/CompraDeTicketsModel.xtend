@@ -16,26 +16,31 @@ import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
+import redis.clients.jedis.JedisPool
+import redis.clients.jedis.JedisPoolConfig
 
 @Accessors
 @Observable
 class CompraDeTicketsModel {
 	val formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-
+	
+	JedisPool jedisPool
 	Usuario usuario
 	String busquedaIngresada
 	String busquedaActual
 	Pelicula peliculaSeleccionado
 	Funcion funcionSeleccionada
-	List<Entrada> carrito
+	CarritoRedis carritoRedis
+//	List<Entrada> carrito
 	Funcion funcionCarritoSeleccionada
 	String mensajeError = ""
 	List<Pelicula> peliculas = new ArrayList
 
 	new(Usuario usuario) {
 		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
-		this.carrito = newArrayList
+		this.carritoRedis = CarritoRedis.instance
 		this.peliculas = repoPeliculas.allInstances
+		this.jedisPool = new JedisPool(new JedisPoolConfig, Constants.LOCALHOST)
 	}
 
 	def buscar() {
@@ -56,13 +61,15 @@ class CompraDeTicketsModel {
 	}
 
 	def agregarAlCarrito() {
-		carrito.add(this.getNewEntrada)
+//		carrito.add(this.getNewEntrada)
+		carritoRedis.agregar(this.getNewEntrada)
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
 
 	def sacarDelCarrito() {
-		carrito.remove(funcionCarritoSeleccionada)
+//		carrito.remove(funcionCarritoSeleccionada)
+		carritoRedis.eliminar(funcionCarritoSeleccionada)
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
@@ -70,7 +77,8 @@ class CompraDeTicketsModel {
 	}
 
 	def limpiarCarrito() {
-		carrito.clear
+//		carrito.clear
+		carritoRedis.limpiar
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
@@ -90,7 +98,7 @@ class CompraDeTicketsModel {
 	}
 
 	def getCantidadItems() {
-		carrito.size
+		carritoRedis.cantidadItems
 	}
 
 	def getFechaActual() {
@@ -121,6 +129,6 @@ class CompraDeTicketsModel {
 	}
 	
 	def getValidarCarrito() {
-		if(this.carrito.size < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
+		if(this.carritoRedis.cantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
 	}
 }
