@@ -5,13 +5,11 @@ import ar.edu.unsam.domain.pelicula.Pelicula
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.OneToOne
+import javax.persistence.Transient
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.Transient
 
 @Entity
 @Observable

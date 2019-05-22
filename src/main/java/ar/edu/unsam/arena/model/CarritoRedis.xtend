@@ -14,7 +14,7 @@ class CarritoRedis {
 //	List<Entrada> entradas = newArrayList
 	var JedisPool jedisPool
 	static CarritoRedis instance = null
-	String carrito = "carrito"
+	static String carrito = "carrito"
 
 	private new() {
 		jedisPool = new JedisPool(new JedisPoolConfig, Constants.LOCALHOST)
@@ -28,18 +28,19 @@ class CarritoRedis {
 	}
 		
 	def agregar(Entrada entrada) {
-		return [Jedis jedis|jedis.rpush(carrito, entrada.toString)]
+		return [Jedis jedis|jedis.rpush(carrito, entrada.id.toString)]
 	}
 	
 	def eliminar(Funcion funcion) {
-		return [Jedis jedis|jedis.del(funcion.toString)]
+		return [Jedis jedis|jedis.rpush(carrito, funcion.toString)]
 	}
 	
 	def limpiar() {
 		return [Jedis jedis|jedis.del(carrito)]
 	}
 	
-	def int cantidadItems() {
-		return [Jedis jedis|jedis.llen(carrito)]
+	def getCantidadItems() {
+		return [Jedis jedis|jedis.hlen(carrito)]
 	}
+	
 }

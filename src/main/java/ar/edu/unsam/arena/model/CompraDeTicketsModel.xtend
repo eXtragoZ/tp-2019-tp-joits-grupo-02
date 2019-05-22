@@ -12,10 +12,12 @@ import java.util.ArrayList
 import java.util.List
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xbase.lib.Functions.Function1
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
+import redis.clients.jedis.Jedis
 import redis.clients.jedis.JedisPool
 import redis.clients.jedis.JedisPoolConfig
 
@@ -30,15 +32,16 @@ class CompraDeTicketsModel {
 	String busquedaActual
 	Pelicula peliculaSeleccionado
 	Funcion funcionSeleccionada
-	CarritoRedis carritoRedis
-//	List<Entrada> carrito
+//	CarritoRedis carritoRedis
+	List<Entrada> carrito
 	Funcion funcionCarritoSeleccionada
 	String mensajeError = ""
 	List<Pelicula> peliculas = new ArrayList
 
 	new(Usuario usuario) {
 		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
-		this.carritoRedis = CarritoRedis.instance
+		this.carrito = newArrayList
+//		this.carritoRedis = CarritoRedis.instance
 		this.peliculas = repoPeliculas.allInstances
 		this.jedisPool = new JedisPool(new JedisPoolConfig, Constants.LOCALHOST)
 	}
@@ -61,15 +64,15 @@ class CompraDeTicketsModel {
 	}
 
 	def agregarAlCarrito() {
-//		carrito.add(this.getNewEntrada)
-		carritoRedis.agregar(this.getNewEntrada)
+		carrito.add(this.getNewEntrada)
+//		carritoRedis.agregar(this.getNewEntrada)
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
 
 	def sacarDelCarrito() {
-//		carrito.remove(funcionCarritoSeleccionada)
-		carritoRedis.eliminar(funcionCarritoSeleccionada)
+		carrito.remove(funcionCarritoSeleccionada)
+//		carritoRedis.eliminar(funcionCarritoSeleccionada)
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
@@ -77,8 +80,8 @@ class CompraDeTicketsModel {
 	}
 
 	def limpiarCarrito() {
-//		carrito.clear
-		carritoRedis.limpiar
+		carrito.clear
+//		carritoRedis.limpiar
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "carrito")
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
@@ -88,8 +91,8 @@ class CompraDeTicketsModel {
 	def comprar() {
 		if(this.totalPrecioCarrito > usuario.saldo) throw new UserException(
 			"ERROR no tiene saldo para realizar la compra")
-//		carrito.forEach[funcion|usuario.comprarEntrada(funcion)]
-		carritoRedis.forEach[funcion|usuario.comprarEntrada(funcion)]
+		carrito.forEach[funcion|usuario.comprarEntrada(funcion)]
+//		carritoRedis.forEach[funcion|usuario.comprarEntrada(funcion)]
 		limpiarCarrito
 	}
 
@@ -99,7 +102,8 @@ class CompraDeTicketsModel {
 	}
 
 	def getCantidadItems() {
-		carritoRedis.cantidadItems
+		this.carrito.size
+//		this.carritoRedis.cantidadItems.intValue
 	}
 
 	def getFechaActual() {
@@ -116,8 +120,12 @@ class CompraDeTicketsModel {
 	}
 
 	def getTotalPrecioCarrito() {
-//		carrito.fold(0d, [total, entrada|total + entrada.precio])
-		carritoRedis.fold(0d, [total, entrada|total + entrada.precio])
+//		for (var i=0; i<carritoRedis.cantidadItems;i++){
+//			
+//		}
+		
+		
+		this.carrito.fold(0d, [total, entrada|total + entrada.precio])
 	}
 
 	def getPeliculaSeleccionado() {
@@ -131,7 +139,11 @@ class CompraDeTicketsModel {
 	}
 	
 	def getValidarCarrito() {
-//		if(this.carrito.getCantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
-		if(this.carritoRedis.cantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
+		if(cantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
+//		if(this.carritoRedis.cantidadItems < 1) throw new UserException("Debe agregar entradas al carrito para avanzar")
 	}
+	
+//	def boolean operator_lessThan(Function1<Jedis, Long> function1, int i)
+//	def boolean operator_lessThan(int i, Function1<Jedis, Long> function1)
+//	def int getIntValue(Function1<Jedis, Long> function1)
 }
