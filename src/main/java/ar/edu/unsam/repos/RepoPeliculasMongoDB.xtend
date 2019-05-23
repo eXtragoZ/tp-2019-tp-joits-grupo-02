@@ -21,10 +21,10 @@ class RepoPeliculasMongoDB {
 	
 	new() {
 		if (ds === null) {
-			val mongo = new MongoClient("localhost", 27017)
+			val mongo = new MongoClient("localhost", 28001)
 			new Morphia => [
 				map(Pelicula).map(Funcion)
-				ds = createDatastore(mongo, "test")
+				ds = createDatastore(mongo, "Pelicula")
 				ds.ensureIndexes
 			]
 			println("Conectado a MongoDB. Bases: " + ds.getDB.collectionNames)
@@ -51,16 +51,12 @@ class RepoPeliculasMongoDB {
 	def List<Pelicula> searchByExample(Pelicula example) {
 		ds.createQuery(entityType)
 			.field("titulo").contains(example.titulo ?: "")
-//			.field("activo").equal(true)
-//			.field("estado").equal(example.estado ?: Libro.DISPONIBLE)
 			.asList
 	}
 	
 	def Pelicula searchById(ObjectId id) {
 		ds.createQuery(entityType)
 			.field("id").equal(id)
-//			.field("activo").equal(true)
-//			.field("estado").equal(example.estado ?: Libro.DISPONIBLE)
 			.asList.head
 	}
 
@@ -73,7 +69,8 @@ class RepoPeliculasMongoDB {
 	}
 
 	def void update(Pelicula pelicula) {
-		ds.update(pelicula, this.defineUpdateOperations(pelicula))
+		ds.merge(pelicula)
+//		ds.update(pelicula, this.defineUpdateOperations(pelicula))
 	}
 
 	def UpdateOperations<Pelicula> defineUpdateOperations(Pelicula pelicula) {
