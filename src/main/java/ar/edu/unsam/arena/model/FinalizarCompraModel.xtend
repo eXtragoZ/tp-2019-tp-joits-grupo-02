@@ -2,40 +2,47 @@ package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.usuario.Usuario
+import ar.edu.unsam.repos.CarritoRedis
 import ar.edu.unsam.repos.RepoUsuarios
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
-import org.uqbar.commons.model.utils.ObservableUtils
+import java.util.List
 
 @Observable
 @Accessors
 class FinalizarCompraModel {
 	
+	CarritoRedis carritoRedis = CarritoRedis.instance
 	Usuario usuario
-	List<Entrada> carrito
 	String mensajeError = ""
 	Entrada seleccionado
+	List<Entrada> carrito
 	
-	new(Usuario usuario, List<Entrada> carrito) {
+	new(Usuario usuario) {
 		this.usuario = RepoUsuarios.instance.searchById(usuario.id)
-		this.carrito = carrito
+		actualizarCarrito
 	}
-		
+	
+	def actualizarCarrito() {
+		carrito = carritoRedis.obtener(usuario)
+	}
+
 	def sacarDelCarrito() {
-		carrito.remove(seleccionado)
+		carritoRedis.eliminar(usuario, seleccionado)
 		this.mensajeError = ""
-		ObservableUtils.firePropertyChanged(this, "carrito")
-		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
+		actualizarCarrito
+		//ObservableUtils.firePropertyChanged(this, "carrito")
+		//ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
 	}
 	
 	def limpiarCarrito() {
-		carrito.clear
+		carritoRedis.limpiar(usuario)
 		this.mensajeError = ""
-		ObservableUtils.firePropertyChanged(this, "carrito")
-		ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
+		actualizarCarrito
+		//ObservableUtils.firePropertyChanged(this, "carrito")
+		//ObservableUtils.firePropertyChanged(this, "totalPrecioCarrito")
 	}
 	
 	def getTotalPrecioCarrito() {
@@ -49,8 +56,9 @@ class FinalizarCompraModel {
 	
 	def comprar() {
 		if(this.totalPrecioCarrito > usuario.saldo)	throw new UserException("ERROR no tiene saldo para realizar la compra")
-		carrito.forEach[ entrada | usuario.comprarEntrada(entrada)]
+		carrito.forEach[ usuario.comprarEntrada(it) ]
 		RepoUsuarios.instance.update(this.usuario)
+		limpiarCarrito
 	}
 	
 }

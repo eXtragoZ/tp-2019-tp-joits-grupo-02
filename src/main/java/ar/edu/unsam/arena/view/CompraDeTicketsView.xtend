@@ -205,19 +205,10 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 		]
 	}
 
-	def limpiarCarrito() {
-		this.modelObject.limpiarCarrito
-	}
-
-	def sacarDelCarrito() {
-		this.modelObject.sacarDelCarrito
-	}
-
 	def finalizarCompra() {
 		try {
 			this.modelObject.validarCarrito
-			new FinalizarCompraView(this, new FinalizarCompraModel(this.modelObject.usuario, this.modelObject.carrito)).
-				open
+			new FinalizarCompraView(this, new FinalizarCompraModel(this.modelObject.usuario)).open
 		} catch (UserException exception) {
 			this.modelObject.mensajeError = exception.message;
 		}

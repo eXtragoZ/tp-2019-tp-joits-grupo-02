@@ -42,8 +42,7 @@ class JoitsApplication extends Application {
 	
 	def void finalizarCompra(CompraDeTicketsView view) {
 		val usuario = view.modelObject.usuario
-		val carrito = view.modelObject.carrito
-		new FinalizarCompraView(this, new FinalizarCompraModel(usuario, carrito)).open
+		new FinalizarCompraView(this, new FinalizarCompraModel(usuario)).open
 	}
 
 }

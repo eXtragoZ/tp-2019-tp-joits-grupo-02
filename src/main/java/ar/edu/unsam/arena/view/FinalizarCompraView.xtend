@@ -82,18 +82,15 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 	
 	private def void sacarDelCarrito() {
 		this.modelObject.sacarDelCarrito()
-		(this.owner as CompraDeTicketsView).sacarDelCarrito
 	}
 	
 	private def void limpiarCarrito() {
 		this.modelObject.limpiarCarrito()
-		(this.owner as CompraDeTicketsView).limpiarCarrito
 	}
 	
 	private def void comprar() {
 		try {
 			this.modelObject.comprar()
-			(this.owner as CompraDeTicketsView).limpiarCarrito
 			this.close
 		} catch (UserException exception) {
 			this.modelObject.mensajeError = exception.message;
@@ -110,22 +107,12 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 
 				new Column<Entrada>(it) => [
 					title = "Nombre"
-					bindContentsToProperty("pelicula.titulo")
+					bindContentsToProperty("tituloPelicula")
 					fixedSize = 200
 				]
 				new Column<Entrada>(it) => [
-					title = "Rating"
-					bindContentsToProperty("pelicula.puntaje")
-					fixedSize = 60
-				]
-				new Column<Entrada>(it) => [
-					title = "Género"
-					bindContentsToProperty("pelicula.genero")
-					fixedSize = 100
-				]
-				new Column<Entrada>(it) => [
 					title = "Fecha y Hora"
-					bindContentsToProperty("funcion.fechaHora")
+					bindContentsToProperty("fechaHoraFormatted")
 					fixedSize = 120
 				]
 				new Column<Entrada>(it) => [
