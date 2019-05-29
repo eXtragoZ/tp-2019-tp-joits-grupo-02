@@ -54,7 +54,7 @@ class CompraDeTicketsModel {
 	}
 
 	def agregarAlCarrito() {
-		carritoRedis.agregar(usuario, this.getNewEntrada)
+		carritoRedis.agregar(usuario, newEntrada)
 		this.mensajeError = ""
 		ObservableUtils.firePropertyChanged(this, "cantidadItems")
 	}
@@ -65,19 +65,19 @@ class CompraDeTicketsModel {
 	}
 
 	def getCantidadItems() {
-		this.carritoRedis.getCantidadItems(usuario)
+		this.carritoRedis.cantidadItems(usuario)
 	}
 
 	def getFechaActual() {
 		formatterDate.format(LocalDate.now)
 	}
 
+	@Dependencies("peliculaSeleccionado", "funcionSeleccionada")
 	def getPrecioEntrada() {
-		return getNewEntrada().precio
+		if (validarFuncion) newEntrada.precio else 0
 	}
 
-	@Dependencies("funcionSeleccionada")
-	def Entrada getNewEntrada() {
+	def newEntrada() {
 		new Entrada(peliculaSeleccionado, funcionSeleccionada)
 	}
 

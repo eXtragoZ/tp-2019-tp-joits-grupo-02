@@ -45,7 +45,10 @@ class PanelDeControlModel {
 	
 	def actualizar() {
 		ObservableUtils.firePropertyChanged(this, "usuario")
-		//this.usuario = RepoUsuarios.instance.searchById(usuario.id)
+	}
+	
+	def getPeliculasVistas() {
+		usuario.entradas.toMap[tituloPelicula].values
 	}
 
 }

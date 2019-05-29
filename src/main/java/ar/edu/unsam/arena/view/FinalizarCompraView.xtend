@@ -16,6 +16,7 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.model.exceptions.UserException
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.commons.model.utils.ObservableUtils
 
 class FinalizarCompraView extends Window<FinalizarCompraModel> {
 
@@ -37,7 +38,10 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 				layout = new HorizontalLayout
 				new Button(it) => [
 					caption = "Eliminar Item"
-					onClick [sacarDelCarrito()]
+					onClick [
+						sacarDelCarrito
+						actualizarPantallaDeCompra
+					]
 					bindEnabled(new NotNullObservable("seleccionado"))
 				]
 				new Label(it) => [
@@ -49,21 +53,27 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 				new Label(it) => [
 					value <=> "totalPrecioCarrito"
 				]
-				
+
 			]
 
 			new Panel(it) => [
 				layout = new HorizontalLayout
 				new Button(it) => [
 					caption = "Limpiar carrito"
-					onClick [limpiarCarrito()]
+					onClick [
+						limpiarCarrito
+						actualizarPantallaDeCompra
+					]
 				]
 				new Label(it) => [
 					width = 320
 				]
 				new Button(it) => [
 					caption = "Comprar"
-					onClick [comprar()]
+					onClick [
+						comprar
+						actualizarPantallaDeCompra
+					]
 					enabled <=> "validarComprar"
 				]
 				new Button(it) => [
@@ -71,7 +81,7 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 					onClick [this.close]
 				]
 			]
-			
+
 			new Label(it) => [
 				foreground = Color.RED
 				value <=> "mensajeError"
@@ -79,15 +89,15 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 
 		]
 	}
-	
+
 	private def void sacarDelCarrito() {
 		this.modelObject.sacarDelCarrito()
 	}
-	
+
 	private def void limpiarCarrito() {
 		this.modelObject.limpiarCarrito()
 	}
-	
+
 	private def void comprar() {
 		try {
 			this.modelObject.comprar()
@@ -124,4 +134,9 @@ class FinalizarCompraView extends Window<FinalizarCompraModel> {
 
 		]
 	}
+
+	private def actualizarPantallaDeCompra() {
+		ObservableUtils.firePropertyChanged((owner as CompraDeTicketsView).modelObject, "cantidadItems")
+	}
+
 }
