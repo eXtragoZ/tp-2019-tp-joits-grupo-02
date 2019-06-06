@@ -1,7 +1,7 @@
 package ar.edu.unsam.arena.model
 
 import ar.edu.unsam.domain.usuario.Usuario
-import ar.edu.unsam.repos.RepoUsuarios
+import ar.edu.unsam.repos.usuario.RepoUsuarios
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable

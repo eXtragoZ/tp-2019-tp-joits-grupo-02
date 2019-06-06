@@ -6,7 +6,7 @@ import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.CarritoRedis
 import ar.edu.unsam.repos.RepoPeliculasMongoDB
-import ar.edu.unsam.repos.RepoUsuarios
+import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.List
@@ -83,7 +83,7 @@ class CompraDeTicketsModel {
 
 	def getPeliculaSeleccionado() {
 		if(this.peliculaSeleccionado !== null){
-			repoPeliculas.searchById(this.peliculaSeleccionado.id)
+			repoPeliculas.searchByObjectId(this.peliculaSeleccionado.id)
 		}
 	}
 

@@ -5,32 +5,16 @@ import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.RepoPeliculasMongoDB
-import ar.edu.unsam.repos.RepoUsuarios
+import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDateTime
 import java.util.Random
 import java.util.Set
 import org.uqbar.arena.bootstrap.CollectionBasedBootstrap
-import redis.clients.jedis.Jedis
 
 class JoitsBootstrap extends CollectionBasedBootstrap {
 	
 	override run() {
 		
-//		RepoRodajes.instance => [
-//			create(new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom()))
-//			create(new Pelicula(1974, "The Godfather: Part II", 9.0f, "Crime, Drama", this.getFuncionesRandom()))
-//			create(new Pelicula(1999, "Fight Club", 8.8f, "Drama", this.getFuncionesRandom()))
-//			create(new Pelicula(1994, "Forrest Gump", 8.8f, "Drama, Romance", this.getFuncionesRandom()))
-//			create(new Pelicula(2010, "Inception", 8.8f, "Action, Adventure, Sci-Fi", this.getFuncionesRandom()))
-//			create(new Pelicula(1999, "Matrix", 8.7f, "Action, Sci-Fi ", this.getFuncionesRandom()))
-//			create(new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi", this.getFuncionesRandom()))
-//			create(new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi", this.getFuncionesRandom()))
-//			create(
-//				new Saga(#[allInstances.get(0) as Pelicula, allInstances.get(1) as Pelicula].toSet,
-//					"The Godfather Collection", 2000, 9.2f, "Crime, Drama", 9, this.getFuncionesRandom()))
-//
-//		]
-
 		val padrino = new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom())
 		RepoPeliculasMongoDB.instance.createIfNotExists(padrino)
 		
@@ -93,7 +77,7 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	private def Entrada getEntradaRandom() {
 		val peliculas = RepoPeliculasMongoDB.instance.allInstances
 		val peliculaAux = peliculas.get(new Random().nextInt(peliculas.size))
-		val pelicula = RepoPeliculasMongoDB.instance.searchById(peliculaAux.id)
+		val pelicula = RepoPeliculasMongoDB.instance.searchByObjectId(peliculaAux.id)
 		val funciones = pelicula.funciones
 		val funcion = funciones.get(new Random().nextInt(funciones.size))
 		new Entrada(pelicula, funcion)

@@ -11,12 +11,11 @@ import org.mongodb.morphia.Datastore
 import org.mongodb.morphia.Morphia
 import org.mongodb.morphia.aggregation.Accumulator
 import org.mongodb.morphia.aggregation.Group
-import org.mongodb.morphia.query.UpdateOperations
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 @Accessors
-class RepoPeliculasMongoDB {
+class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 
 	static protected Datastore ds
 
@@ -51,11 +50,13 @@ class RepoPeliculasMongoDB {
 		}
 	}
 
-	def List<Pelicula> searchByExample(Pelicula example) {
+	override searchByExample(Pelicula example) {
 		ds.createQuery(entityType).field("titulo").contains(example.titulo ?: "").asList
 	}
 
-	def Pelicula searchById(ObjectId id) {
+	override searchById(long id) {	}
+
+	def searchByObjectId(ObjectId id) {
 		ds.createQuery(entityType).field("id").equal(id).asList.head
 	}
 
@@ -65,29 +66,22 @@ class RepoPeliculasMongoDB {
 			return entidadAModificar
 		}
 		create(pelicula)
+		this.searchByObjectId(pelicula.id)
 	}
 
-	def void update(Pelicula pelicula) {
+	override update(Pelicula pelicula) {
 		ds.merge(pelicula)
-//		ds.update(pelicula, this.defineUpdateOperations(pelicula))
 	}
 
-	def UpdateOperations<Pelicula> defineUpdateOperations(Pelicula pelicula) {
-		ds.createUpdateOperations(entityType).set("titulo", pelicula.titulo).set("puntaje", pelicula.puntaje).set(
-			"genero", pelicula.genero).set("funciones", pelicula.funciones).set("precioBase", pelicula.precioBase).set(
-			"anio", pelicula.anio)
-	}
-
-	def Pelicula create(Pelicula pelicula) {
+	override create(Pelicula pelicula) {
 		ds.save(pelicula)
-		pelicula
 	}
 
 	def void delete(Pelicula pelicula) {
 		ds.delete(pelicula)
 	}
 
-	def List<Pelicula> allInstances() {
+	override List<Pelicula> allInstances() {
 		ds.createQuery(this.getEntityType()).asList
 	}
 
