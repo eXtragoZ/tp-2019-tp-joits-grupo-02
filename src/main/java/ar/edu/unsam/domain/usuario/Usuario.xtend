@@ -12,9 +12,13 @@ import javax.persistence.ManyToMany
 import javax.persistence.OneToMany
 import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.neo4j.ogm.annotation.NodeEntity
+import org.neo4j.ogm.annotation.Property
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
+import org.neo4j.ogm.annotation.Relationship
 
+@NodeEntity(label="Entrada")
 @Entity
 @Observable
 @Accessors
@@ -24,9 +28,11 @@ class Usuario {
 	@GeneratedValue
 	Long id
 	
+	@Property(name="nombreUsuario")
 	@Column(length=100)
 	String nombreUsuario
 	
+	@Property(name="nombre")
 	@Column(length=100)
 	String nombre
 	
@@ -36,6 +42,7 @@ class Usuario {
 	@Column
 	int edad
 	
+	@Relationship(type = "ACTED_IN", direction = "INCOMING")
 	@ManyToMany (fetch=FetchType.LAZY)
 	Set<Usuario> amigos = newHashSet
 	

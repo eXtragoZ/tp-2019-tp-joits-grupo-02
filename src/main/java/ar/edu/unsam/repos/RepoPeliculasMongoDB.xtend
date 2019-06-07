@@ -23,7 +23,7 @@ class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 
 	new() {
 		if (ds === null) {
-			val mongo = new MongoClient("localhost", 28001)
+			val mongo = new MongoClient("localhost", 27017)
 			new Morphia => [
 				map(Pelicula).map(Funcion)
 				ds = createDatastore(mongo, "Pelicula")

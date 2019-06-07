@@ -2,19 +2,18 @@ package ar.edu.unsam.domain.pelicula
 
 import ar.edu.unsam.domain.funcion.Funcion
 import java.util.Set
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.FetchType
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
-import javax.persistence.OneToMany
 import org.apache.commons.lang.StringUtils
 import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Id
+import org.neo4j.ogm.annotation.NodeEntity
+import org.neo4j.ogm.annotation.Property
 import org.uqbar.commons.model.annotations.Observable
 
+@NodeEntity(label="Pelicula")
 @Entity
 @Observable
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -23,22 +22,18 @@ class Pelicula {
 
 	@Id	ObjectId id
 	
-//	@Column(length=100)
+	@Property(name="titulo")
 	String titulo
 	
-//	@Column
 	float puntaje
 	
-//	@Column(length=100)
 	String genero
 	
-//	@OneToMany (fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Set<Funcion> funciones = newHashSet
 	
-//	@Column
 	double precioBase = 30.00 //contemplar bigdecimal
 	
-//	@Column
+	@Property(name="anio")
 	int anio
 
 	new() {		}

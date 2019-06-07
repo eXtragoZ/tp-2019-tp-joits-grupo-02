@@ -7,8 +7,11 @@ import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Id
+import org.neo4j.ogm.annotation.NodeEntity
+import org.neo4j.ogm.annotation.Property
 import org.uqbar.commons.model.annotations.Observable
 
+@NodeEntity(label="Funcion")
 @Entity
 @Accessors
 @Observable
@@ -16,10 +19,10 @@ class Funcion {
 	
 	@Id	ObjectId id
 	
-//	@Column
+	@Property(name="fecha")
 	LocalDateTime fechaHora
 	
-//	@Column(length=100)
+	@Property(name="sala")
 	String nombreSala
 	
 	new() {
