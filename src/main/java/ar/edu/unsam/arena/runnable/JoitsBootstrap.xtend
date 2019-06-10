@@ -68,9 +68,9 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 
 		]
 
-		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
-		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)].toSet
-		RepoUsuarios.instance.update(usuario)
+//		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
+//		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)].toSet
+//		RepoUsuarios.instance.update(usuario)
 		
 	}
 	

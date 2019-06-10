@@ -14,18 +14,19 @@ import org.apache.commons.lang.StringUtils
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Property
+import org.neo4j.ogm.annotation.Relationship
+import org.neo4j.ogm.annotation.Transient
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
-import org.neo4j.ogm.annotation.Relationship
 
-@NodeEntity(label="Entrada")
+@NodeEntity(label="Usuario")
 @Entity
 @Observable
 @Accessors
 class Usuario {
 
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
+	@org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue
 	Long id
 	
 	@Property(name="nombreUsuario")
@@ -40,19 +41,24 @@ class Usuario {
 	String apellido
 	
 	@Column
+	@Transient
 	int edad
 	
-	@Relationship(type = "ACTED_IN", direction = "INCOMING")
+	@Relationship(type = "FRIENDS_WITH", direction = "INCOMING")
 	@ManyToMany (fetch=FetchType.LAZY)
 	Set<Usuario> amigos = newHashSet
 	
 	@Column
+	@Transient
 	double saldo
 	
+	@Relationship(type = "MOVIES_SEEING", direction = "INCOMING")
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@Transient
 	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)
+	@Transient
 	String password
 
 	new() {

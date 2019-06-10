@@ -49,6 +49,8 @@ class RepoUsuariosHibernate {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
 			val from = query.from(entityType)
+			from.fetch("amigos", JoinType.LEFT)
+			from.fetch("entradas", JoinType.LEFT)
 			query.select(from)
 			generateWhere(criteria, query, from, usuario)
 			entityManager.createQuery(query).resultList

@@ -16,6 +16,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.Transient
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Property
@@ -30,8 +31,8 @@ import org.uqbar.commons.model.annotations.Observable
 @JsonIgnoreProperties(value = "changeSupport")
 class Entrada {
 
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
+	@org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue
 	long id
 	
 	@Property(name="fecha")
@@ -48,20 +49,22 @@ class Entrada {
 	@Column
 	String tituloPelicula
 
-	//OneToOne(fetch=FetchType.LAZY)
-	@Relationship(type = "ACTED_IN", direction = "INCOMING")
-	transient Pelicula pelicula
+	@Relationship(type = "MOVIE", direction = "INCOMING")
+	@Transient
+	@Property(name="pelicula")
+	Pelicula pelicula
 
-	//OneToOne(fetch=FetchType.LAZY)
-	@Relationship(type = "ACTED_IN", direction = "INCOMING")
-	transient Funcion funcion
+	@Relationship(type = "FUNCTION", direction = "INCOMING")
+	@Transient
+	@Property(name="funcion")
+	Funcion funcion
 
 	new() {	}
 
 	new(Pelicula pelicula, Funcion funcion) {
 		this.fechaHora = LocalDateTime.now
-		//this.pelicula = pelicula
-		//this.funcion = funcion
+		this.pelicula = pelicula
+		this.funcion = funcion
 		this.precio = pelicula.precioEntrada + funcion.precio
 		this.tituloPelicula = pelicula.titulo
 	}

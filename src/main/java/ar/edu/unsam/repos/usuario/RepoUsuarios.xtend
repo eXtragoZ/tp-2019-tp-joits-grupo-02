@@ -33,7 +33,9 @@ class RepoUsuarios implements RepoDefault<Usuario> {
 	
 	override create(Usuario usuario) {
 		this.repoUsuariosHibernate.create(usuario)
-		this.repoUsuariosNeo4J.create(usuario)
+		val _usuario = this.repoUsuariosHibernate.searchByString(usuario.nombreUsuario)
+		val __usuario = this.repoUsuariosHibernate.searchById(_usuario.id)
+		this.repoUsuariosNeo4J.create(__usuario)
 	}
 
 	override update(Usuario usuario) {

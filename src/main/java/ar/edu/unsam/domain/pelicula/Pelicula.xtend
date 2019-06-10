@@ -9,8 +9,10 @@ import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Id
+import org.neo4j.ogm.annotation.GeneratedValue
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Property
+import org.neo4j.ogm.annotation.Transient
 import org.uqbar.commons.model.annotations.Observable
 
 @NodeEntity(label="Pelicula")
@@ -20,17 +22,23 @@ import org.uqbar.commons.model.annotations.Observable
 @Accessors
 class Pelicula {
 
-	@Id	ObjectId id
+	@Id
+	@org.neo4j.ogm.annotation.Id @GeneratedValue	
+	ObjectId id
 	
 	@Property(name="titulo")
 	String titulo
 	
+	@Property(name="puntaje")
 	float puntaje
 	
+	@Property(name="genero")
 	String genero
 	
+	@Transient
 	Set<Funcion> funciones = newHashSet
 	
+	@Property(name="precioBase")
 	double precioBase = 30.00 //contemplar bigdecimal
 	
 	@Property(name="anio")
