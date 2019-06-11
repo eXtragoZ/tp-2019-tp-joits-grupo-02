@@ -52,11 +52,13 @@ class Entrada {
 	@Relationship(type = "MOVIE", direction = "INCOMING")
 	@Transient
 	@Property(name="pelicula")
+	@JsonIgnore
 	Pelicula pelicula
 
 	@Relationship(type = "FUNCTION", direction = "INCOMING")
 	@Transient
 	@Property(name="funcion")
+	@JsonIgnore
 	Funcion funcion
 
 	new() {	}

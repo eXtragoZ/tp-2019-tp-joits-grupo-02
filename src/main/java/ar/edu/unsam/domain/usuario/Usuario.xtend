@@ -29,11 +29,10 @@ class Usuario {
 	@org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue
 	Long id
 	
-	@Property(name="nombreUsuario")
+	@Property(name="name")
 	@Column(length=100)
 	String nombreUsuario
 	
-	@Property(name="nombre")
 	@Column(length=100)
 	String nombre
 	
@@ -44,7 +43,7 @@ class Usuario {
 	@Transient
 	int edad
 	
-	@Relationship(type = "FRIENDS_WITH", direction = "INCOMING")
+	@Relationship(type = "FRIENDS_WITH", direction = "OUTGOING")
 	@ManyToMany (fetch=FetchType.LAZY)
 	Set<Usuario> amigos = newHashSet
 	
@@ -52,9 +51,9 @@ class Usuario {
 	@Transient
 	double saldo
 	
-	@Relationship(type = "MOVIES_SEEING", direction = "INCOMING")
+	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@Transient
+//	@Transient
 	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)

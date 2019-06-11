@@ -20,7 +20,7 @@ class RepoDefaultNeo4J<T> {
 	static Configuration configuration = new Configuration.Builder().uri("bolt://localhost").credentials("neo4j",
 		"joits").build()
 
-	public static SessionFactory sessionFactory = new SessionFactory(configuration, "ar.edu.unsam.domain")
+	public static SessionFactory sessionFactory = new SessionFactory(configuration, "ar.edu.unsam.domain.usuario.Usuario")
 
 	protected def getSession() {
 		sessionFactory.openSession
