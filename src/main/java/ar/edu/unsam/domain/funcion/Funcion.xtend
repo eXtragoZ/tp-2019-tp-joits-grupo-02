@@ -11,6 +11,7 @@ import org.neo4j.ogm.annotation.GeneratedValue
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Property
 import org.uqbar.commons.model.annotations.Observable
+import org.neo4j.ogm.annotation.Transient
 
 @NodeEntity(label="Funcion")
 @Entity
@@ -18,11 +19,14 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class Funcion {
 	
-	@Id	
-	@org.neo4j.ogm.annotation.Id @GeneratedValue
+	@Id
+	@Transient	
 	ObjectId id
 	
-	@Property(name="fecha")
+	@org.neo4j.ogm.annotation.Id @GeneratedValue
+	Long id_neo
+	
+	@Property
 	LocalDateTime fechaHora
 	
 	@Property(name="sala")

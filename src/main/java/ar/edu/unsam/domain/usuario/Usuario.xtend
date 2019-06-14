@@ -25,8 +25,8 @@ import org.uqbar.commons.model.exceptions.UserException
 @Accessors
 class Usuario {
 
-	@Id @GeneratedValue
-	@org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue
+	@Id
+	@org.neo4j.ogm.annotation.Id  @org.neo4j.ogm.annotation.GeneratedValue
 	Long id
 	
 	@Property(name="name")
@@ -51,9 +51,9 @@ class Usuario {
 	@Transient
 	double saldo
 	
-	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
+//	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-//	@Transient
+	@Transient
 	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)
@@ -83,6 +83,7 @@ class Usuario {
 
 	def comprarEntrada(Entrada entrada) {
 		this.reducirSaldo(entrada.precio)
+		entrada.usuario = this
 		entradas.add(entrada)
 	}
 

@@ -17,17 +17,20 @@ class RepoDefaultNeo4J<T> {
 	 * http://neo4j.com/docs/ogm-manual/current/reference/
 	 * 
 	 */
-	static Configuration configuration = new Configuration.Builder().uri("bolt://localhost").credentials("neo4j",
+	static Configuration configuration = new Configuration.Builder().uri("bolt://localhost:11005").credentials("neo4j",
 		"joits").build()
 
-	public static SessionFactory sessionFactory = new SessionFactory(configuration, "ar.edu.unsam.domain.usuario.Usuario")
+	public static SessionFactory sessionFactory = new SessionFactory(configuration,
+		"ar.edu.unsam.domain")
 
 	protected def getSession() {
 		sessionFactory.openSession
 	}
-	
+
 	def create(T t) {
+		println("llega aca")
 		session.save(t)
+		println("termino de persistir")
 	}
 
 }

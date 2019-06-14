@@ -23,25 +23,28 @@ import org.uqbar.commons.model.annotations.Observable
 class Pelicula {
 
 	@Id
-	@org.neo4j.ogm.annotation.Id @GeneratedValue	
+	@Transient
 	ObjectId id
+	
+	@org.neo4j.ogm.annotation.Id @GeneratedValue
+	Long id_neo	
 	
 	@Property(name="titulo")
 	String titulo
 	
-	@Property(name="puntaje")
+	@Property
 	float puntaje
 	
-	@Property(name="genero")
+	@Property
 	String genero
 	
 	@Transient
 	Set<Funcion> funciones = newHashSet
 	
-	@Property(name="precioBase")
+	@Property
 	double precioBase = 30.00 //contemplar bigdecimal
 	
-	@Property(name="anio")
+	@Property
 	int anio
 
 	new() {		}

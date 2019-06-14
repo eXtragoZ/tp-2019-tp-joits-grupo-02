@@ -35,52 +35,61 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		RepoUsuarios.instance => [
 			create(new Usuario("a", "Nombre", "Apeliido", 30, "") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("cgarcia", "Carlos", "García", 25, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("osc", "Óscar", "Alvarez", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("rub", "Rubén", "Carmona", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("hug", "Hugo", "Ferrer", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("mar", "Marcos", "Guerrero", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("rau", "Raúl", "Romero", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 			create(new Usuario("san", "Santiago", "Vargas", 30, "1234") => [
 				saldo = 1000
-				entradas = #[this.entradaRandom, this.entradaRandom].toSet
+				entradas = #[entradaRandom, entradaRandom].toSet
+				amigos = #{}
 			])
 
 		]
 
-//		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
-//		usuario.amigos = #[RepoUsuarios.instance.allInstances.get(0)].toSet
-//		RepoUsuarios.instance.update(usuario)
+		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
+		val amigo = RepoUsuarios.instance.allInstances.get(0)
+		usuario.amigos = #[RepoUsuarios.instance.searchById(amigo.id)].toSet
+		RepoUsuarios.instance.update(usuario)
 		
 	}
 	
-	private def Entrada getEntradaRandom() {
+	private def Entrada getEntradaRandom(Usuario usuario) {
 		val peliculas = RepoPeliculasMongoDB.instance.allInstances
 		val peliculaAux = peliculas.get(new Random().nextInt(peliculas.size))
 		val pelicula = RepoPeliculasMongoDB.instance.searchByObjectId(peliculaAux.id)
 		val funciones = pelicula.funciones
 		val funcion = funciones.get(new Random().nextInt(funciones.size))
-		new Entrada(pelicula, funcion)
+		new Entrada(pelicula, funcion, usuario)
 	}
 	
 	private def Set<Funcion> getFuncionesRandom() {
