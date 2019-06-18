@@ -2,7 +2,7 @@ package ar.edu.unsam.repos.usuario
 
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.RepoDefault
-import ar.edu.unsam.repos.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
 import java.util.List
 import org.bson.types.ObjectId
 

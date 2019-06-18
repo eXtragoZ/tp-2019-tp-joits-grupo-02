@@ -1,7 +1,8 @@
-package ar.edu.unsam.repos
+package ar.edu.unsam.repos.pelicula
 
 import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
+import ar.edu.unsam.repos.RepoDefault
 import com.mongodb.MongoClient
 import java.time.LocalDateTime
 import java.util.List

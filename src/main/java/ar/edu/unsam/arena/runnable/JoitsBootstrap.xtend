@@ -5,7 +5,7 @@ import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.pelicula.Saga
 import ar.edu.unsam.domain.usuario.Usuario
-import ar.edu.unsam.repos.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
 import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDateTime
 import java.util.Random
@@ -90,7 +90,6 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		val usuario = RepoUsuarios.instance.searchById(RepoUsuarios.instance.allInstances.get(1).id)
 		val amigoAux = RepoUsuarios.instance.allInstances.get(0)
 		val amigo = RepoUsuarios.instance.searchById(amigoAux.id)
-		println(amigo.entradas.size)
 		amigo.entradas.forEach[entrada | RepoUsuarios.searchPeliculaById(entrada.idPelicula)]
 		usuario.amigos = #[RepoUsuarios.instance.searchById(amigo.id)].toSet
 		RepoUsuarios.instance.update(usuario)

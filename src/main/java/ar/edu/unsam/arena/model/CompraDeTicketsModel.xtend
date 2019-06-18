@@ -5,7 +5,7 @@ import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.CarritoRedis
-import ar.edu.unsam.repos.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
 import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

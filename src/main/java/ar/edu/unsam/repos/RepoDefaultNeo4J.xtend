@@ -27,10 +27,8 @@ class RepoDefaultNeo4J<T> {
 		sessionFactory.openSession
 	}
 
-	def create(T t) {
-		println("llega aca")
+	def createOrUpdate(T t) {
 		session.save(t)
-		println("termino de persistir")
 	}
 
 }

@@ -59,7 +59,7 @@ class BuscarAmigosModel {
 	def agregarAmigo() {
 		val amigo = repoUsuario.searchById(this.seleccionado.id)
 		this.usuario.amigos.add(amigo)
-		//this.repoUsuario.update(usuario)
+//		this.repoUsuario.update(usuario)
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
 		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
 	}
