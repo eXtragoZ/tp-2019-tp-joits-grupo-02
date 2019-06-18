@@ -8,18 +8,6 @@ import java.util.Map
 
 class RepoPeliculasNeo4J extends RepoDefaultNeo4J<Pelicula> {
 
-	static RepoPeliculasNeo4J instance
-
-	private new() {
-	}
-
-	def static getInstance() {
-		if (instance === null) {
-			instance = new RepoPeliculasNeo4J
-		} else {
-			instance
-		}
-	}
 
 	def List<Pelicula> getPeliculasRecomendadas(String nombreUsuario) {
 		val query = String.format("MATCH (peliUsuario:Pelicula)<-[:MOVIES_SEEING]-(usuario:Usuario)-[FRIENDS_WITH]->(amigo:Usuario)-[:MOVIES_SEEING]->(peliAmigo:Pelicula)

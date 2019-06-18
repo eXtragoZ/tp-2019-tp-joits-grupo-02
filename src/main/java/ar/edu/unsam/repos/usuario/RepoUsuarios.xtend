@@ -2,7 +2,7 @@ package ar.edu.unsam.repos.usuario
 
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.RepoDefault
-import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.pelicula.RepoPeliculas
 import java.util.List
 import org.bson.types.ObjectId
 
@@ -69,7 +69,7 @@ class RepoUsuarios implements RepoDefault<Usuario> {
 	
 	static def searchPeliculaById(String id) {
 		val objId = new ObjectId(id)
-		val pelicula = RepoPeliculasMongoDB.instance.searchByObjectId(objId)
+		val pelicula = RepoPeliculas.instance.searchByObjectId(objId)
 		pelicula
 	}
 

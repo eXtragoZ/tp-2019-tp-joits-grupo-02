@@ -5,6 +5,7 @@ import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.CarritoRedis
+import ar.edu.unsam.repos.pelicula.RepoPeliculas
 import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
 import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDate
@@ -16,7 +17,6 @@ import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
-import ar.edu.unsam.repos.pelicula.RepoPeliculasNeo4J
 
 @Accessors
 @Observable
@@ -51,7 +51,7 @@ class CompraDeTicketsModel {
 	}
 
 	def getRecomendadas() {
-		return RepoPeliculasNeo4J.instance.getPeliculasRecomendadas(usuario.nombreUsuario)
+		return RepoPeliculas.instance.getPeliculasRecomendadas(usuario.nombreUsuario)
 	}
 
 	def agregarAlCarrito() {
@@ -89,7 +89,7 @@ class CompraDeTicketsModel {
 	}
 
 	def repoPeliculas() {
-		RepoPeliculasMongoDB.instance
+		RepoPeliculas.instance
 	}
 	
 	def getValidarCarrito() {

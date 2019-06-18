@@ -5,7 +5,7 @@ import ar.edu.unsam.domain.funcion.Funcion
 import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.pelicula.Saga
 import ar.edu.unsam.domain.usuario.Usuario
-import ar.edu.unsam.repos.pelicula.RepoPeliculasMongoDB
+import ar.edu.unsam.repos.pelicula.RepoPeliculas
 import ar.edu.unsam.repos.usuario.RepoUsuarios
 import java.time.LocalDateTime
 import java.util.Random
@@ -25,21 +25,20 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 		val interestellar = new Pelicula(2014, "Interstellar", 8.6f, "Adventure, Drama, Sci-Fi", this.getFuncionesRandom())
 		val capitanaMarvel = new Pelicula(2019, "Captain Marvel", 7.1f, "Action, Adventure, Sci-Fi", this.getFuncionesRandom())
 		
-		
-		val padrinoMongo = RepoPeliculasMongoDB.instance.createIfNotExists(padrino)
-		val padrino2Mongo = RepoPeliculasMongoDB.instance.createIfNotExists(padrino2)
+		RepoPeliculas.instance.create(padrino)
+		RepoPeliculas.instance.create(padrino2)
+		val padrinoMongo = RepoPeliculas.instance.searchByExample(padrino).get(0)
+		val padrino2Mongo = RepoPeliculas.instance.searchByExample(padrino2).get(0)
 		val sagaPadrino = new Saga(#[padrinoMongo,padrino2Mongo].toSet,"The Godfather Collection", 2000, 9.2f, "Crime, Drama", 9, this.getFuncionesRandom())
 		
-		RepoPeliculasMongoDB.instance => [
-			createIfNotExists(padrino)
-			createIfNotExists(padrino2)
-			createIfNotExists(clubDeLaPelea)
-			createIfNotExists(forrestGump)
-			createIfNotExists(inception)
-			createIfNotExists(matrix)
-			createIfNotExists(interestellar)
-			createIfNotExists(capitanaMarvel)
-			createIfNotExists(sagaPadrino)
+		RepoPeliculas.instance => [
+			create(clubDeLaPelea)
+			create(forrestGump)
+			create(inception)
+			create(matrix)
+			create(interestellar)
+			create(capitanaMarvel)
+			create(sagaPadrino)
 		
 		]
 
@@ -97,9 +96,9 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	}
 	
 	private def Entrada getEntradaRandom(Usuario usuario) {
-		val peliculas = RepoPeliculasMongoDB.instance.allInstances
+		val peliculas = RepoPeliculas.instance.allInstances
 		val peliculaAux = peliculas.get(new Random().nextInt(peliculas.size))
-		val pelicula = RepoPeliculasMongoDB.instance.searchByObjectId(peliculaAux.id)
+		val pelicula = RepoPeliculas.instance.searchByObjectId(peliculaAux.id)
 		val funciones = pelicula.funciones
 		val funcion = funciones.get(new Random().nextInt(funciones.size))
 		new Entrada(pelicula, funcion, usuario)

@@ -2,19 +2,18 @@ package ar.edu.unsam.domain.pelicula
 
 import ar.edu.unsam.domain.funcion.Funcion
 import java.util.Set
-import javax.persistence.Column
-import javax.persistence.FetchType
-import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.mongodb.morphia.annotations.Entity
+import org.neo4j.ogm.annotation.NodeEntity
+import org.neo4j.ogm.annotation.Relationship
 import org.uqbar.commons.model.annotations.Observable
 
-@Entity
+@NodeEntity(label="Saga")
 @Accessors
 @Observable
 class Saga extends Pelicula {
 
 //	@OneToMany(fetch=FetchType.EAGER)
+	@Relationship(type = "MOVIE_FROM_SAGA", direction = "OUTGOING")
 	Set<Pelicula> peliculas = newHashSet
 	
 //	@Column

@@ -20,8 +20,6 @@ class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 
 	static protected Datastore ds
 
-	static RepoPeliculasMongoDB instance
-
 	new() {
 		if (ds === null) {
 			val mongo = new MongoClient("localhost", 27017)
@@ -31,14 +29,6 @@ class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 				ds.ensureIndexes
 			]
 			println("Conectado a MongoDB. Bases: " + ds.getDB.collectionNames)
-		}
-	}
-
-	def static getInstance() {
-		if (instance === null) {
-			instance = new RepoPeliculasMongoDB
-		} else {
-			instance
 		}
 	}
 
