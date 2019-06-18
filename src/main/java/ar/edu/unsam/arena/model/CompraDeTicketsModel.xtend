@@ -16,6 +16,7 @@ import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.commons.model.utils.ObservableUtils
+import ar.edu.unsam.repos.pelicula.RepoPeliculasNeo4J
 
 @Accessors
 @Observable
@@ -50,7 +51,7 @@ class CompraDeTicketsModel {
 	}
 
 	def getRecomendadas() {
-		return repoPeliculas.searchByExample(new Pelicula)
+		return RepoPeliculasNeo4J.instance.getPeliculasRecomendadas(usuario.nombreUsuario)
 	}
 
 	def agregarAlCarrito() {
