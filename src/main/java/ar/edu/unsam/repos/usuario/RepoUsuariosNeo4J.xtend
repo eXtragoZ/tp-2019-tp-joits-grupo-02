@@ -1,13 +1,39 @@
 package ar.edu.unsam.repos.usuario
 
 import ar.edu.unsam.domain.usuario.Usuario
-import ar.edu.unsam.repos.RepoDefaultNeo4J
 import java.util.ArrayList
 import java.util.List
+import org.neo4j.ogm.config.Configuration
 import org.neo4j.ogm.cypher.ComparisonOperator
 import org.neo4j.ogm.cypher.Filter
+import org.neo4j.ogm.session.SessionFactory
 
-class RepoUsuariosNeo4J extends RepoDefaultNeo4J<Usuario> {
+class RepoUsuariosNeo4J {
+	
+		/**
+	 * Al buscar muchos elementos, buscaremos por defecto traer solo la información de ese nodo, por eso 0.
+	 * Al buscar un nodo concreto, la profundidad será 1 para traer el nodo y sus relaciones
+	 */
+	public static int PROFUNDIDAD_BUSQUEDA_LISTA = 0
+	public static int PROFUNDIDAD_BUSQUEDA_CONCRETA = 1
+
+	/**
+	 * http://neo4j.com/docs/ogm-manual/current/reference/
+	 * 
+	 */
+	static Configuration configuration = new Configuration.Builder().uri("bolt://localhost:11005").credentials("neo4j",
+		"joits").build()
+
+	public static SessionFactory sessionFactory = new SessionFactory(configuration,
+		"ar.edu.unsam.domain")
+
+	protected def getSession() {
+		sessionFactory.openSession
+	}
+
+	def createOrUpdate(Usuario usuario) {
+		session.save(usuario)
+	}
 
 	def List<Usuario> getNoAmigos(String valor) {
 		val filtroPorNombreActor = 

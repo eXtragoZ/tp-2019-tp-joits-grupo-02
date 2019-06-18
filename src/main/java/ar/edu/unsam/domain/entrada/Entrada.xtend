@@ -15,26 +15,27 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Transient
+import org.bson.types.ObjectId
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.neo4j.ogm.annotation.EndNode
+import org.neo4j.ogm.annotation.GeneratedValue
 import org.neo4j.ogm.annotation.Property
 import org.neo4j.ogm.annotation.RelationshipEntity
 import org.neo4j.ogm.annotation.StartNode
 import org.uqbar.commons.model.annotations.Observable
 
-@RelationshipEntity(type="MOVIES_SEEING")
 @Entity
 @Observable
 @Accessors
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(value = "changeSupport")
+@RelationshipEntity(type="MOVIES_SEEING")
 class Entrada {
 
 	@Id
-	@org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue
+	@org.neo4j.ogm.annotation.Id @GeneratedValue
 	Long id
 		
 	@Property
@@ -51,15 +52,19 @@ class Entrada {
 	@Column
 	String tituloPelicula
 
-	@EndNode
 	@Transient
 //	@Property(name="pelicula")
 	@JsonIgnore
-	Pelicula pelicula
+	@EndNode Pelicula pelicula
+	
+	@org.neo4j.ogm.annotation.Transient
+	@JsonIgnore
+	@Column(length=100)
+	String idPelicula
 
-	@StartNode 
 	@Transient
-	Usuario usuario
+	@JsonIgnore
+	@StartNode Usuario usuario
 	
 	@JsonIgnore
 	transient Funcion funcion
@@ -72,6 +77,7 @@ class Entrada {
 		this.funcion = funcion
 		this.precio = pelicula.precioEntrada + funcion.precio
 		this.tituloPelicula = pelicula.titulo
+		this.idPelicula = pelicula.id.toString
 	}
 	
 	new(Pelicula pelicula, Funcion funcion, Usuario usuario) {
@@ -81,6 +87,7 @@ class Entrada {
 		this.usuario = usuario
 		this.precio = pelicula.precioEntrada + funcion.precio
 		this.tituloPelicula = pelicula.titulo
+		this.idPelicula = pelicula.id.toString
 	}
 	
 	

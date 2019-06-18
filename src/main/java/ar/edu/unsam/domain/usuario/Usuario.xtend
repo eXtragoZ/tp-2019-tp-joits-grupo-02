@@ -51,9 +51,9 @@ class Usuario {
 	@Transient
 	double saldo
 	
-//	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
+	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@Transient
+//	@Transient
 	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)

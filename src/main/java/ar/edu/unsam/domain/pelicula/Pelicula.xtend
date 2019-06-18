@@ -23,11 +23,10 @@ import org.uqbar.commons.model.annotations.Observable
 class Pelicula {
 
 	@Id
-	@Transient
 	ObjectId id
 	
 	@org.neo4j.ogm.annotation.Id @GeneratedValue
-	Long id_neo	
+	Long idNeo
 	
 	@Property(name="titulo")
 	String titulo

@@ -54,7 +54,9 @@ class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 		ds.createQuery(entityType).field("titulo").contains(example.titulo ?: "").asList
 	}
 
-	override searchById(long id) {	}
+	override searchById(long id) {
+		ds.createQuery(entityType).field("idNeo").equal(id).asList.head
+	}
 
 	def searchByObjectId(ObjectId id) {
 		ds.createQuery(entityType).field("id").equal(id).asList.head
