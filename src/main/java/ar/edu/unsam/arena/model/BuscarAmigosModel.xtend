@@ -24,7 +24,7 @@ class BuscarAmigosModel {
 	def buscar() {
 		busquedaActual = busquedaIngresada
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
-		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
+		ObservableUtils.firePropertyChanged(this, "amigosRecomendados")
 	}
 
 	def getListaDeBusqueda() {
@@ -61,7 +61,7 @@ class BuscarAmigosModel {
 		this.usuario.amigos.add(amigo)
 //		this.repoUsuario.update(usuario)
 		ObservableUtils.firePropertyChanged(this, "listaDeBusqueda")
-		ObservableUtils.firePropertyChanged(this, "busquedaRecomendada")
+		ObservableUtils.firePropertyChanged(this, "amigosRecomendados")
 	}
 
 }

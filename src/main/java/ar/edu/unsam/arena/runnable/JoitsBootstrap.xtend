@@ -16,6 +16,8 @@ class JoitsBootstrap extends CollectionBasedBootstrap {
 	
 	override run() {
 		
+		RepoPeliculas.instance.delete
+		
 		val padrino = new Pelicula(1972, "The Godfather", 9.2f, "Crime, Drama", this.getFuncionesRandom())
 		val padrino2 = new Pelicula(1974, "The Godfather: Part II", 9.0f, "Crime, Drama", this.getFuncionesRandom())
 		val clubDeLaPelea = new Pelicula(1999, "Fight Club", 8.8f, "Drama", this.getFuncionesRandom())

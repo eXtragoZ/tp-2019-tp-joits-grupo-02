@@ -5,7 +5,7 @@ import org.neo4j.ogm.config.Configuration
 import org.neo4j.ogm.session.SessionFactory
 
 @Accessors
-class RepoDefaultNeo4J<T> {
+abstract class RepoDefaultNeo4J<T> {
 	/**
 	 * Al buscar muchos elementos, buscaremos por defecto traer solo la información de ese nodo, por eso 0.
 	 * Al buscar un nodo concreto, la profundidad será 1 para traer el nodo y sus relaciones
@@ -30,5 +30,7 @@ class RepoDefaultNeo4J<T> {
 	def createOrUpdate(T t) {
 		session.save(t)
 	}
+	
+	abstract def void delete()
 
 }

@@ -148,5 +148,13 @@ class RepoPeliculasMongoDB implements RepoDefault<Pelicula>{
 			.aggregate(Pelicula)
 			.toList
 	}
+	
+	def void deleteDocuments() {
+//		ds.delete('db.Pelicula.deleteMany({})')
+//		ds.delete('db.Saga.deleteMany({})')
+		ds.DB.getCollection('Pelicula').drop
+		ds.DB.getCollection('Saga').drop
+		
+	}
 
 }

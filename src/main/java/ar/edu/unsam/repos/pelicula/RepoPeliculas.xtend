@@ -33,6 +33,8 @@ class RepoPeliculas implements RepoDefault<Pelicula> {
 	
 	override create(Pelicula t) {
 		this.repoPeliculasNeo4J.createOrUpdate(t)
+		val idNeo = this.repoPeliculasNeo4J.searchPeliculaByTitle(t.titulo).idNeo
+		t.idNeo = idNeo 
 		this.repoPeliculasMongoDB.createIfNotExists(t)
 	}
 	
@@ -51,6 +53,11 @@ class RepoPeliculas implements RepoDefault<Pelicula> {
 	
 	def getPeliculasRecomendadas(String nombreUsuario) {
 		this.repoPeliculasNeo4J.getPeliculasRecomendadas(nombreUsuario)
+	}
+	
+	def delete() {
+		this.repoPeliculasMongoDB.deleteDocuments
+		this.repoPeliculasNeo4J.delete
 	}
 	
 }
