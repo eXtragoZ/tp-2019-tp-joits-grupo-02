@@ -33,12 +33,12 @@ class RepoUsuarios implements RepoDefault<Usuario> {
 	}
 	
 	override create(Usuario usuario) {
-		this.repoUsuariosNeo4J.createOrUpdate(usuario)
+		this.repoUsuariosNeo4J.create(usuario)
 		this.repoUsuariosHibernate.create(usuario)
 	}
 
 	override update(Usuario usuario) {
-		this.repoUsuariosNeo4J.createOrUpdate(usuario)
+		this.repoUsuariosNeo4J.update(usuario)
 		this.repoUsuariosHibernate.update(usuario)
 	}
 	

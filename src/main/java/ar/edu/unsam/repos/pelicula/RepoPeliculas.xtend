@@ -32,14 +32,14 @@ class RepoPeliculas implements RepoDefault<Pelicula> {
 	}
 	
 	override create(Pelicula t) {
-		this.repoPeliculasNeo4J.createOrUpdate(t)
+		this.repoPeliculasNeo4J.create(t)
 		val idNeo = this.repoPeliculasNeo4J.searchPeliculaByTitle(t.titulo).idNeo
 		t.idNeo = idNeo 
 		this.repoPeliculasMongoDB.createIfNotExists(t)
 	}
 	
 	override update(Pelicula t) {
-		this.repoPeliculasNeo4J.createOrUpdate(t)
+		this.repoPeliculasNeo4J.update(t)
 		this.repoPeliculasMongoDB.update(t)
 	}
 	

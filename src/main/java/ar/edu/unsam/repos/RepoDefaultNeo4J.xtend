@@ -27,8 +27,12 @@ abstract class RepoDefaultNeo4J<T> {
 		sessionFactory.openSession
 	}
 
-	def createOrUpdate(T t) {
+	def create(T t) {
 		session.save(t)
+	}
+	
+	def update(T t) {
+		session.save(t,PROFUNDIDAD_BUSQUEDA_CONCRETA)
 	}
 	
 	abstract def void delete()
