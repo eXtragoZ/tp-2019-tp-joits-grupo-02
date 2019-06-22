@@ -53,7 +53,6 @@ class Usuario {
 	
 	@Relationship(type = "MOVIES_SEEING", direction = "OUTGOING")
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-//	@Transient
 	Set<Entrada> entradas = newHashSet
 	
 	@Column(length=100)
@@ -84,6 +83,9 @@ class Usuario {
 	def comprarEntrada(Entrada entrada) {
 		this.reducirSaldo(entrada.precio)
 		entrada.usuario = this
+		entrada.pelicula = Entrada.searchPeliculaById(entrada.idPelicula)
+		println(entrada.idPelicula)
+		println(entrada.pelicula)
 		entradas.add(entrada)
 	}
 

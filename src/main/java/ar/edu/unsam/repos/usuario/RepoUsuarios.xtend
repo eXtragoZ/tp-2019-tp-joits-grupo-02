@@ -1,10 +1,9 @@
 package ar.edu.unsam.repos.usuario
 
+import ar.edu.unsam.domain.entrada.Entrada
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.RepoDefault
-import ar.edu.unsam.repos.pelicula.RepoPeliculas
 import java.util.List
-import org.bson.types.ObjectId
 
 class RepoUsuarios implements RepoDefault<Usuario> {
 
@@ -48,7 +47,7 @@ class RepoUsuarios implements RepoDefault<Usuario> {
 		val usuario = this.repoUsuariosHibernate.searchById(_id)
 		val entradas = usuario.entradas
 		entradas.forEach[entrada | 
-			entrada.pelicula = RepoUsuarios.searchPeliculaById(entrada.idPelicula)
+			entrada.pelicula = Entrada.searchPeliculaById(entrada.idPelicula)
 			entrada.usuario = usuario
 		]
 		usuario.entradas = entradas
@@ -60,17 +59,12 @@ class RepoUsuarios implements RepoDefault<Usuario> {
 	}
 
 	def amigosRecomendados(Usuario usuario) {
-		this.repoUsuariosHibernate.amigosRecomendados(usuario)
+		this.repoUsuariosNeo4J.getAmigosRecomendados(usuario.nombreUsuario)
 	}
 
 	def searchingAmigos(Usuario usuario) {
 		this.repoUsuariosHibernate.searchingAmigos(usuario)
 	}
 	
-	static def searchPeliculaById(String id) {
-		val objId = new ObjectId(id)
-		val pelicula = RepoPeliculas.instance.searchByObjectId(objId)
-		pelicula
-	}
 
 }

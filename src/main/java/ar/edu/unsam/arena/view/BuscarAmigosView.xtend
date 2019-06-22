@@ -34,7 +34,7 @@ class BuscarAmigosView extends Window<BuscarAmigosModel> {
 				width = 100
 				alignLeft
 			]
-			new TablaUsuarioView("busquedaRecomendada").crearTabla(it)
+			new TablaUsuarioView("amigosRecomendados").crearTabla(it)
 
 			new Panel(it) => [
 				layout = new HorizontalLayout

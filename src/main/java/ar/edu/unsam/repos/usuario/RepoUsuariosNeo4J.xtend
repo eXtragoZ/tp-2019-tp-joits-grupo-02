@@ -1,9 +1,12 @@
 package ar.edu.unsam.repos.usuario
 
+import ar.edu.unsam.domain.pelicula.Pelicula
 import ar.edu.unsam.domain.usuario.Usuario
 import ar.edu.unsam.repos.RepoDefaultNeo4J
 import java.util.ArrayList
+import java.util.HashMap
 import java.util.List
+import java.util.Map
 import org.neo4j.ogm.cypher.ComparisonOperator
 import org.neo4j.ogm.cypher.Filter
 
@@ -53,6 +56,15 @@ class RepoUsuariosNeo4J extends RepoDefaultNeo4J<Usuario>{
 		session.save(usuario)
 	// ver save(entity, depth). Aquí por defecto depth es -1 que
 	// implica hacer una pasada recorriendo todo el grafo en profundidad
+	}
+	
+	def List<Usuario> getAmigosRecomendados(String nombreUsuario) {
+		val query = String.format("MATCH (otroUsuario:Usuario)-[:MOVIES_SEEING]->(pelicula:Pelicula)<-[:MOVIES_SEEING]-(usuario:Usuario)
+					WHERE  usuario.name = '%s' 
+					RETURN otroUsuario LIMIT 5",nombreUsuario)
+		val Map<String, String > params = new HashMap(1);
+        params.put ("name", nombreUsuario);
+		return session.query(Usuario, query, params).toList
 	}
 
 }

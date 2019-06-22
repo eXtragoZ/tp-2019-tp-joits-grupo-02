@@ -13,7 +13,7 @@ class RepoPeliculasNeo4J extends RepoDefaultNeo4J<Pelicula> {
 		val query = String.format("MATCH (peliUsuario:Pelicula)<-[:MOVIES_SEEING]-(usuario:Usuario)-[FRIENDS_WITH]->(amigo:Usuario)-[:MOVIES_SEEING]->(peliAmigo:Pelicula)
 					WHERE  usuario.name = '%s' 
 					AND NOT (amigo)-[:MOVIES_SEEING]->()<-[:MOVIES_SEEING]-(usuario)
-					RETURN peliAmigo",nombreUsuario)
+					RETURN peliAmigo LIMIT 5",nombreUsuario)
 		val Map<String, String > params = new HashMap(1);
         params.put ("name", nombreUsuario);
 		return session.query(Pelicula, query, params).toList

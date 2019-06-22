@@ -31,19 +31,15 @@ class Pelicula {
 	@Property(name="titulo")
 	String titulo
 	
-	@Property
 	float puntaje
 	
-	@Property
 	String genero
 	
 	@Transient
 	Set<Funcion> funciones = newHashSet
 	
-	@Property
 	double precioBase = 30.00 //contemplar bigdecimal
 	
-	@Property
 	int anio
 
 	new() {		}

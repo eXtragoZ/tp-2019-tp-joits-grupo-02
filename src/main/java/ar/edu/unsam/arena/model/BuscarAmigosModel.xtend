@@ -40,8 +40,8 @@ class BuscarAmigosModel {
 //		this.getNoSonAmigos(this.repoUsuario.allInstances)
 	}
 
-	def getBusquedaRecomendada() {
-		this.getNoSonAmigos(this.repoUsuario.amigosRecomendados(this.usuario))
+	def getAmigosRecomendados() {
+		repoUsuario.amigosRecomendados(usuario)
 	}
 	
 	def getNoSonAmigos(List<Usuario> usuarios) {
