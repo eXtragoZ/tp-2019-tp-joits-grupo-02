@@ -97,4 +97,8 @@ class CompraDeTicketsModel {
 			throw new UserException("Debe agregar entradas al carrito para avanzar")
 	}
 	
+	def actualizarListas() {
+		ObservableUtils.firePropertyChanged(this, "recomendadas")
+	}
+	
 }

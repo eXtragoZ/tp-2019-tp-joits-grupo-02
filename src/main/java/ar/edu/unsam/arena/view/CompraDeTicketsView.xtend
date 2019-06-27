@@ -217,4 +217,9 @@ class CompraDeTicketsView extends Window<CompraDeTicketsModel> {
 	def panelDeControl() {
 		(owner as JoitsApplication).panelDeControl(this)
 	}
+	
+	def actualizarListas() {
+		this.modelObject.actualizarListas
+	}
+	
 }

@@ -3,6 +3,7 @@ package ar.edu.unsam.arena.view
 import ar.edu.unsam.arena.model.BuscarAmigosModel
 import ar.edu.unsam.arena.model.PanelDeControlModel
 import ar.edu.unsam.domain.entrada.Entrada
+import java.security.acl.Owner
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -82,7 +83,12 @@ class PanelDeControlView extends Window<PanelDeControlModel> {
 
 	def aceptar() {
 		this.modelObject.aceptar
+		this.actualizarOwner
 		this.close
+	}
+	
+	def void actualizarOwner(){
+		(this.owner as CompraDeTicketsView).actualizarListas()
 	}
 
 	private def Panel panelIzquierdo(Panel it) {

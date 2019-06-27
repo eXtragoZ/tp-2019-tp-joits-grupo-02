@@ -24,6 +24,7 @@ class RepoUsuariosNeo4J extends RepoDefaultNeo4J<Usuario>{
 	def List<Usuario> getAmigosRecomendados(String nombreUsuario) {
 		val query = String.format("MATCH (otroUsuario:Usuario)-[:MOVIES_SEEING]->(pelicula:Pelicula)<-[:MOVIES_SEEING]-(usuario:Usuario)
 					WHERE  usuario.name = '%s' 
+					AND NOT (otroUsuario)<-[:FRIENDS_WITH]-(usuario)
 					RETURN otroUsuario LIMIT 5",nombreUsuario)
 		val Map<String, String > params = new HashMap(1);
         params.put ("name", nombreUsuario);
